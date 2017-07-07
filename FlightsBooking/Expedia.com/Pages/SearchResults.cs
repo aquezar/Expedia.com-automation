@@ -104,17 +104,5 @@ namespace Expedia.com.Pages
             }
         }
         
-        public void SelectRandomFlight()
-        {
-            selectedFlight.Add(selectedFlightRoute.Text);
-            selectedFlight.Add(selectedFlightPrice.Text);
-            selectedFlight.Add(selectedFlightAirlines.Text);
-            ScenarioContext.Current["flight"] = selectedFlight;
-
-
-            //Switch to Trip Detail
-            string newTabHandle = pageDriver.WindowHandles.Last();
-            pageDriver.SwitchTo().Window(newTabHandle);
-        } 
     }
 }

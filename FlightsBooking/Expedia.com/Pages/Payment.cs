@@ -9,9 +9,6 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
-        /*[FindsBy(How = How.XPath, Using = ".//*[@id='totalPriceForTrip']")]
-        private IWebDriver totalPrice { get; set; }*/
-
         public Payment (IWebDriver driver)
         {
             pageDriver = driver;
