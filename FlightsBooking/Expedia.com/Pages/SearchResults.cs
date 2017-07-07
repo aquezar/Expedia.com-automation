@@ -2,8 +2,10 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -36,12 +38,15 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@data-test-id='airports']")]
         private IList<IWebElement> flightsListRoute { get; set; }
 
+        [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@data-test-id='airports']")]
+        private IWebElement selectedFlightRoute { get; set; }
+
         //Price of flight
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[contains(@class, 'offer-price')]/span[@class='visuallyhidden']")]
-        private IList<IWebElement> flightPrice { get; set; }
+        private IWebElement selectedFlightPrice { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@class='secondary truncate']")]
-        private IList<IWebElement> flightAirlines { get; set; }
+        private IWebElement selectedFlightAirlines { get; set; }
 
         public SearchResults(IWebDriver driver)
         {
@@ -80,6 +85,10 @@ namespace Expedia.com.Pages
 
         public void FlightSelect()
         {
+            selectedFlight.Add(selectedFlightRoute.Text);
+            selectedFlight.Add(selectedFlightPrice.Text);
+            selectedFlight.Add(selectedFlightAirlines.Text);
+            ScenarioContext.Current["flight"] = selectedFlight;
             SelectButton.Click();
 
             //Switch to Trip Detail
@@ -95,5 +104,17 @@ namespace Expedia.com.Pages
             }
         }
         
+        public void SelectRandomFlight()
+        {
+            selectedFlight.Add(selectedFlightRoute.Text);
+            selectedFlight.Add(selectedFlightPrice.Text);
+            selectedFlight.Add(selectedFlightAirlines.Text);
+            ScenarioContext.Current["flight"] = selectedFlight;
+
+
+            //Switch to Trip Detail
+            string newTabHandle = pageDriver.WindowHandles.Last();
+            pageDriver.SwitchTo().Window(newTabHandle);
+        } 
     }
 }
