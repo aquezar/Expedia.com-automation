@@ -2,10 +2,8 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -31,8 +29,8 @@ namespace Expedia.com.Pages
             get { return new SelectElement(dropdownSort); }
         }
 
-       /* [FindsBy(How = How.XPath, Using = "//button[contains(@class, 'btn-secondary btn-action t-select-btn')]")]
-        private IWebElement SelectButton { get; set; } */
+        [FindsBy(How = How.XPath, Using = "//button[contains(@class, 'btn-secondary btn-action t-select-btn')]")]
+        private IWebElement SelectButton { get; set; }
 
         //From-To airports codes
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@data-test-id='airports']")]
@@ -42,10 +40,6 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[contains(@class, 'offer-price')]/span[@class='visuallyhidden']")]
         private IList<IWebElement> flightPrice { get; set; }
 
-        //Select buttons
-        [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//button[@class='btn-secondary btn-action t-select-btn']")]
-        private IList<IWebElement> flightSelect { get; set; }
-
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@class='secondary truncate']")]
         private IList<IWebElement> flightAirlines { get; set; }
 
@@ -54,22 +48,6 @@ namespace Expedia.com.Pages
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
         }
-/*
-        public void ResFlyingFrom()
-        {
-            SearchFlyingFromValue = SearchFlyingFrom.GetAttribute("value");
-        }
-
-        public void ResFlyingTo()
-        {
-            SearchFlyingToValue = SearchFlyingTo.GetAttribute("value");
-        }
-
-        public void ResDepartureDate()
-        {
-            SearchDepartureDateValue = SearchDepartureDate.GetAttribute("value");
-        }
-*/
 
        public void CloseCommercial(string commercialWinTitle)
         {
@@ -100,14 +78,14 @@ namespace Expedia.com.Pages
             }
         }
 
-      /*  public void FlightSelect()
+        public void FlightSelect()
         {
             SelectButton.Click();
 
             //Switch to Trip Detail
             string newTabHandle = pageDriver.WindowHandles.Last();
             pageDriver.SwitchTo().Window(newTabHandle);
-        } */
+        }
 
         public void CheckSearchResults(string from, string to)
         {
@@ -117,19 +95,5 @@ namespace Expedia.com.Pages
             }
         }
         
-        public void SelectRandomFlight()
-        {
-            Random rnd = new Random();
-            int select = rnd.Next(0, flightSelect.Count);
-            selectedFlight.Add(flightsListRoute.ElementAt(select).Text);
-            selectedFlight.Add(flightPrice.ElementAt(select).Text);
-            selectedFlight.Add(flightAirlines.ElementAt(select).Text);
-            ScenarioContext.Current["flight"] = selectedFlight;
-            flightSelect.ElementAt(select).Click();
-
-            //Switch to Trip Detail
-            string newTabHandle = pageDriver.WindowHandles.Last();
-            pageDriver.SwitchTo().Window(newTabHandle);
-        } 
     }
 }

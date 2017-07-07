@@ -38,7 +38,7 @@ namespace Expedia.com
         public void GivenISelectFlights()
         {
             //new SearchResults(driver).FlightSelect(); 
-            new SearchResults(driver).SelectRandomFlight();
+            new SearchResults(driver).FlightSelect();
         }
         
     }
