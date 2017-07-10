@@ -4,6 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Expedia.com.Pages
 {
@@ -80,10 +81,16 @@ namespace Expedia.com.Pages
         public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
         {
             Assert.AreEqual(tripInfo[0], (from + " - " + to));
-          /*  for (int i = 1; i <= tripForPassanger.Count-1; i++)
+            for (int i = 1; i <= tripForPassanger.Count-1; i++)
             {
-                Assert.AreEqual(tripInfo[1], tripForPassanger[i].Text);                    
-            } */
+                double ticketPrice;
+                double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
+                double priceForPassanger;
+                double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
+                //Assert.AreEqual(tripInfo[1], tripForPassanger[i].Text);
+                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
+                
+            } 
         }
     }
 }
