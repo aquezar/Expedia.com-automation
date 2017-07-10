@@ -13,7 +13,7 @@ Scenario Outline: One Way
 	And I enter Departing <date>
 	And I Choose Adults number <passangers>
 	And I click Search button
-	And I close commercial if it opens, verifying by <commercialTab>
+	And I close <commercialTab> if it opens
 	And I check that correct Search results opens, verifying by <searchTab>
 	And I check that search results is relevant to search request by <fromAirport> and <toAirport>
 	And I select flights

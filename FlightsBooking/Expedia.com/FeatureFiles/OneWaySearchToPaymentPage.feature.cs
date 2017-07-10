@@ -96,7 +96,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 15
  testRunner.And("I click Search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.And(string.Format("I close commercial if it opens, verifying by {0}", commercialTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I close {0} if it opens", commercialTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
  testRunner.And(string.Format("I check that correct Search results opens, verifying by {0}", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
