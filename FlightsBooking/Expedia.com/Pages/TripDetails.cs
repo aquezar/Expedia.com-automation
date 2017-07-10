@@ -4,7 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -12,13 +12,17 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        //private double totalPrice = 0.0;
+        //private double tripTotalPrice;
+
+
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
         private IWebElement TDFrom { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[2]/span[2]")]
         private IWebElement TDTo { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//div[@id='tsTotal']//span[@class='visuallyhidden']")]
+        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]
         private IWebElement tripTotal { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//li[@class='toggle after-open']//span[contains(@id, 'totalPriceForPassenger')]")]
@@ -74,8 +78,7 @@ namespace Expedia.com.Pages
             else
             {
                 BookButton.Click();
-            }               
-            
+            }                         
         }
 
         public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
@@ -87,10 +90,14 @@ namespace Expedia.com.Pages
                 double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
                 double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
-                //Assert.AreEqual(tripInfo[1], tripForPassanger[i].Text);
+                ScenarioContext.Current["ticketPrice"] = priceForPassanger;
+                // double.TryParse(tripTotal.Text.Substring(1), out tripTotalPrice);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
-                
-            } 
+                // totalPrice = priceForPassanger + totalPrice;  
+               
+            }
+            //Assert.AreEqual(tripTotalPrice, totalPrice);
+            
         }
     }
 }

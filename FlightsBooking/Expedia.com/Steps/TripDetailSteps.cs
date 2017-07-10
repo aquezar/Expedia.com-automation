@@ -18,7 +18,7 @@ namespace Expedia.com
             flight = (List<string>)ScenarioContext.Current["flight"];
         }
 
-        [Given(@"I check that Trip Detail page opens (.*)")]
+        [Given(@"I check that (.*) opens")]
         public void GivenICheckThatTripDetailPageOpens(string p0)
         {
             new TripDetails(driver).TripDetailPageOpens(p0);         

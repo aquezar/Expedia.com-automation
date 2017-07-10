@@ -104,7 +104,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And("I select flights", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
- testRunner.And(string.Format("I check that Trip Detail page opens {0}", tripDetailPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I check that {0} opens", tripDetailPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
  testRunner.And(string.Format("I compare the {0} and {1} values for selected and displayed flight", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
