@@ -88,46 +88,10 @@ namespace Expedia.com.Pages
             Passangers.SelectByText(passangers);
         }
 
-      /*  BACKUP
-       *  public void Search(string searchTabTitle, string commercialWinTitle)
-        {
-            SearchButton.Click();
-            Assert.AreEqual(searchTabTitle, pageDriver.Title);
-
-            string commercialTabHandle = pageDriver.WindowHandles.Last();
-            var commercialWindow = pageDriver.SwitchTo().Window(commercialTabHandle);
-
-            if (commercialWindow.Title == commercialWinTitle)
-            {
-                pageDriver.Close();
-                var originalTab = pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
-                Assert.AreEqual(searchTabTitle, originalTab.Title);
-            }
-        } */
-
         public void Search()
         {
             SearchButton.Click();
         }
-
-        /* public void Search()
-         {
-             SearchButton.Click();
-
-             string originalTabTitle = "KBP to BUD Flights | Expedia";
-             Assert.AreEqual(originalTabTitle, pageDriver.Title);
-
-             string commercialTabHandle = pageDriver.WindowHandles.Last();
-             var commercialWindow = pageDriver.SwitchTo().Window(commercialTabHandle);
-
-             string expectedWindowTitle = "Search for Flights to Budapest";
-             if (commercialWindow.Title == expectedWindowTitle)
-             {
-                 pageDriver.Close();
-                 var originalTab = pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
-                 Assert.AreEqual(originalTabTitle, originalTab.Title);
-             }
-         }*/
 
     }
 }

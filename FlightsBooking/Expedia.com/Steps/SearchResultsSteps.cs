@@ -15,7 +15,7 @@ namespace Expedia.com
             driver = (IWebDriver)ScenarioContext.Current["driver"];
         }
 
-        [Given(@"I close commercial if it opens, verifying by (.*)")]
+        [Given(@"I close (.*) if it opens")]
         public void GivenICloseCommercialIfItOpens(string p0)
         {
             new SearchResults(driver).CloseCommercial(p0);
