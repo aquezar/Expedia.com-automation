@@ -23,7 +23,7 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-        public void PaymentPageOpens(string paymentTitle, double ticketPrice)
+        public void PaymentPageOpens(string paymentTitle, List<double> ticketPrice)
         {
             string PaymentPageTitle = pageDriver.Title;
             Assert.IsTrue(PaymentPageTitle.Equals(paymentTitle));
@@ -33,7 +33,7 @@ namespace Expedia.com.Pages
             {
                 double priceForPassanger;
                 double.TryParse(tripSummary[i].Text.Substring(1), out priceForPassanger);
-                Assert.AreEqual(ticketPrice, priceForPassanger);
+                Assert.AreEqual(ticketPrice[i], priceForPassanger);
             }
         }
     }

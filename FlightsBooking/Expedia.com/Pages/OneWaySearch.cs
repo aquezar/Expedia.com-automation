@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -86,6 +88,9 @@ namespace Expedia.com.Pages
         public void SelectNumberOfAdults(string passangers)
         {
             Passangers.SelectByText(passangers);
+            int passangersCount;
+            Int32.TryParse(passangers, out passangersCount);
+            ScenarioContext.Current["passangers"] = passangersCount;
         }
 
         public void Search()

@@ -24,4 +24,4 @@ Scenario Outline: One Way
 
 Examples: 
 | from                               | to                                          | date       | passangers | searchTab          | commercialTab                  | tripDetailPage | paymentPage | fromAirport | toAirport |
-| Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 1          | KBP to BUD Flights | Search for Flights to Budapest | Trip Detail    | Expedia: Payment | KBP         | BUD       |
+| Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 5          | KBP to BUD Flights | Search for Flights to Budapest | Trip Detail    | Expedia: Payment | KBP         | BUD       |

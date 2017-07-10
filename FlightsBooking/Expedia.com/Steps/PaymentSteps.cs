@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com
@@ -10,12 +11,12 @@ namespace Expedia.com
 
         readonly IWebDriver driver;
 
-        double ticketPrice;
+        List<double> ticketPrice;
 
         public PaymentSteps()
         {
             driver = (IWebDriver)ScenarioContext.Current["driver"];
-            ticketPrice = (double)ScenarioContext.Current["ticketPrice"];
+            ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
         }
 
         [Then(@"Payment page opens (.*)")]
