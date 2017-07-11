@@ -12,9 +12,6 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
-        //private double totalPrice = 0.0;
-        //private double tripTotalPrice;
-
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
         private IWebElement TDFrom { get; set; }
 
@@ -24,7 +21,7 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]
         private IWebElement tripTotal { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] ////span[contains(@id, 'totalPriceForPassenger')] //".//li[@class='toggle after-open']//span[contains(@id, 'totalPriceForPassenger')]"
+        [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
         private IList<IWebElement> tripForPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
@@ -67,7 +64,6 @@ namespace Expedia.com.Pages
             }
         }
 
-
         public void Continue()
         {
             if (IsElementPresent(By.XPath(".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")))
@@ -85,22 +81,17 @@ namespace Expedia.com.Pages
             Assert.AreEqual(tripInfo[0], (from + " - " + to));
             List<double> ticketsPricesList = new List<double>();
             int passangers = (int)ScenarioContext.Current["passangers"];
-            for (int i = passangers; i <= tripForPassanger.Count-1; i++) //i must be equal to passangers count!!! pass passangers value in ScenarioContext
+            for (int i = passangers; i <= tripForPassanger.Count-1; i++) //i must be equal to passangers count
             {
                 double ticketPrice;
                 double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
                 double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
-                //ScenarioContext.Current["ticketPrice"] = priceForPassanger;
-                // double.TryParse(tripTotal.Text.Substring(1), out tripTotalPrice);
-                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
-                // totalPrice = priceForPassanger + totalPrice;  
+                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0); 
                 ticketsPricesList.Add(priceForPassanger);
             }
             ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
-
-            //Assert.AreEqual(tripTotalPrice, totalPrice);
-
         }
+
     }
 }

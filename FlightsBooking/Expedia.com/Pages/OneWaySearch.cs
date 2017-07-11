@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -61,7 +60,6 @@ namespace Expedia.com.Pages
         public void GoToFlights()
         {
             FlightsTab.Click();
-            Console.WriteLine("Proceed to Flights tab");
         }
 
         public void GoToOneWay()
@@ -89,7 +87,7 @@ namespace Expedia.com.Pages
         {
             Passangers.SelectByText(passangers);
             int passangersCount;
-            Int32.TryParse(passangers, out passangersCount);
+            int.TryParse(passangers, out passangersCount);
             ScenarioContext.Current["passangers"] = passangersCount;
         }
 
