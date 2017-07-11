@@ -24,5 +24,6 @@ Scenario Outline: One Way
 	Then Payment page Trip summary is corresponding to selected tickets
 
 Examples: 
-| from                               | to                                          | date       | passangers | searchTab          | commercialTab                  | tripDetailPage | paymentPage | fromAirport | toAirport |
+| from                               | to                                          | date       | passangers | searchTab          | commercialTab                  | tripDetailPage | paymentPage      | fromAirport | toAirport |
 | Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 1          | KBP to BUD Flights | Search for Flights to Budapest | Trip Detail    | Expedia: Payment | KBP         | BUD       |
+| London, England, UK (LHR-Heathrow) | Berlin, Germany (TXL-Tegel)                 | 10/18/2017 | 3          | LHR to TXL Flights | Search for Flights to Berlin   | Trip Detail    | Expedia: Payment | LHR         | TXL       |
