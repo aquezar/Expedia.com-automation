@@ -16,15 +16,23 @@ namespace Expedia.com
         public PaymentSteps()
         {
             driver = (IWebDriver)ScenarioContext.Current["driver"];
-            ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
+            
         }
 
-        [Then(@"Payment page opens (.*)")]
-        public void ThenPaymentPageOpens(string p0)
+        [When(@"(.*) opens")]
+        public void WhenPaymentPageOpens(string p0)
         {
-            new Payment(driver).PaymentPageOpens(p0, ticketPrice);
+            new Payment(driver).PaymentPageOpens(p0);       
+        }
+
+        [Then(@"Payment page Trip summary is corresponding to selected tickets")]
+        public void ThenPaymentPageTripSummaryIsCorrespondingToSelectedTickets()
+        {
+            ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
+            new Payment(driver).TripSummaryCheck(ticketPrice);
 
             driver.Quit();
         }
+
     }
 }

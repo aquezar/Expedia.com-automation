@@ -19,9 +19,10 @@ Scenario Outline: One Way
 	And I select flights
 	And I check that <tripDetailPage> opens 
 	And I compare the <fromAirport> and <toAirport> values for selected and displayed flight
-	When I confirm flight
-	Then Payment page opens <paymentPage>
+	And I confirm flight
+	When <paymentPage> opens 
+	Then Payment page Trip summary is corresponding to selected tickets
 
 Examples: 
 | from                               | to                                          | date       | passangers | searchTab          | commercialTab                  | tripDetailPage | paymentPage | fromAirport | toAirport |
-| Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 5          | KBP to BUD Flights | Search for Flights to Budapest | Trip Detail    | Expedia: Payment | KBP         | BUD       |
+| Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 1          | KBP to BUD Flights | Search for Flights to Budapest | Trip Detail    | Expedia: Payment | KBP         | BUD       |

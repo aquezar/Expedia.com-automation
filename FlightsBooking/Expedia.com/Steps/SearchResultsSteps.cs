@@ -37,7 +37,6 @@ namespace Expedia.com
         [Given(@"I select flights")]
         public void GivenISelectFlights()
         {
-            //new SearchResults(driver).FlightSelect(); 
             new SearchResults(driver).FlightSelect();
         }
         

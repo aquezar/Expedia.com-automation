@@ -10,12 +10,12 @@ namespace Expedia.com
     {
 
         readonly IWebDriver driver;
-        readonly List<string>flight = new List<string>();
+        private List<string>flight = new List<string>();
 
         public TripDetailSteps()
         {
             driver = (IWebDriver)ScenarioContext.Current["driver"];
-            flight = (List<string>)ScenarioContext.Current["flight"];
+            
         }
 
         [Given(@"I check that (.*) opens")]
@@ -27,12 +27,13 @@ namespace Expedia.com
         [Given(@"I compare the (.*) and (.*) values for selected and displayed flight")]
         public void GivenICompareTheKBPAndBUDValuesForSelectedAndDisplayedFlight(string p0, string p1)
         {
+            flight = (List<string>)ScenarioContext.Current["flight"];
             new TripDetails(driver).CompareFlightsInfo(flight, p0, p1);
         }
 
 
-        [When(@"I confirm flight")]
-        public void WhenIConfirmFlight()
+        [Given(@"I confirm flight")]
+        public void GivenIConfirmFlight()
         {
             new TripDetails(driver).Continue();
         }

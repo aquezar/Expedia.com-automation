@@ -52,7 +52,6 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.CssSelector, Using = ".btn-primary.btn-action.gcw-submit")]
         private IWebElement SearchButton { get; set; }
 
-
         public OneWaySearch(IWebDriver driver)
         {
             pageDriver = driver;
@@ -62,6 +61,7 @@ namespace Expedia.com.Pages
         public void GoToFlights()
         {
             FlightsTab.Click();
+            Console.WriteLine("Proceed to Flights tab");
         }
 
         public void GoToOneWay()
