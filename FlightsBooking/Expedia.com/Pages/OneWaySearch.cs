@@ -86,8 +86,13 @@ namespace Expedia.com.Pages
         public void SelectNumberOfAdults(string passangers)
         {
             Passangers.SelectByText(passangers);
+            PassNumberOfPassangers();
+        }
+
+        private void PassNumberOfPassangers()
+        {
             int passangersCount;
-            int.TryParse(passangers, out passangersCount);
+            int.TryParse(Passangers.SelectedOption.Text, out passangersCount);
             ScenarioContext.Current["passangers"] = passangersCount;
         }
 

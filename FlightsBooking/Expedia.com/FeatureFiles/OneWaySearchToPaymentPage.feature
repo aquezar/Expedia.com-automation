@@ -18,7 +18,7 @@ Scenario Outline: One Way
 	And I check that search results is relevant to search request by <fromAirport> and <toAirport>
 	And I select flights
 	And I check that <tripDetailPage> opens 
-	And I compare the <fromAirport> and <toAirport> values for selected and displayed flight
+	And I compare the <fromAirport> and <toAirport> values and departure, arrival, duration for selected and displayed flight
 	And I confirm flight
 	When <paymentPage> opens 
 	Then Payment page Trip summary is corresponding to selected tickets
