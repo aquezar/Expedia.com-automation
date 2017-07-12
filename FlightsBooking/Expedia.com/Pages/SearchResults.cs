@@ -74,36 +74,32 @@ namespace Expedia.com.Pages
                 var originalTab = pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
             }
         }
-       public void CheckPageOpened(string searchTabTitle) 
+       public void CheckCorrectSearchPageOpened(string searchTabTitle) 
         {
-             //Check that correct page is opened
              Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
         }
 
-        public void GetStopsFilter()
-        {
-            int StopsFilterCount = pageDriver.FindElement(By.Id("stops")).FindElements(By.ClassName("check filter-option")).Count;
-            List<IWebElement> StopsFilter = pageDriver.FindElement(By.Id("stops")).FindElements(By.ClassName("check filter-option")).ToList();
-            string[] StopFilterValues = new string[StopsFilterCount];
-            for (int i = 0; i <= StopsFilterCount-1; i++)
-            {
-                StopFilterValues[i] = StopsFilter.ElementAt(i).Text;
-            }
-        }
-
-        public void FlightSelect()
+        private void CollectCheepestFlightInfo()
         {
             selectedFlight.Add(selectedFlightRoute.Text);
             selectedFlight.Add(selectedFlightPrice.Text);
             selectedFlight.Add(flightDepartureTime.Text);
-            selectedFlight.Add(flightArrivalTime.Text + "m");
+            selectedFlight.Add(flightArrivalTime.Text);
             selectedFlight.Add((flightDuration.Text + ", " + flightStops.Text));
             ScenarioContext.Current["flight"] = selectedFlight;
-            SelectButton.Click();
+        }
 
-            //Switch to Trip Detail
+        private void SwitchToTripDetailsTab()
+        {
             string newTabHandle = pageDriver.WindowHandles.Last();
             pageDriver.SwitchTo().Window(newTabHandle);
+        }
+
+        public void FlightSelect()
+        {
+            CollectCheepestFlightInfo();
+            SelectButton.Click();
+            SwitchToTripDetailsTab();
         }
 
         public void CheckSearchResults(string from, string to)

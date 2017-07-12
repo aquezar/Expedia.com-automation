@@ -24,8 +24,8 @@ namespace Expedia.com
             new TripDetails(driver).TripDetailPageOpens(p0);         
         }
 
-        [Given(@"I compare the (.*) and (.*) values for selected and displayed flight")]
-        public void GivenICompareTheKBPAndBUDValuesForSelectedAndDisplayedFlight(string p0, string p1)
+        [Given(@"I compare the (.*) and (.*) values and departure, arrival, duration for selected and displayed flight")]
+        public void GivenICompareSelectedAndDisplayedFlight(string p0, string p1)
         {
             flight = (List<string>)ScenarioContext.Current["flight"];
             new TripDetails(driver).CompareFlightsInfo(flight, p0, p1);

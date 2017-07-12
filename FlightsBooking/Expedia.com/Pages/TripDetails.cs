@@ -85,24 +85,49 @@ namespace Expedia.com.Pages
             }                         
         }
 
-        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
+        private void CompareTicketsPricesInTripSummary(List<string> tripInfo)
         {
-            Assert.AreEqual(tripInfo[0], (from + " - " + to));
-            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
-            Assert.AreEqual(tripInfo[3], flightArrivalTime.Text);
-            Assert.AreEqual(tripInfo[4], flightDuration.Text);
             List<double> ticketsPricesList = new List<double>();
             int passangers = (int)ScenarioContext.Current["passangers"];
-            for (int i = passangers; i <= tripForPassanger.Count-1; i++) //i must be equal to passangers count
+            for (int i = passangers; i <= tripForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
                 double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
                 double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
-                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0); 
+                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
             }
             ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
+        }
+
+        private void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
+        {
+            Assert.AreEqual(tripInfo[0], (from + " - " + to));
+        }
+
+        private void CompareDepartureTime(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+        }
+
+        private void CompareArrivalTime(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length - 1)));
+        }
+
+        private void CompareFlightDuration(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[4], flightDuration.Text);
+        }
+
+        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
+        {
+            CompareDepartureAndDestination(tripInfo, from, to);
+            CompareDepartureTime(tripInfo);
+            CompareArrivalTime(tripInfo);
+            CompareFlightDuration(tripInfo);
+            CompareTicketsPricesInTripSummary(tripInfo);
         }
 
     }
