@@ -44,8 +44,17 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[contains(@class, 'offer-price')]/span[@class='visuallyhidden']")]
         private IWebElement selectedFlightPrice { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@class='secondary truncate']")]
-        private IWebElement selectedFlightAirlines { get; set; }
+        [FindsBy(How = How.ClassName, Using = "departure-time")]
+        private IWebElement flightDepartureTime { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "arrival-time")]
+        private IWebElement flightArrivalTime { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".//div[contains(@class, 'primary duration')]")]
+        private IWebElement flightDuration { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = ".//div[contains(@class, 'primary stops')]")]
+        private IWebElement flightStops { get; set; }
 
         public SearchResults(IWebDriver driver)
         {
@@ -86,7 +95,9 @@ namespace Expedia.com.Pages
         {
             selectedFlight.Add(selectedFlightRoute.Text);
             selectedFlight.Add(selectedFlightPrice.Text);
-            selectedFlight.Add(selectedFlightAirlines.Text);
+            selectedFlight.Add(flightDepartureTime.Text);
+            selectedFlight.Add(flightArrivalTime.Text + "m");
+            selectedFlight.Add((flightDuration.Text + ", " + flightStops.Text));
             ScenarioContext.Current["flight"] = selectedFlight;
             SelectButton.Click();
 

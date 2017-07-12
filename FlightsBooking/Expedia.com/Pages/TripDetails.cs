@@ -36,6 +36,15 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
         private IWebElement TripTo { get; set; }
 
+        [FindsBy(How = How.Id, Using = "departure-time-automation-label-0")]
+        private IWebElement flightDepartureTime { get; set; }
+
+        [FindsBy(How = How.Id, Using = "arrival-time-automation-label-0")]
+        private IWebElement flightArrivalTime { get; set; }
+
+        [FindsBy(How = How.Id, Using = "duration-automation-label-0")]
+        private IWebElement flightDuration { get; set; }
+
         public TripDetails(IWebDriver driver)
         {
             pageDriver = driver;
@@ -79,6 +88,9 @@ namespace Expedia.com.Pages
         public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
         {
             Assert.AreEqual(tripInfo[0], (from + " - " + to));
+            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+            Assert.AreEqual(tripInfo[3], flightArrivalTime.Text);
+            Assert.AreEqual(tripInfo[4], flightDuration.Text);
             List<double> ticketsPricesList = new List<double>();
             int passangers = (int)ScenarioContext.Current["passangers"];
             for (int i = passangers; i <= tripForPassanger.Count-1; i++) //i must be equal to passangers count
