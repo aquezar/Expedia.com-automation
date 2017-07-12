@@ -20,5 +20,11 @@ namespace Expedia.com.Framework
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
             return driver;
         }
+
+        [AfterScenario]
+        private void Quit()
+        {
+            driver.Quit();
+        }
     }
 }

@@ -30,8 +30,6 @@ namespace Expedia.com
         {
             ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
             new Payment(driver).TripSummaryCheck(ticketPrice);
-
-            driver.Quit();
         }
 
     }
