@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -45,8 +44,17 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[contains(@class, 'offer-price')]/span[@class='visuallyhidden']")]
         private IWebElement selectedFlightPrice { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@class='secondary truncate']")]
-        private IWebElement selectedFlightAirlines { get; set; }
+        [FindsBy(How = How.ClassName, Using = "departure-time")]
+        private IWebElement flightDepartureTime { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "arrival-time")]
+        private IWebElement flightArrivalTime { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".//div[contains(@class, 'primary duration')]")]
+        private IWebElement flightDuration { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = ".//div[contains(@class, 'primary stops')]")]
+        private IWebElement flightStops { get; set; }
 
         public SearchResults(IWebDriver driver)
         {
@@ -66,34 +74,32 @@ namespace Expedia.com.Pages
                 var originalTab = pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
             }
         }
-       public void CheckPageOpened(string searchTabTitle) 
+       public void CheckCorrectSearchPageOpened(string searchTabTitle) 
         {
-             //Check that correct page is opened
              Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
         }
 
-        public void GetStopsFilter()
+        private void CollectCheepestFlightInfo()
         {
-            int StopsFilterCount = pageDriver.FindElement(By.Id("stops")).FindElements(By.ClassName("check filter-option")).Count;
-            List<IWebElement> StopsFilter = pageDriver.FindElement(By.Id("stops")).FindElements(By.ClassName("check filter-option")).ToList();
-            string[] StopFilterValues = new string[StopsFilterCount];
-            for (int i = 0; i <= StopsFilterCount-1; i++)
-            {
-                StopFilterValues[i] = StopsFilter.ElementAt(i).Text;
-            }
+            selectedFlight.Add(selectedFlightRoute.Text);
+            selectedFlight.Add(selectedFlightPrice.Text);
+            selectedFlight.Add(flightDepartureTime.Text);
+            selectedFlight.Add(flightArrivalTime.Text);
+            selectedFlight.Add((flightDuration.Text + ", " + flightStops.Text));
+            ScenarioContext.Current["flight"] = selectedFlight;
+        }
+
+        private void SwitchToTripDetailsTab()
+        {
+            string newTabHandle = pageDriver.WindowHandles.Last();
+            pageDriver.SwitchTo().Window(newTabHandle);
         }
 
         public void FlightSelect()
         {
-            selectedFlight.Add(selectedFlightRoute.Text);
-            selectedFlight.Add(selectedFlightPrice.Text);
-            selectedFlight.Add(selectedFlightAirlines.Text);
-            ScenarioContext.Current["flight"] = selectedFlight;
+            CollectCheepestFlightInfo();
             SelectButton.Click();
-
-            //Switch to Trip Detail
-            string newTabHandle = pageDriver.WindowHandles.Last();
-            pageDriver.SwitchTo().Window(newTabHandle);
+            SwitchToTripDetailsTab();
         }
 
         public void CheckSearchResults(string from, string to)

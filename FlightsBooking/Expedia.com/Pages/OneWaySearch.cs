@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -50,7 +51,6 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.CssSelector, Using = ".btn-primary.btn-action.gcw-submit")]
         private IWebElement SearchButton { get; set; }
 
-
         public OneWaySearch(IWebDriver driver)
         {
             pageDriver = driver;
@@ -86,6 +86,14 @@ namespace Expedia.com.Pages
         public void SelectNumberOfAdults(string passangers)
         {
             Passangers.SelectByText(passangers);
+            PassNumberOfPassangers();
+        }
+
+        private void PassNumberOfPassangers()
+        {
+            int passangersCount;
+            int.TryParse(Passangers.SelectedOption.Text, out passangersCount);
+            ScenarioContext.Current["passangers"] = passangersCount;
         }
 
         public void Search()

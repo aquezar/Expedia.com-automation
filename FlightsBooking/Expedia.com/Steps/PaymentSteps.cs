@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com
@@ -10,17 +11,26 @@ namespace Expedia.com
 
         readonly IWebDriver driver;
 
+        List<double> ticketPrice;
+
         public PaymentSteps()
         {
             driver = (IWebDriver)ScenarioContext.Current["driver"];
+            
         }
 
-        [Then(@"Payment page opens (.*)")]
-        public void ThenPaymentPageOpens(string p0)
+        [When(@"(.*) opens")]
+        public void WhenPaymentPageOpens(string p0)
         {
-            new Payment(driver).PaymentPageOpens(p0);
-
-            driver.Quit();
+            new Payment(driver).PaymentPageOpens(p0);       
         }
+
+        [Then(@"Payment page Trip summary is corresponding to selected tickets")]
+        public void ThenPaymentPageTripSummaryIsCorrespondingToSelectedTickets()
+        {
+            ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
+            new Payment(driver).TripSummaryCheck(ticketPrice);
+        }
+
     }
 }

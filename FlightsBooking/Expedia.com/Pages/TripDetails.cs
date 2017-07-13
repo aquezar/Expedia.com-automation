@@ -4,7 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
@@ -18,10 +18,10 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[2]/span[2]")]
         private IWebElement TDTo { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//div[@id='tsTotal']//span[@class='visuallyhidden']")]
+        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]
         private IWebElement tripTotal { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//li[@class='toggle after-open']//span[contains(@id, 'totalPriceForPassenger')]")]
+        [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
         private IList<IWebElement> tripForPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
@@ -35,6 +35,15 @@ namespace Expedia.com.Pages
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
         private IWebElement TripTo { get; set; }
+
+        [FindsBy(How = How.Id, Using = "departure-time-automation-label-0")]
+        private IWebElement flightDepartureTime { get; set; }
+
+        [FindsBy(How = How.Id, Using = "arrival-time-automation-label-0")]
+        private IWebElement flightArrivalTime { get; set; }
+
+        [FindsBy(How = How.Id, Using = "duration-automation-label-0")]
+        private IWebElement flightDuration { get; set; }
 
         public TripDetails(IWebDriver driver)
         {
@@ -64,7 +73,6 @@ namespace Expedia.com.Pages
             }
         }
 
-
         public void Continue()
         {
             if (IsElementPresent(By.XPath(".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")))
@@ -74,23 +82,53 @@ namespace Expedia.com.Pages
             else
             {
                 BookButton.Click();
-            }               
-            
+            }                         
         }
 
-        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
+        private void CompareTicketsPricesInTripSummary(List<string> tripInfo)
         {
-            Assert.AreEqual(tripInfo[0], (from + " - " + to));
-            for (int i = 1; i <= tripForPassanger.Count-1; i++)
+            List<double> ticketsPricesList = new List<double>();
+            int passangers = (int)ScenarioContext.Current["passangers"];
+            for (int i = passangers; i <= tripForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
                 double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
                 double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
-                //Assert.AreEqual(tripInfo[1], tripForPassanger[i].Text);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
-                
-            } 
+                ticketsPricesList.Add(priceForPassanger);
+            }
+            ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
         }
+
+        private void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
+        {
+            Assert.AreEqual(tripInfo[0], (from + " - " + to));
+        }
+
+        private void CompareDepartureTime(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+        }
+
+        private void CompareArrivalTime(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length - 1)));
+        }
+
+        private void CompareFlightDuration(List<string> tripInfo)
+        {
+            Assert.AreEqual(tripInfo[4], flightDuration.Text);
+        }
+
+        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
+        {
+            CompareDepartureAndDestination(tripInfo, from, to);
+            CompareDepartureTime(tripInfo);
+            CompareArrivalTime(tripInfo);
+            CompareFlightDuration(tripInfo);
+            CompareTicketsPricesInTripSummary(tripInfo);
+        }
+
     }
 }

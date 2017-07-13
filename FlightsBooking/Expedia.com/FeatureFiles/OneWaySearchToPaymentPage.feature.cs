@@ -68,6 +68,7 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.DescriptionAttribute("One Way")]
         [NUnit.Framework.CategoryAttribute("searchflow")]
         [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "Search for Flights to Budapest", "Trip Detail", "Expedia: Payment", "KBP", "BUD", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/18/2017", "3", "LHR to TXL Flights", "Search for Flights to Berlin", "Trip Detail", "Expedia: Payment", "LHR", "TXL", new string[0])]
         public virtual void OneWay(string from, string to, string date, string passangers, string searchTab, string commercialTab, string tripDetailPage, string paymentPage, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -104,13 +105,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And("I select flights", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
- testRunner.And(string.Format("I check that Trip Detail page opens {0}", tripDetailPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I check that {0} opens", tripDetailPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
- testRunner.And(string.Format("I compare the {0} and {1} values for selected and displayed flight", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I compare the {0} and {1} values and departure, arrival, duration for selected an" +
+                        "d displayed flight", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
- testRunner.When("I confirm flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I confirm flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
- testRunner.Then(string.Format("Payment page opens {0}", paymentPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("{0} opens", paymentPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
+ testRunner.Then("Payment page Trip summary is corresponding to selected tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

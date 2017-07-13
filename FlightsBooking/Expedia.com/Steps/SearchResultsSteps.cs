@@ -24,7 +24,7 @@ namespace Expedia.com
         [Given(@"I check that correct Search results opens, verifying by (.*)")]
         public void GivenICheckThatCorrectSearchResultsOpens(string p0)
         {
-            new SearchResults(driver).CheckPageOpened(p0);            
+            new SearchResults(driver).CheckCorrectSearchPageOpened(p0);            
         }
 
         [Given(@"I check that search results is relevant to search request by (.*) and (.*)")]
@@ -37,7 +37,6 @@ namespace Expedia.com
         [Given(@"I select flights")]
         public void GivenISelectFlights()
         {
-            //new SearchResults(driver).FlightSelect(); 
             new SearchResults(driver).FlightSelect();
         }
         
