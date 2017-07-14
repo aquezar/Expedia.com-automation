@@ -61,6 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureFiles\SpecFlowFeature1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Settings.cs" />
     <Compile Include="Pages\Payment.cs" />
     <Compile Include="Steps\PaymentSteps.cs" />
@@ -79,6 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FeatureFiles\SpecFlowFeature1.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="FeatureFiles\OneWaySearchToPaymentPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
