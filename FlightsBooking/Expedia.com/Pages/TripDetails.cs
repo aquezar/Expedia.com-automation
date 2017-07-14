@@ -56,7 +56,6 @@ namespace Expedia.com.Pages
             //unable to assert page title in a different way
             WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.TitleIs(TripDetailTabTitle + " | Expedia"));
-            // --
             Assert.AreEqual(TripDetailTabTitle + " | Expedia", pageDriver.Title);
         }
 
