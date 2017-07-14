@@ -1,7 +1,7 @@
 ﻿Feature: Change departure date in Search results
 	In order to change departure date
 	As unregistered user
-	I want to have the ability to cnhange departure date after performing search 
+	I want to have the ability to cnhange departure date after performing search
 
 @changeDate
 Scenario Outline: Change Departure date

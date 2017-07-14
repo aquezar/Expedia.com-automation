@@ -32,7 +32,7 @@ namespace Expedia.com.FeatureFiles
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "One Way search", "\tIn order to book my flight for one way only\r\n\tAs unregistered user\r\n\tI want to p" +
-                    "erform search, select flight and proceed to payment", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "erform search and proceed to payment after selecting flight", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

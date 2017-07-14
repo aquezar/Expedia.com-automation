@@ -139,7 +139,7 @@ namespace Expedia.com.Pages
             int.TryParse(t[0], out month);
             int.TryParse(t[1], out day);
             DateTime convertedDate = new DateTime(year, month, day);
-            departureDate = convertedDate.ToString("ddd, MMM d", CultureInfo.CurrentCulture);
+            departureDate = convertedDate.ToString("ddd, MMM d");
         }
         
         public void compareDates()

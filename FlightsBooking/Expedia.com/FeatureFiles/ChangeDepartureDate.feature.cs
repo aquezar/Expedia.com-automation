@@ -32,7 +32,7 @@ namespace Expedia.com.FeatureFiles
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Change departure date in Search results", "\tIn order to change departure date\r\n\tAs unregistered user\r\n\tI want to have the ab" +
-                    "ility to cnhange departure date after performing search ", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ility to cnhange departure date after performing search", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
