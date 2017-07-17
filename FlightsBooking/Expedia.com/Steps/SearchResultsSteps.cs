@@ -39,6 +39,28 @@ namespace Expedia.com
         {
             new SearchResults(driver).FlightSelect();
         }
-        
+
+        [Given(@"I change departure date to (.*)")]
+        public void GivenIChangeDepartureDateTo(string p0)
+        {
+            new SearchResults(driver).changeDepartureDate(p0);
+        }
+
+        [When(@"I click Search button on Search Results page")]
+        public void WhenIClickSearchButtonOnSearchResultsPage()
+        {
+            new SearchResults(driver).search();
+        }
+
+        [Then(@"Flights for new date are shown")]
+        public void ThenFlightsForNewDateAreShown()
+        {
+            new SearchResults(driver).compareDates();
+        }
+
+
+
+
+
     }
 }

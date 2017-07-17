@@ -1,7 +1,7 @@
 ﻿Feature: One Way search
 	In order to book my flight for one way only
 	As unregistered user
-	I want to perform search, select flight and proceed to payment
+	I want to perform search and proceed to payment after selecting flight
 
 @searchflow
 Scenario Outline: One Way
