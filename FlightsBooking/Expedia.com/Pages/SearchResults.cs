@@ -2,7 +2,9 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -13,6 +15,8 @@ namespace Expedia.com.Pages
         private IWebDriver pageDriver;
 
         public List<string> selectedFlight = new List<string>(); //list for selected flight
+
+        private string departureDate;
 
         [FindsBy(How = How.Id, Using = "departure-airport-1")]
         private IWebElement SearchFlyingFrom { get; set; }
@@ -55,6 +59,15 @@ namespace Expedia.com.Pages
         
         [FindsBy(How = How.XPath, Using = ".//div[contains(@class, 'primary stops')]")]
         private IWebElement flightStops { get; set; }
+
+        [FindsBy(How = How.Id, Using = "departure-date-1")]
+        private IWebElement departure { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "title-date-rtv")]
+        private IWebElement flightDate { get; set; }
+
+        [FindsBy(How = How.Id, Using = "flight-wizard-search-button")]
+        private IWebElement searchButton { get; set; }
 
         public SearchResults(IWebDriver driver)
         {
@@ -109,6 +122,35 @@ namespace Expedia.com.Pages
                 Assert.AreEqual(flightsListRoute.ElementAt(i).Text, (from + " - " + to));
             }
         }
+
+        public void changeDepartureDate(string date)
+        {
+            departure.Clear();
+            departure.SendKeys(date);
+        }
+
+        private void convertDepartureDate()
+        {
+            var t = departure.GetAttribute("value").Split('/');
+            int day;
+            int month;
+            int year;
+            int.TryParse(t[2], out year);
+            int.TryParse(t[0], out month);
+            int.TryParse(t[1], out day);
+            DateTime convertedDate = new DateTime(year, month, day);
+            departureDate = convertedDate.ToString("ddd, MMM d");
+        }
         
+        public void compareDates()
+        {
+            convertDepartureDate();
+            Assert.AreEqual(departureDate, flightDate.Text);
+        }
+
+        public void search()
+        {
+            searchButton.Click();
+        }
     }
 }

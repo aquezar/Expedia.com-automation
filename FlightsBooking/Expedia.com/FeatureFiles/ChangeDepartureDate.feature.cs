@@ -18,21 +18,21 @@ namespace Expedia.com.FeatureFiles
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("One Way search")]
-    public partial class OneWaySearchFeature
+    [NUnit.Framework.DescriptionAttribute("Change departure date in Search results")]
+    public partial class ChangeDepartureDateInSearchResultsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "OneWaySearchToPaymentPage.feature"
+#line 1 "ChangeDepartureDate.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "One Way search", "\tIn order to book my flight for one way only\r\n\tAs unregistered user\r\n\tI want to p" +
-                    "erform search and proceed to payment after selecting flight", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Change departure date in Search results", "\tIn order to change departure date\r\n\tAs unregistered user\r\n\tI want to have the ab" +
+                    "ility to cnhange departure date after performing search", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,19 +65,19 @@ namespace Expedia.com.FeatureFiles
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("One Way")]
-        [NUnit.Framework.CategoryAttribute("searchflow")]
-        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "Search for Flights to Budapest", "Trip Detail", "Expedia: Payment", "KBP", "BUD", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/18/2017", "3", "LHR to TXL Flights", "Search for Flights to Berlin", "Trip Detail", "Expedia: Payment", "LHR", "TXL", new string[0])]
-        public virtual void OneWay(string from, string to, string date, string passangers, string searchTab, string commercialTab, string tripDetailPage, string paymentPage, string fromAirport, string toAirport, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Change Departure date")]
+        [NUnit.Framework.CategoryAttribute("changeDate")]
+        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "Search for Flights to Budapest", "KBP", "BUD", "11/15/2017", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/18/2017", "3", "LHR to TXL Flights", "Search for Flights to Berlin", "LHR", "TXL", "12/03/2017", new string[0])]
+        public virtual void ChangeDepartureDate(string from, string to, string date, string passangers, string searchTab, string commercialTab, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "searchflow"};
+                    "changeDate"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("One Way", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change Departure date", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -103,18 +103,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 18
  testRunner.And(string.Format("I check that search results is relevant to search request by {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
- testRunner.And("I select flights", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I change departure date to {0}", newDepartureDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
- testRunner.And(string.Format("I check that {0} opens", tripDetailPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click Search button on Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 21
- testRunner.And(string.Format("I compare the {0} and {1} values and departure, arrival, duration for selected an" +
-                        "d displayed flight", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
- testRunner.And("I confirm flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
- testRunner.When(string.Format("{0} opens", paymentPage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
- testRunner.Then("Payment page Trip summary is corresponding to selected tickets", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Flights for new date are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
