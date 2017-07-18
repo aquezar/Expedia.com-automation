@@ -13,6 +13,8 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        private string departureDate;
+
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
         private IWebElement TDFrom { get; set; }
 
@@ -45,6 +47,9 @@ namespace Expedia.com.Pages
 
         [FindsBy(How = How.Id, Using = "duration-automation-label-0")]
         private IWebElement flightDuration { get; set; }
+
+        [FindsBy(How = How.Id, Using = "departure-date-0")]
+        private IWebElement flightDate { get; set; }
 
         public TripDetails(IWebDriver driver)
         {
@@ -109,6 +114,25 @@ namespace Expedia.com.Pages
         public void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
         {
             Assert.AreEqual(tripInfo[0], (from + " - " + to));
+        }
+
+        private void convertDepartureDate(string departure)
+        {
+            var t = departure.Split('/');
+            int day;
+            int month;
+            int year;
+            int.TryParse(t[2], out year);
+            int.TryParse(t[0], out month);
+            int.TryParse(t[1], out day);
+            DateTime convertedDate = new DateTime(year, month, day);
+            departureDate = convertedDate.ToString("ddd, MMM d");
+        }
+
+        public void CompareDates(string date)
+        {
+            convertDepartureDate(date);
+            Assert.AreEqual(departureDate, flightDate.Text);
         }
 
         public void CompareDepartureTime(List<string> tripInfo)

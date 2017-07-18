@@ -17,9 +17,10 @@ Scenario Outline: One Way
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
 	And I select cheepest ticket
 	And I check the <fromAirport> and <toAirport>
+	And I check flight <date>
 	And I check departure time
 	And I check arrival time
-	And I check flight duration
+	And I check duration of flight
 	And I check tecket price
 	And I confirm flight
 	When Payment page opens 

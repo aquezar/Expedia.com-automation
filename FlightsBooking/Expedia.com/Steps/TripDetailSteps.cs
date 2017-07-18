@@ -28,6 +28,12 @@ namespace Expedia.com
             details.CompareDepartureAndDestination(flight, p0, p1);
         }
 
+        [Given(@"I check flight (.*)")]
+        public void GivenICheckDepartureDate(string p0)
+        {
+            details.CompareDates(p0);
+        }
+
         [Given(@"I check departure time")]
         public void GivenICheckDepartureTime()
         {
@@ -40,7 +46,7 @@ namespace Expedia.com
             details.CompareArrivalTime(flight);
         }
 
-        [Given(@"I check flight duration")]
+        [Given(@"I check duration of flight")]
         public void GivenICheckFlightDuration()
         {
             details.CompareFlightDuration(flight);
