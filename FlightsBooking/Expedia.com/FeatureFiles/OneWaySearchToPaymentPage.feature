@@ -3,7 +3,7 @@
 	As unregistered user
 	I want to perform search and proceed to payment after selecting flight
 
-@searchflow
+@searchFlow
 Scenario Outline: One Way
 	Given I open expedia.com
 	And I navigate to Flights

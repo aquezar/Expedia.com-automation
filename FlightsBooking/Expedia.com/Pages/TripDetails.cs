@@ -103,11 +103,11 @@ namespace Expedia.com.Pages
         {
             pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
 
-            if (pageDriver.Title != "Trip Details | Expedia")
+            /*if (pageDriver.Title != "Trip Details | Expedia")
             {
                 pageDriver.Close();
                 pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
-            }
+            }*/
 
         }
 
