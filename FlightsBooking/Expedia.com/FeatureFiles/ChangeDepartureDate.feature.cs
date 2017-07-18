@@ -67,9 +67,9 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Change Departure date")]
         [NUnit.Framework.CategoryAttribute("changeDate")]
-        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "Search for Flights to Budapest", "KBP", "BUD", "11/15/2017", null)]
-        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/18/2017", "3", "LHR to TXL Flights", "Search for Flights to Berlin", "LHR", "TXL", "12/03/2017", null)]
-        public virtual void ChangeDepartureDate(string from, string to, string date, string passangers, string searchTab, string commercialTab, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "KBP", "BUD", "11/15/2017", null)]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/25/2017", "3", "LHR to TXL Flights", "LHR", "TXL", "12/03/2017", null)]
+        public virtual void ChangeDepartureDate(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "changeDate"};
@@ -97,16 +97,14 @@ this.ScenarioSetup(scenarioInfo);
 #line 15
  testRunner.And("I click Search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.And(string.Format("I close {0} if it opens", commercialTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("After {0} opens", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
- testRunner.And(string.Format("I check that correct Search results opens, verifying by {0}", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I check correctness of search results by checking {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.And(string.Format("I check that search results is relevant to search request by {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
  testRunner.And(string.Format("I change departure date to {0}", newDepartureDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 19
  testRunner.When("I click Search button on Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
+#line 20
  testRunner.Then("Flights for new date are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

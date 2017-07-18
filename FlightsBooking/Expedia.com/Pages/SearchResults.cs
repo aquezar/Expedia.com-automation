@@ -75,21 +75,11 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-       public void CloseCommercial(string commercialWinTitle)
+       
+       public void AfterSearchPageOpened(string searchTabTitle) 
         {
-            //Close commercial if opened
-            string commercialTabHandle = pageDriver.WindowHandles.Last();
-            var commercialWindow = pageDriver.SwitchTo().Window(commercialTabHandle);
-
-            if (commercialWindow.Title == commercialWinTitle)
-            {
-                pageDriver.Close();
-                var originalTab = pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
-            }
-        }
-       public void CheckCorrectSearchPageOpened(string searchTabTitle) 
-        {
-             Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
+            //pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
+            Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
         }
 
         private void CollectCheepestFlightInfo()
@@ -112,7 +102,7 @@ namespace Expedia.com.Pages
         {
             CollectCheepestFlightInfo();
             SelectButton.Click();
-            SwitchToTripDetailsTab();
+            //SwitchToTripDetailsTab();
         }
 
         public void CheckSearchResults(string from, string to)

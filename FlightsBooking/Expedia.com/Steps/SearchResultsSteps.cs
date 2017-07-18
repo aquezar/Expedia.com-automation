@@ -8,54 +8,49 @@ namespace Expedia.com
     public class SearchresultsSteps
     {
 
-        readonly IWebDriver driver;
+        private IWebDriver driver;
+        SearchResults results;
 
         public SearchresultsSteps()
         {
             driver = (IWebDriver)ScenarioContext.Current["driver"];
         }
 
-        [Given(@"I close (.*) if it opens")]
-        public void GivenICloseCommercialIfItOpens(string p0)
+        [Given(@"After (.*) opens")]
+        public void GivenAfterSearchResultsOpens(string p0)
         {
-            new SearchResults(driver).CloseCommercial(p0);
+            results = new SearchResults(driver);
+            results.AfterSearchPageOpened(p0);            
         }
 
-        [Given(@"I check that correct Search results opens, verifying by (.*)")]
-        public void GivenICheckThatCorrectSearchResultsOpens(string p0)
+        [Given(@"I check correctness of search results by checking (.*) and (.*)")]
+        public void GivenICheckCorrectnessOfSearchResults(string p0, string p1)
         {
-            new SearchResults(driver).CheckCorrectSearchPageOpened(p0);            
+            results.CheckSearchResults(p0, p1);
         }
 
-        [Given(@"I check that search results is relevant to search request by (.*) and (.*)")]
-        public void GivenICheckThatSearchResultsIsRelevantToSearchRequest(string p0, string p1)
-        {
-            new SearchResults(driver).CheckSearchResults(p0, p1);
-        }
-
-
-        [Given(@"I select flights")]
+        [Given(@"I select cheepest ticket")]
         public void GivenISelectFlights()
         {
-            new SearchResults(driver).FlightSelect();
+            results.FlightSelect();
         }
 
         [Given(@"I change departure date to (.*)")]
         public void GivenIChangeDepartureDateTo(string p0)
         {
-            new SearchResults(driver).changeDepartureDate(p0);
+            results.changeDepartureDate(p0);
         }
 
         [When(@"I click Search button on Search Results page")]
         public void WhenIClickSearchButtonOnSearchResultsPage()
         {
-            new SearchResults(driver).search();
+            results.search();
         }
 
         [Then(@"Flights for new date are shown")]
         public void ThenFlightsForNewDateAreShown()
         {
-            new SearchResults(driver).compareDates();
+            results.compareDates();
         }
 
 

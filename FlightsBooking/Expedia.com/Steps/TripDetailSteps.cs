@@ -9,8 +9,9 @@ namespace Expedia.com
     public class TripDetailSteps
     {
 
-        readonly IWebDriver driver;
+        private IWebDriver driver;
         private List<string>flight = new List<string>();
+        TripDetails details;
 
         public TripDetailSteps()
         {
@@ -18,24 +19,44 @@ namespace Expedia.com
             
         }
 
-        [Given(@"I check that (.*) opens")]
-        public void GivenICheckThatTripDetailPageOpens(string p0)
+        [Given(@"I check the (.*) and (.*)")]
+        public void GivenICheckFromAndTo(string p0, string p1)
         {
-            new TripDetails(driver).TripDetailPageOpens(p0);         
+            details = new TripDetails(driver);
+            details.SwitchToTripDetailsTab();
+            flight = (List<string>)ScenarioContext.Current["flight"];
+            details.CompareDepartureAndDestination(flight, p0, p1);
         }
 
-        [Given(@"I compare the (.*) and (.*) values and departure, arrival, duration for selected and displayed flight")]
-        public void GivenICompareSelectedAndDisplayedFlight(string p0, string p1)
+        [Given(@"I check departure time")]
+        public void GivenICheckDepartureTime()
         {
-            flight = (List<string>)ScenarioContext.Current["flight"];
-            new TripDetails(driver).CompareFlightsInfo(flight, p0, p1);
+            details.CompareDepartureTime(flight);
+        }
+
+        [Given(@"I check arrival time")]
+        public void GivenICheckArrivalTime()
+        {
+            details.CompareArrivalTime(flight);
+        }
+
+        [Given(@"I check flight duration")]
+        public void GivenICheckFlightDuration()
+        {
+            details.CompareFlightDuration(flight);
+        }
+
+        [Given(@"I check tecket price")]
+        public void GivenICheckTecketPrice()
+        {
+            details.CompareTicketsPricesInTripSummary(flight);
         }
 
 
         [Given(@"I confirm flight")]
         public void GivenIConfirmFlight()
         {
-            new TripDetails(driver).Continue();
+            details.Continue();
         }
 
     }

@@ -4,6 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -51,13 +52,6 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-        public void TripDetailPageOpens(string TripDetailTabTitle)
-        {
-            //unable to assert page title in a different way
-            WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.TitleIs(TripDetailTabTitle + " | Expedia"));
-            Assert.AreEqual(TripDetailTabTitle + " | Expedia", pageDriver.Title);
-        }
 
         private bool IsElementPresent(By by)
         {
@@ -84,7 +78,7 @@ namespace Expedia.com.Pages
             }                         
         }
 
-        private void CompareTicketsPricesInTripSummary(List<string> tripInfo)
+        public void CompareTicketsPricesInTripSummary(List<string> tripInfo)
         {
             List<double> ticketsPricesList = new List<double>();
             int passangers = (int)ScenarioContext.Current["passangers"];
@@ -100,34 +94,38 @@ namespace Expedia.com.Pages
             ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
         }
 
-        private void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
+        public void SwitchToTripDetailsTab()
+        {
+            pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
+
+            if (pageDriver.Title != "Trip Details | Expedia")
+            {
+                pageDriver.Close();
+                pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
+            }
+
+        }
+
+        public void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
         {
             Assert.AreEqual(tripInfo[0], (from + " - " + to));
         }
 
-        private void CompareDepartureTime(List<string> tripInfo)
+        public void CompareDepartureTime(List<string> tripInfo)
         {
             Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
         }
 
-        private void CompareArrivalTime(List<string> tripInfo)
+        public void CompareArrivalTime(List<string> tripInfo)
         {
             Assert.AreEqual(tripInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length - 1)));
         }
 
-        private void CompareFlightDuration(List<string> tripInfo)
+        public void CompareFlightDuration(List<string> tripInfo)
         {
             Assert.AreEqual(tripInfo[4], flightDuration.Text);
         }
 
-        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
-        {
-            CompareDepartureAndDestination(tripInfo, from, to);
-            CompareDepartureTime(tripInfo);
-            CompareArrivalTime(tripInfo);
-            CompareFlightDuration(tripInfo);
-            CompareTicketsPricesInTripSummary(tripInfo);
-        }
 
     }
 }

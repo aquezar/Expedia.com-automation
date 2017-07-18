@@ -9,9 +9,10 @@ namespace Expedia.com
     class PaymentSteps
     {
 
-        readonly IWebDriver driver;
+        private IWebDriver driver;
 
         List<double> ticketPrice;
+        Payment payment;
 
         public PaymentSteps()
         {
@@ -19,17 +20,18 @@ namespace Expedia.com
             
         }
 
-        [When(@"(.*) opens")]
-        public void WhenPaymentPageOpens(string p0)
+        [When(@"Payment page opens")]
+        public void WhenPaymentPageOpens()
         {
-            new Payment(driver).PaymentPageOpens(p0);       
+            payment = new Payment(driver);
+            payment.PaymentPageOpens();       
         }
 
         [Then(@"Payment page Trip summary is corresponding to selected tickets")]
         public void ThenPaymentPageTripSummaryIsCorrespondingToSelectedTickets()
         {
             ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
-            new Payment(driver).TripSummaryCheck(ticketPrice);
+            payment.TripSummaryCheck(ticketPrice);
         }
 
     }

@@ -18,10 +18,9 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-        public void PaymentPageOpens(string paymentTitle)
+        public void PaymentPageOpens()
         {
-            string PaymentPageTitle = pageDriver.Title;
-            Assert.IsTrue(PaymentPageTitle.Equals(paymentTitle));
+            Assert.IsTrue(pageDriver.Title.Equals("Expedia: Payment"));
         }
 
         public void TripSummaryCheck(List<double> ticketPrice)
