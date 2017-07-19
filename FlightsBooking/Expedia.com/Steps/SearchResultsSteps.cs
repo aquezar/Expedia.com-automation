@@ -29,6 +29,12 @@ namespace Expedia.com
             results.CheckSearchResults(p0, p1);
         }
 
+        [Given(@"I check departure date for search results")]
+        public void GivenICheckDepartureDateForSearchResults()
+        {
+            results.compareDates();
+        }
+
         [Given(@"I select cheepest ticket")]
         public void GivenISelectFlights()
         {

@@ -15,6 +15,7 @@ Scenario Outline: One Way
 	And I click Search button
 	And After <searchTab> opens
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
+	And I check departure date for search results
 	And I select cheepest ticket
 	And I check the <fromAirport> and <toAirport>
 	And I check flight <date>
@@ -22,9 +23,18 @@ Scenario Outline: One Way
 	And I check arrival time
 	And I check duration of flight
 	And I check tecket price
-	And I confirm flight
-	When Payment page opens 
-	Then Payment page Trip summary is corresponding to selected tickets
+	When I confirm flight
+	Then Payment page opens 
+	And I open Flight details
+	And I check flight <date>
+	And I check departing <fromAirport>
+	And I check departure time
+	And I check arrival <toAirport>
+	And I check time of arrival
+	And I check duration of flight
+	And I check ticket price for each passanger
+	And I check total price
+	
 
 
 Examples: 

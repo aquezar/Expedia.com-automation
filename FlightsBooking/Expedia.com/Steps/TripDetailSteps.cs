@@ -59,7 +59,7 @@ namespace Expedia.com
         }
 
 
-        [Given(@"I confirm flight")]
+        [When(@"I confirm flight")]
         public void GivenIConfirmFlight()
         {
             details.Continue();

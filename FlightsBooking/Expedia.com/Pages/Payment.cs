@@ -9,7 +9,8 @@ namespace Expedia.com.Pages
     class Payment
     {
         private IWebDriver pageDriver;
-
+        double convertedTotalPrice;
+        double priceOfTrip;
         private string departureDate;
 
         [FindsBy(How = How.XPath, Using = ".//span[contains(@id, 'totalPriceForPassenger')]")]
@@ -39,6 +40,9 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.ClassName, Using = "stop-information")]
         private IWebElement flightStops { get; set; }
 
+        [FindsBy(How = How.Id, Using = "totalPriceForTrip")]
+        private IWebElement totalPrice { get; set; }
+
 
         public Payment (IWebDriver driver)
         {
@@ -61,7 +65,7 @@ namespace Expedia.com.Pages
             }
         }
 
-        private void ShowFlightDetails()
+        public void ShowFlightDetails()
         {
             flightDetails.Click();
         }
@@ -97,7 +101,7 @@ namespace Expedia.com.Pages
 
         public void CheckArrivalAirport(string to)
         {
-            Assert.AreEqual(to, arrivalAirportCode);
+            Assert.AreEqual(to, arrivalAirportCode.Text);
         }
 
         public void CheckArrivalTime(List<string> tripInfo)
@@ -107,8 +111,36 @@ namespace Expedia.com.Pages
 
         public void CheckFlightDuration(List<string> tripInfo)
         {
-            var flightDurationAndStops = flightDuration.Text + " " + (flightStops.Text.Remove(flightStops.Text.Length - 1));
+            string flightDurationAndStops;
+            if(flightStops.Text == "Nonstop")
+            {
+                flightDurationAndStops = flightDuration.Text + " " + flightStops.Text;
+            }
+            else
+            {
+                flightDurationAndStops = flightDuration.Text + " " + (flightStops.Text.Remove(flightStops.Text.Length - 1));
+            }
+            
             Assert.AreEqual(tripInfo[4], flightDurationAndStops);
+        }
+
+        private void ConvertTotalPrice()
+        {
+            double.TryParse(totalPrice.Text.Substring(1), out convertedTotalPrice);
+        }
+
+        public void CheckTotalPrice()
+        {
+            
+            for (int i = 0; i <= tripSummary.Count - 1; i++)
+            {
+                double priceOfTicket;  
+                double.TryParse(tripSummary[i].Text.Substring(1), out priceOfTicket);
+                priceOfTrip += priceOfTicket;                
+            }
+            
+            ConvertTotalPrice();
+            Assert.AreEqual(Math.Round(priceOfTrip, 2), Math.Round(convertedTotalPrice, 2));
         }
     }
 }
