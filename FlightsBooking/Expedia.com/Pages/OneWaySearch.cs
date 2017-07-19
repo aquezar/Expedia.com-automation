@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using Expedia.com.Framework;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -50,6 +53,12 @@ namespace Expedia.com.Pages
 
         [FindsBy(How = How.CssSelector, Using = ".btn-primary.btn-action.gcw-submit")]
         private IWebElement SearchButton { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "error-link")]
+        private IWebElement departureDateValidator { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='gcw-flights-form-hp-flight']/div[2]")]
+        private IWebElement alertMessage { get; set; }
 
         public OneWaySearch(IWebDriver driver)
         {
@@ -101,5 +110,15 @@ namespace Expedia.com.Pages
             SearchButton.Click();
         }
 
+        public void ValidationMessage()
+        {
+            Assert.IsTrue(alertMessage.Displayed);
+        }
+
+        public void DepartureDateEmptyValidation(string testName)
+        {
+            Assert.AreEqual(departureDateValidator.Text, "Enter your departure date in this format: mm/dd/yyyy.");
+            Settings.TakeScreenShot(pageDriver, @"D:\TestOutput\" + testName);
+        }
     }
 }

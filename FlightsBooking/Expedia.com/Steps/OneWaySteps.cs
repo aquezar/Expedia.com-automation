@@ -51,7 +51,7 @@ namespace Expedia.com
             search.EnterDepartingDate(p0);
         }
 
-        [Given(@"I Choose Adults number (.*)")]
+        [Given(@"I choose number of (.*)")]
         public void GivenIChooseAdultsNumber(string p0)
         {
             search.SelectNumberOfAdults(p0);
@@ -62,6 +62,19 @@ namespace Expedia.com
         {
             search.Search();
         }
-        
+
+        [When(@"Validation message appears")]
+        public void ThenValidationMessageAppears()
+        {
+            search.ValidationMessage();
+        }
+
+        [Then(@"Message text saying that Date is empty")]
+        public void ThenMessageTextSayingThatDateIsEmpty()
+        {
+            search.DepartureDateEmptyValidation("Departure_empty");
+        }
+
+
     }
 }

@@ -11,28 +11,30 @@ namespace Expedia.com.Framework
     [Binding]
     public class Settings
     {
-        public IWebDriver driver;
+        public static IWebDriver driver;
 
         [BeforeScenario]
-        public IWebDriver InitFireFox()
+        public IWebDriver Init()
         {
             string browser = ConfigurationManager.AppSettings["Browser"];
             switch (browser)
             {
                 case "Firefox":
                     driver = new FirefoxDriver();
+                    Console.WriteLine("Runing test in Firefox");
                     break;
                 case "IE":
                     driver = new InternetExplorerDriver();
+                    Console.WriteLine("Runing test in IE");
                     break;
                 case "Chrome":
                     driver = new ChromeDriver();
+                    Console.WriteLine("Runing test in Chrome");
                     break;
                 default:
                     break;
             }
-                    //driver = new FirefoxDriver();
-                    ScenarioContext.Current["driver"] = driver;
+            ScenarioContext.Current["driver"] = driver;
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
@@ -44,6 +46,16 @@ namespace Expedia.com.Framework
         private void Quit()
         {
             driver.Quit();
+        }
+
+        public static void TakeScreenShot(IWebDriver driver, string savePath)
+        {
+            var title = driver.Title;
+            var dateTime = DateTime.Now.ToString();
+            var fileName = savePath + "_" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss") + ".png";
+            ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
+            Screenshot screenshot = screenshotHandler.GetScreenshot();
+            screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
         }
     }
 }

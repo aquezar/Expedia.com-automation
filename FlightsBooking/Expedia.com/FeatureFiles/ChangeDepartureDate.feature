@@ -1,6 +1,6 @@
 ﻿Feature: Change departure date in Search results
 	In order to change departure date
-	As unregistered user
+	As a user
 	I want to have the ability to cnhange departure date after performing search
 
 @changeDate
@@ -11,7 +11,7 @@ Scenario Outline: Change Departure date
 	And I enter Flying from <from>
 	And I enter Flying to <to>
 	And I enter Departing <date>
-	And I Choose Adults number <passangers>
+	And I choose number of <passangers>
 	And I click Search button
 	And After <searchTab> opens
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
