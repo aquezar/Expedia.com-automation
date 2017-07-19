@@ -24,7 +24,7 @@ namespace Expedia.com.FeatureFiles
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "SpecFlowFeature1.feature"
+#line 1 "ValidationMessages.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -68,7 +68,6 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.DescriptionAttribute("One Way search without departure date")]
         [NUnit.Framework.CategoryAttribute("departureDate")]
         [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "1", "KBP to BUD Flights", "KBP", "BUD", null)]
-        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "3", "LHR to TXL Flights", "LHR", "TXL", null)]
         public virtual void OneWaySearchWithoutDepartureDate(string from, string to, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {

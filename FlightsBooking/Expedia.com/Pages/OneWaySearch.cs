@@ -78,16 +78,19 @@ namespace Expedia.com.Pages
 
         public void EnterFlyingFrom(string from)
         {
+            FlyingFrom.Clear();
             FlyingFrom.SendKeys(from);    
         }
 
         public void EnterFlyingTo(string to)
         {
+            FlyingTo.Clear();
             FlyingTo.SendKeys(to);
         }
 
         public void EnterDepartingDate(string date)
         {
+            DepartingDate.Clear();
             DepartingDate.SendKeys(date);
             CloseDatePicker.Click();
         }

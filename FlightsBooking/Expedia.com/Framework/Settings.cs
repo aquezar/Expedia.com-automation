@@ -52,7 +52,7 @@ namespace Expedia.com.Framework
         {
             var title = driver.Title;
             var dateTime = DateTime.Now.ToString();
-            var fileName = savePath + "_" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss") + ".png";
+            var fileName = savePath + "_" + ConfigurationManager.AppSettings["Browser"] + "_" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss") + ".png";
             ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
             Screenshot screenshot = screenshotHandler.GetScreenshot();
             screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);

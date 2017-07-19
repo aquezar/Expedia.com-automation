@@ -17,4 +17,3 @@ Scenario Outline: One Way search without departure date
 Examples: 
 | from                               | to                                          | passangers | searchTab          | fromAirport | toAirport |
 | Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 1          | KBP to BUD Flights | KBP         | BUD       |
-| London, England, UK (LHR-Heathrow) | Berlin, Germany (TXL-Tegel)                 | 3          | LHR to TXL Flights | LHR         | TXL       |

@@ -69,10 +69,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangeDepartureDate.feature</DependentUpon>
     </Compile>
-    <Compile Include="FeatureFiles\SpecFlowFeature1.feature.cs">
+    <Compile Include="FeatureFiles\ValidationMessages.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
+      <DependentUpon>ValidationMessages.feature</DependentUpon>
     </Compile>
     <Compile Include="Framework\Settings.cs" />
     <Compile Include="Pages\Payment.cs" />
@@ -96,9 +96,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChangeDepartureDate.feature.cs</LastGenOutput>
     </None>
-    <None Include="FeatureFiles\SpecFlowFeature1.feature">
+    <None Include="FeatureFiles\ValidationMessages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
+      <LastGenOutput>ValidationMessages.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="FeatureFiles\OneWaySearchToPaymentPage.feature">
