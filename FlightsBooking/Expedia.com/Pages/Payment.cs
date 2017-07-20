@@ -19,7 +19,7 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//a[@data-toggle-text='One Way Flight']")]
         private IWebElement flightDetails { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='flight-details']//span[@class='flight-info-date font-change']")]
+        [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//div[@class='date-info']")] //".//*[@id='flight-details']//span[@class='flight-info-date font-change']"
         private IWebElement flightDate { get; set; }
 
         [FindsBy(How = How.ClassName, Using = "departure-airport-codes")]
@@ -140,7 +140,7 @@ namespace Expedia.com.Pages
             }
             
             ConvertTotalPrice();
-            Assert.AreEqual(Math.Round(priceOfTrip, 2), Math.Round(convertedTotalPrice, 2));
+            Assert.IsTrue(convertedTotalPrice - priceOfTrip <= 0.01); //Assert.AreEqual(Math.Round(priceOfTrip, 2), Math.Round(convertedTotalPrice, 2));
         }
     }
 }

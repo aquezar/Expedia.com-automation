@@ -1,0 +1,208 @@
+=> Expedia.com.FeatureFiles.ChangeDepartureDateInSearchResultsFeature.ChangeDepartureDate("Kiev, Ukraine (KBP-Borispol Intl.)","Budapest, Hungary(BUD - Ferenc Liszt Intl.)","09/05/2017","1","KBP to BUD Flights","KBP","BUD","11/15/2017",null)
+Runing test in Chrome
+Given I open expedia.com
+-> done: OneWaySteps.GivenIOpenExpedia_Com() (3.7s)
+And I navigate to Flights
+-> done: OneWaySteps.GivenINavigateToFlights() (0.2s)
+And I navigate to OneWay
+-> done: OneWaySteps.GivenINavigateToOneWay() (0.1s)
+And I enter Flying from Kiev, Ukraine (KBP-Borispol Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingFrom("Kiev, Ukraine (KB...") (1.2s)
+And I enter Flying to Budapest, Hungary(BUD - Ferenc Liszt Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingTom("Budapest, Hungary...") (5.4s)
+And I enter Departing 09/05/2017
+-> done: OneWaySteps.GivenIEnterDepartingDate("09/05/2017") (0.4s)
+And I choose number of 1
+-> done: OneWaySteps.GivenIChooseAdultsNumber("1") (0.3s)
+And I click Search button
+-> done: OneWaySteps.GivenIClickSearchButton() (9.2s)
+And After KBP to BUD Flights opens
+-> done: SearchresultsSteps.GivenAfterSearchResultsOpens("KBP to BUD Flights") (0.0s)
+And I check correctness of search results by checking KBP and BUD
+-> done: SearchresultsSteps.GivenICheckCorrectnessOfSearchResults("KBP", "BUD") (2.0s)
+And I change departure date to 11/15/2017
+-> done: SearchresultsSteps.GivenIChangeDepartureDateTo("11/15/2017") (0.2s)
+When I click Search button on Search Results page
+-> done: SearchresultsSteps.WhenIClickSearchButtonOnSearchResultsPage() (7.9s)
+Then Flights for new date are shown
+-> done: SearchresultsSteps.ThenFlightsForNewDateAreShown() (0.1s)
+=> Expedia.com.FeatureFiles.ChangeDepartureDateInSearchResultsFeature.ChangeDepartureDate("London, England, UK (LHR-Heathrow)","Berlin, Germany (TXL-Tegel)","10/25/2017","3","LHR to TXL Flights","LHR","TXL","12/03/2017",null)
+Runing test in Chrome
+Given I open expedia.com
+-> done: OneWaySteps.GivenIOpenExpedia_Com() (3.1s)
+And I navigate to Flights
+-> done: OneWaySteps.GivenINavigateToFlights() (0.1s)
+And I navigate to OneWay
+-> done: OneWaySteps.GivenINavigateToOneWay() (0.1s)
+And I enter Flying from London, England, UK (LHR-Heathrow)
+-> done: OneWaySteps.GivenIEnterFlyingFrom("London, England, ...") (1.5s)
+And I enter Flying to Berlin, Germany (TXL-Tegel)
+-> done: OneWaySteps.GivenIEnterFlyingTom("Berlin, Germany (...") (2.2s)
+And I enter Departing 10/25/2017
+-> done: OneWaySteps.GivenIEnterDepartingDate("10/25/2017") (3.1s)
+And I choose number of 3
+-> done: OneWaySteps.GivenIChooseAdultsNumber("3") (0.4s)
+And I click Search button
+-> done: OneWaySteps.GivenIClickSearchButton() (12.2s)
+And After LHR to TXL Flights opens
+-> done: SearchresultsSteps.GivenAfterSearchResultsOpens("LHR to TXL Flights") (0.0s)
+And I check correctness of search results by checking LHR and TXL
+-> done: SearchresultsSteps.GivenICheckCorrectnessOfSearchResults("LHR", "TXL") (3.4s)
+And I change departure date to 12/03/2017
+-> done: SearchresultsSteps.GivenIChangeDepartureDateTo("12/03/2017") (0.2s)
+When I click Search button on Search Results page
+-> done: SearchresultsSteps.WhenIClickSearchButtonOnSearchResultsPage() (8.0s)
+Then Flights for new date are shown
+-> done: SearchresultsSteps.ThenFlightsForNewDateAreShown() (0.1s)
+=> Expedia.com.FeatureFiles.ChangeDepartureDateInSearchResultsFeature
+-> Using app.config
+=> Expedia.com.FeatureFiles.OneWaySearchFeature.OneWay("Kiev, Ukraine (KBP-Borispol Intl.)","Budapest, Hungary(BUD - Ferenc Liszt Intl.)","09/05/2017","1","KBP to BUD Flights","KBP","BUD",null)
+Runing test in Chrome
+Given I open expedia.com
+-> done: OneWaySteps.GivenIOpenExpedia_Com() (3.5s)
+And I navigate to Flights
+-> done: OneWaySteps.GivenINavigateToFlights() (0.1s)
+And I navigate to OneWay
+-> done: OneWaySteps.GivenINavigateToOneWay() (0.1s)
+And I enter Flying from Kiev, Ukraine (KBP-Borispol Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingFrom("Kiev, Ukraine (KB...") (1.3s)
+And I enter Flying to Budapest, Hungary(BUD - Ferenc Liszt Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingTom("Budapest, Hungary...") (1.7s)
+And I enter Departing 09/05/2017
+-> done: OneWaySteps.GivenIEnterDepartingDate("09/05/2017") (0.4s)
+And I choose number of 1
+-> done: OneWaySteps.GivenIChooseAdultsNumber("1") (0.5s)
+And I click Search button
+-> done: OneWaySteps.GivenIClickSearchButton() (9.6s)
+And After KBP to BUD Flights opens
+-> done: SearchresultsSteps.GivenAfterSearchResultsOpens("KBP to BUD Flights") (0.0s)
+And I check correctness of search results by checking KBP and BUD
+-> done: SearchresultsSteps.GivenICheckCorrectnessOfSearchResults("KBP", "BUD") (1.9s)
+And I check departure date for search results
+-> done: SearchresultsSteps.GivenICheckDepartureDateForSearchResults() (0.1s)
+And I select cheepest ticket
+-> done: SearchresultsSteps.GivenISelectFlights() (0.5s)
+And I check the KBP and BUD
+-> done: TripDetailSteps.GivenICheckFromAndTo("KBP", "BUD") (0.0s)
+And I check flight 09/05/2017
+-> done: TripDetailSteps.GivenICheckDepartureDate("09/05/2017") (3.8s)
+And I check departure time
+-> done: TripDetailSteps.GivenICheckDepartureTime() (1.9s)
+And I check arrival time
+-> done: TripDetailSteps.GivenICheckArrivalTime() (0.1s)
+And I check duration of flight
+-> done: TripDetailSteps.GivenICheckFlightDuration() (0.0s)
+And I check tecket price
+-> done: TripDetailSteps.GivenICheckTecketPrice() (0.1s)
+When I confirm flight
+-> done: TripDetailSteps.GivenIConfirmFlight() (5.0s)
+Then Payment page opens
+-> done: PaymentSteps.ThenPaymentPageOpens() (0.0s)
+And I open Flight details
+-> done: PaymentSteps.ThenIOpenFlightDetails() (0.1s)
+And I check flight 09/05/2017
+-> done: PaymentSteps.ThenICheckFlightDate("09/05/2017") (0.1s)
+And I check departing KBP
+-> done: PaymentSteps.ThenICheckDepartingAirport("KBP") (0.0s)
+And I check departure time
+-> done: PaymentSteps.ThenICheckDepartureTime() (0.0s)
+And I check arrival BUD
+-> done: PaymentSteps.ThenICheckArrivalAirport("BUD") (0.0s)
+And I check time of arrival
+-> done: PaymentSteps.ThenICheckTimeOfArrival() (0.0s)
+And I check duration of flight
+-> done: PaymentSteps.ThenICheckDurationOfFlight() (0.1s)
+And I check ticket price for each passanger
+-> done: PaymentSteps.ThenICheckTicketPriceForEachPassanger() (0.1s)
+And I check total price
+-> done: PaymentSteps.ThenICheckTotalPrice() (0.1s)
+=> Expedia.com.FeatureFiles.OneWaySearchFeature.OneWay("London, England, UK (LHR-Heathrow)","Berlin, Germany (TXL-Tegel)","10/25/2017","3","LHR to TXL Flights","LHR","TXL",null)
+Runing test in Chrome
+Given I open expedia.com
+-> done: OneWaySteps.GivenIOpenExpedia_Com() (3.5s)
+And I navigate to Flights
+-> done: OneWaySteps.GivenINavigateToFlights() (0.1s)
+And I navigate to OneWay
+-> done: OneWaySteps.GivenINavigateToOneWay() (0.1s)
+And I enter Flying from London, England, UK (LHR-Heathrow)
+-> done: OneWaySteps.GivenIEnterFlyingFrom("London, England, ...") (1.3s)
+And I enter Flying to Berlin, Germany (TXL-Tegel)
+-> done: OneWaySteps.GivenIEnterFlyingTom("Berlin, Germany (...") (1.2s)
+And I enter Departing 10/25/2017
+-> done: OneWaySteps.GivenIEnterDepartingDate("10/25/2017") (0.4s)
+And I choose number of 3
+-> done: OneWaySteps.GivenIChooseAdultsNumber("3") (0.4s)
+And I click Search button
+-> done: OneWaySteps.GivenIClickSearchButton() (6.3s)
+And After LHR to TXL Flights opens
+-> done: SearchresultsSteps.GivenAfterSearchResultsOpens("LHR to TXL Flights") (2.5s)
+And I check correctness of search results by checking LHR and TXL
+-> done: SearchresultsSteps.GivenICheckCorrectnessOfSearchResults("LHR", "TXL") (3.5s)
+And I check departure date for search results
+-> done: SearchresultsSteps.GivenICheckDepartureDateForSearchResults() (0.1s)
+And I select cheepest ticket
+-> done: SearchresultsSteps.GivenISelectFlights() (0.5s)
+And I check the LHR and TXL
+-> done: TripDetailSteps.GivenICheckFromAndTo("LHR", "TXL") (0.0s)
+And I check flight 10/25/2017
+-> done: TripDetailSteps.GivenICheckDepartureDate("10/25/2017") (6.8s)
+And I check departure time
+-> done: TripDetailSteps.GivenICheckDepartureTime() (0.1s)
+And I check arrival time
+-> done: TripDetailSteps.GivenICheckArrivalTime() (1.5s)
+And I check duration of flight
+-> done: TripDetailSteps.GivenICheckFlightDuration() (0.1s)
+And I check tecket price
+-> done: TripDetailSteps.GivenICheckTecketPrice() (0.1s)
+When I confirm flight
+-> done: TripDetailSteps.GivenIConfirmFlight() (5.3s)
+Then Payment page opens
+-> done: PaymentSteps.ThenPaymentPageOpens() (0.0s)
+And I open Flight details
+-> done: PaymentSteps.ThenIOpenFlightDetails() (0.1s)
+And I check flight 10/25/2017
+-> done: PaymentSteps.ThenICheckFlightDate("10/25/2017") (0.1s)
+And I check departing LHR
+-> done: PaymentSteps.ThenICheckDepartingAirport("LHR") (0.0s)
+And I check departure time
+-> done: PaymentSteps.ThenICheckDepartureTime() (0.0s)
+And I check arrival TXL
+-> done: PaymentSteps.ThenICheckArrivalAirport("TXL") (0.0s)
+And I check time of arrival
+-> done: PaymentSteps.ThenICheckTimeOfArrival() (0.0s)
+And I check duration of flight
+-> done: PaymentSteps.ThenICheckDurationOfFlight() (0.1s)
+And I check ticket price for each passanger
+-> done: PaymentSteps.ThenICheckTicketPriceForEachPassanger() (0.1s)
+And I check total price
+-> done: PaymentSteps.ThenICheckTotalPrice() (0.1s)
+=> Expedia.com.FeatureFiles.ValidationMessagesFeature.OneWaySearchWithoutDepartureDate("Kiev, Ukraine (KBP-Borispol Intl.)","Budapest, Hungary(BUD - Ferenc Liszt Intl.)","1","KBP to BUD Flights","KBP","BUD",null)
+Runing test in Chrome
+Given I open expedia.com
+-> done: OneWaySteps.GivenIOpenExpedia_Com() (4.3s)
+And I navigate to Flights
+-> done: OneWaySteps.GivenINavigateToFlights() (0.1s)
+And I navigate to OneWay
+-> done: OneWaySteps.GivenINavigateToOneWay() (0.1s)
+And I enter Flying from Kiev, Ukraine (KBP-Borispol Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingFrom("Kiev, Ukraine (KB...") (1.4s)
+And I enter Flying to Budapest, Hungary(BUD - Ferenc Liszt Intl.)
+-> done: OneWaySteps.GivenIEnterFlyingTom("Budapest, Hungary...") (1.5s)
+And I choose number of 1
+-> done: OneWaySteps.GivenIChooseAdultsNumber("1") (0.2s)
+And I click Search button
+-> done: OneWaySteps.GivenIClickSearchButton() (0.2s)
+When Validation message appears
+-> done: OneWaySteps.ThenValidationMessageAppears() (0.1s)
+Then Message text saying that Date is empty
+-> error:   Expected string length 53 but was 54. Strings differ at index 53.
+  Expected: "Enter your departure date in this format: mm/dd/yyyy."
+  But was:  "Enter your departure date in this format: mm/dd/yyyy.."
+  ----------------------------------------------------------------^
+
+An error occured ->   Expected string length 53 but was 54. Strings differ at index 53.
+  Expected: "Enter your departure date in this format: mm/dd/yyyy."
+  But was:  "Enter your departure date in this format: mm/dd/yyyy.."
+  ----------------------------------------------------------------^
+
+Screenshot created in dir ->C:\Users\vklovak\Documents\Git\REPO\expedia\FlightsBooking\Expedia.com\bin\Debug\failed_tests\Change Departure date_Chrome_07-20-2017_14-55-40.png
