@@ -4,6 +4,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using TechTalk.SpecFlow;
 
@@ -12,8 +13,9 @@ namespace Expedia.com.Framework
     [Binding]
     public class Settings
     {
-        public static IWebDriver driver;
-        private static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+        private IWebDriver driver;
+        private static string processname;
+        private string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
 
         [BeforeScenario]
         public IWebDriver Init()
@@ -23,14 +25,17 @@ namespace Expedia.com.Framework
             {
                 case "Firefox":
                     driver = new FirefoxDriver();
+                    processname = "firefox";
                     Console.WriteLine("Runing test in Firefox");
                     break;
                 case "IE":
                     driver = new InternetExplorerDriver();
+                    processname = "IEDriverServer";
                     Console.WriteLine("Runing test in IE");
                     break;
                 case "Chrome":
                     driver = new ChromeDriver();
+                    processname = "chromedriver";
                     Console.WriteLine("Runing test in Chrome");
                     break;
                 default:
@@ -59,7 +64,7 @@ namespace Expedia.com.Framework
             driver.Quit();
         }
 
-        public static void TakeScreenShot(IWebDriver driver, string savePath)
+        public void TakeScreenShot(IWebDriver driver, string savePath)
         {
             var fileName = savePath + screenshotName;
             ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
@@ -69,6 +74,21 @@ namespace Expedia.com.Framework
                 Directory.CreateDirectory(savePath);
             }
             screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
+        }
+        [AfterTestRun]
+        private static void KillDriverProcess()
+        {
+            try
+            {
+                foreach (Process process in Process.GetProcessesByName(processname))
+                { 
+                    process.Kill();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            };
         }
     }
 }
