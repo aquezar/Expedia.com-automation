@@ -78,7 +78,6 @@ namespace Expedia.com.Pages
        
        public void AfterSearchPageOpened(string searchTabTitle) 
         {
-            //pageDriver.SwitchTo().Window(pageDriver.WindowHandles.First());
             Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
         }
 
@@ -92,17 +91,10 @@ namespace Expedia.com.Pages
             ScenarioContext.Current["flight"] = selectedFlight;
         }
 
-        private void SwitchToTripDetailsTab()
-        {
-            string newTabHandle = pageDriver.WindowHandles.Last();
-            pageDriver.SwitchTo().Window(newTabHandle);
-        }
-
         public void FlightSelect()
         {
             CollectCheepestFlightInfo();
             SelectButton.Click();
-            //SwitchToTripDetailsTab();
         }
 
         public void CheckSearchResults(string from, string to)

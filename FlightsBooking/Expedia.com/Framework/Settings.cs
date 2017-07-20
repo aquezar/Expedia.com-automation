@@ -4,6 +4,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
 using System.Configuration;
+using System.IO;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Framework
@@ -60,11 +61,13 @@ namespace Expedia.com.Framework
 
         public static void TakeScreenShot(IWebDriver driver, string savePath)
         {
-            //var title = driver.Title;
-            //var dateTime = DateTime.Now.ToString();
             var fileName = savePath + screenshotName;
             ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
             Screenshot screenshot = screenshotHandler.GetScreenshot();
+            if (!Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
             screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
         }
     }
