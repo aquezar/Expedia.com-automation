@@ -65,11 +65,11 @@ namespace Expedia.com.FeatureFiles
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("One Way")]
+        [NUnit.Framework.DescriptionAttribute("One Way Search")]
         [NUnit.Framework.CategoryAttribute("searchFlow")]
         [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "KBP", "BUD", null)]
         [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/25/2017", "3", "LHR to TXL Flights", "LHR", "TXL", null)]
-        public virtual void OneWay(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
+        public virtual void OneWaySearch(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "searchFlow"};
@@ -77,7 +77,7 @@ namespace Expedia.com.FeatureFiles
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("One Way", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("One Way Search", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8

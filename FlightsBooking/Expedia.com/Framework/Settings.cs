@@ -12,7 +12,7 @@ namespace Expedia.com.Framework
     public class Settings
     {
         public static IWebDriver driver;
-        private static string screenshotName = ScenarioContext.Current.ScenarioInfo.Title + "_" + ConfigurationManager.AppSettings["Browser"] + "_" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss") + ".png";
+        private static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
 
         [BeforeScenario]
         public IWebDriver Init()
@@ -49,9 +49,9 @@ namespace Expedia.com.Framework
             if(ScenarioContext.Current.TestError != null)
             {
                 var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string dir = System.IO.Path.GetDirectoryName(location) + "\\failed_tests\\"; 
+                string dir = System.IO.Path.GetDirectoryName(location) + "\\failed_tests\\" + ScenarioContext.Current.ScenarioInfo.Title + "\\"; 
                 Console.WriteLine("An error occured -> " + ScenarioContext.Current.TestError.Message);
-                Console.WriteLine("Screenshot created in dir ->" + dir + screenshotName);
+                Console.WriteLine("Screenshot created ->" + dir + screenshotName);
                 TakeScreenShot(driver, dir);
             }
 

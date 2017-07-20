@@ -4,7 +4,7 @@
 	I want to perform search and proceed to payment after selecting flight
 
 @searchFlow
-Scenario Outline: One Way
+Scenario Outline: One Way Search
 	Given I open expedia.com
 	And I navigate to Flights
 	And I navigate to OneWay
