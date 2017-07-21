@@ -9,9 +9,6 @@ namespace Expedia.com.Pages
     class Payment
     {
         private IWebDriver pageDriver;
-        double convertedTotalPrice;
-        double priceOfTrip;
-        private string departureDate;
 
         [FindsBy(How = How.XPath, Using = ".//span[contains(@id, 'totalPriceForPassenger')]")]
         private IList<IWebElement> tripSummary { get; set; }
@@ -70,8 +67,9 @@ namespace Expedia.com.Pages
             flightDetails.Click();
         }
 
-        private void ConvertTripDate(string date)
+        private string ConvertTripDate(string date)
         {
+            string departureDate;
             var t = date.Split('/');
             int day;
             int month;
@@ -81,12 +79,12 @@ namespace Expedia.com.Pages
             int.TryParse(t[1], out day);
             DateTime convertedDate = new DateTime(year, month, day);
             departureDate = convertedDate.ToString("ddd, MMM d");
+            return departureDate;
         }
 
         public void CheckTripDate(string date)
         {
-            ConvertTripDate(date);
-            Assert.AreEqual(departureDate, flightDate.Text);
+            Assert.AreEqual(ConvertTripDate(date), flightDate.Text);
         }
 
         public void CheckDepartureAirport(string from)
@@ -124,23 +122,23 @@ namespace Expedia.com.Pages
             Assert.AreEqual(tripInfo[4], flightDurationAndStops);
         }
 
-        private void ConvertTotalPrice()
+        private double ConvertTotalPrice()
         {
+            double convertedTotalPrice;
             double.TryParse(totalPrice.Text.Substring(1), out convertedTotalPrice);
+            return convertedTotalPrice;
         }
 
         public void CheckTotalPrice()
         {
-            
+            double priceOfTrip = 0.0;
             for (int i = 0; i <= tripSummary.Count - 1; i++)
             {
                 double priceOfTicket;  
                 double.TryParse(tripSummary[i].Text.Substring(1), out priceOfTicket);
                 priceOfTrip += priceOfTicket;                
             }
-            
-            ConvertTotalPrice();
-            Assert.IsTrue(convertedTotalPrice - priceOfTrip <= 0.01);
+            Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
         }
     }
 }

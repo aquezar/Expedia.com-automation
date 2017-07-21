@@ -120,7 +120,7 @@ namespace Expedia.com.Pages
 
         public void DepartureDateEmptyValidation(string testName)
         {
-            Assert.AreEqual(departureDateValidator.Text, "Enter your departure date in this format: mm/dd/yyyy..");
+            Assert.AreEqual(departureDateValidator.Text, "Enter your departure date in this format: mm/dd/yyyy.");
         }
     }
 }
