@@ -64,7 +64,7 @@ namespace Expedia.com.Framework
             driver.Quit();
         }
 
-        public void TakeScreenShot(IWebDriver driver, string savePath)
+        private void TakeScreenShot(IWebDriver driver, string savePath)
         {
             var fileName = savePath + screenshotName;
             ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
@@ -75,6 +75,7 @@ namespace Expedia.com.Framework
             }
             screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
         }
+
         [AfterTestRun]
         private static void KillDriverProcess()
         {

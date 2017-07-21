@@ -140,7 +140,7 @@ namespace Expedia.com.Pages
             }
             
             ConvertTotalPrice();
-            Assert.IsTrue(convertedTotalPrice - priceOfTrip <= 0.01); //Assert.AreEqual(Math.Round(priceOfTrip, 2), Math.Round(convertedTotalPrice, 2));
+            Assert.IsTrue(convertedTotalPrice - priceOfTrip <= 0.01);
         }
     }
 }

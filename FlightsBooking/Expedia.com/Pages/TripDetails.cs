@@ -12,7 +12,8 @@ namespace Expedia.com.Pages
     public class TripDetails
     {
         private IWebDriver pageDriver;
-
+        private double convertedTotalPrice;
+        private double priceOfTrip;
         private string departureDate;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
@@ -21,8 +22,12 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[2]/span[2]")]
         private IWebElement TDTo { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]
+        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]  //".//*[@id='tsTotal']//span[2]"
         private IWebElement tripTotal { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".package-price-total")]
+        private IWebElement tripTotalDollars { get; set; }
+
 
         [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
         private IList<IWebElement> tripForPassanger { get; set; }
@@ -95,8 +100,17 @@ namespace Expedia.com.Pages
                 double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
+                priceOfTrip += ticketPrice;
             }
+            ConvertTotalPrice();
+            Assert.IsTrue(convertedTotalPrice - priceOfTrip <= 0.01);
+
             ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
+        }
+
+        private void ConvertTotalPrice()
+        {
+            double.TryParse(tripTotal.GetAttribute("textContent").Substring(1), out convertedTotalPrice);
         }
 
         public void SwitchToTripDetailsTab()
