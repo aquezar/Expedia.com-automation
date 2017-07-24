@@ -15,8 +15,7 @@ namespace Expedia.com
 
         public TripDetailSteps()
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
-            
+            driver = (IWebDriver)ScenarioContext.Current["driver"];         
         }
 
         [Given(@"I check the (.*) and (.*)")]
@@ -58,11 +57,10 @@ namespace Expedia.com
             details.CompareTicketsPricesInTripSummary(flight);
         }
 
-
         [When(@"I confirm flight")]
         public void GivenIConfirmFlight()
         {
-            details.Continue();
+            details.ClickContinueBookingButton();
         }
 
     }

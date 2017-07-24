@@ -32,31 +32,31 @@ namespace Expedia.com
         [Given(@"I check departure date for search results")]
         public void GivenICheckDepartureDateForSearchResults()
         {
-            results.compareDates();
+            results.CompareDates();
         }
 
         [Given(@"I select cheepest ticket")]
         public void GivenISelectFlights()
         {
-            results.FlightSelect();
+            results.ClickFlightSelect();
         }
 
         [Given(@"I change departure date to (.*)")]
         public void GivenIChangeDepartureDateTo(string p0)
         {
-            results.changeDepartureDate(p0);
+            results.ChangeDepartureDate(p0);
         }
 
         [When(@"I click Search button on Search Results page")]
         public void WhenIClickSearchButtonOnSearchResultsPage()
         {
-            results.search();
+            results.ClickSearchButton();
         }
 
         [Then(@"Flights for new date are shown")]
         public void ThenFlightsForNewDateAreShown()
         {
-            results.compareDates();
+            results.CompareDates();
         }
 
 

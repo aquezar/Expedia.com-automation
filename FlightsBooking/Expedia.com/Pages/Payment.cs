@@ -16,7 +16,7 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//a[@data-toggle-text='One Way Flight']")]
         private IWebElement flightDetails { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//div[@class='date-info']")] //".//*[@id='flight-details']//span[@class='flight-info-date font-change']"
+        [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//div[@class='date-info']")] 
         private IWebElement flightDate { get; set; }
 
         [FindsBy(How = How.ClassName, Using = "departure-airport-codes")]
@@ -40,7 +40,6 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.Id, Using = "totalPriceForTrip")]
         private IWebElement totalPrice { get; set; }
 
-
         public Payment (IWebDriver driver)
         {
             pageDriver = driver;
@@ -49,7 +48,10 @@ namespace Expedia.com.Pages
 
         public void PaymentPageOpens()
         {
-            Assert.IsTrue(pageDriver.Title.Equals("Expedia: Payment"));
+            IJavaScriptExecutor js = pageDriver as IJavaScriptExecutor;
+            string title = (string)js.ExecuteScript("return document.title");
+            Assert.IsTrue(title.Equals("Expedia: Payment"));
+            //Assert.IsTrue(pageDriver.Title.Equals("Expedia: Payment"));
         }
 
         public void TripSummaryCheck(List<double> ticketPrice)

@@ -24,31 +24,31 @@ namespace Expedia.com
         public void GivenINavigateToFlights()
         {
             search = new OneWaySearch(driver);
-            search.GoToFlights();
+            search.GoToFlightsTab();
         }
 
         [Given(@"I navigate to OneWay")]
         public void GivenINavigateToOneWay()
         {
-            search.GoToOneWay();
+            search.GoToOneWayTab();
         }
 
         [Given(@"I enter Flying from (.*)")]
         public void GivenIEnterFlyingFrom(string p0)
         {
-            search.EnterFlyingFrom(p0);
+            search.EnterFlyingFromValue(p0);
         }
 
         [Given(@"I enter Flying to (.*)")]
         public void GivenIEnterFlyingTom(string p0)
         {
-            search.EnterFlyingTo(p0);
+            search.EnterFlyingToValue(p0);
         }
 
         [Given(@"I enter Departing (.*)")]
         public void GivenIEnterDepartingDate(string p0)
         {
-            search.EnterDepartingDate(p0);
+            search.EnterDepartingDateValue(p0);
         }
 
         [Given(@"I choose number of (.*)")]
@@ -60,7 +60,7 @@ namespace Expedia.com
         [Given(@"I click Search button")]
         public void GivenIClickSearchButton()
         {
-            search.Search();
+            search.ClickSearchButton();
         }
 
         [When(@"Validation message appears")]

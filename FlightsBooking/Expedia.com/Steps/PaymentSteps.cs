@@ -16,8 +16,7 @@ namespace Expedia.com
 
         public PaymentSteps()
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
-            
+            driver = (IWebDriver)ScenarioContext.Current["driver"];          
         }
 
         [Then(@"Payment page opens")]

@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +12,33 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
-        private IWebElement TDFrom { get; set; }
+        //xpath absolute path .//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]
+        [FindsBy(How = How.ClassName, Using = "fdp-location")]
+        private IWebElement fromAirport { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/div[2]/span[@class='fdp-location']")] 
+        private IWebElement toAirport { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[2]/span[2]")]
-        private IWebElement TDTo { get; set; }
+        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]  
+        private IWebElement tripTotalPrice { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]  //".//*[@id='tsTotal']//span[2]"
-        private IWebElement tripTotal { get; set; }
-
+        //css = span[id*='totalPriceForPassenger']
         [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
-        private IList<IWebElement> tripForPassanger { get; set; }
+        private IList<IWebElement> ticketPriceForPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
-        private IWebElement ContinueBooking { get; set; }
+        private IWebElement continueBookingButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='details']//button[@class='btn-secondary btn-action']")]
-        private IWebElement BookButton { get; set; }
+        private IWebElement bookButton { get; set; }
 
+        //css = #departure-airport-automation-label-0
         [FindsBy(How = How.XPath, Using = ".//*[@id='departure-airport-automation-label-0']")]
-        private IWebElement TripFrom { get; set; }
+        private IWebElement flightFromAirportCode { get; set; }
 
+        //id = arrival-airportcode-automation-label-0
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
-        private IWebElement TripTo { get; set; }
+        private IWebElement flightToAirportCode { get; set; }
 
         [FindsBy(How = How.Id, Using = "departure-time-automation-label-0")]
         private IWebElement flightDepartureTime { get; set; }
@@ -55,12 +58,11 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-
-        private bool IsElementPresent(By by)
+        private bool IsElementPresent(IWebElement element)
         {
             try
             {
-                pageDriver.FindElement(by);
+                Assert.IsTrue(element.Displayed);
                 return true;
             }
             catch (NoSuchElementException)
@@ -69,15 +71,15 @@ namespace Expedia.com.Pages
             }
         }
 
-        public void Continue()
+        public void ClickContinueBookingButton()
         {
-            if (IsElementPresent(By.XPath(".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")))
+            if (IsElementPresent(continueBookingButton))
             {
-                ContinueBooking.Click();
+                continueBookingButton.Click();
             }
             else
             {
-                BookButton.Click();
+                bookButton.Click();
             }                         
         }
 
@@ -86,12 +88,12 @@ namespace Expedia.com.Pages
             List<double> ticketsPricesList = new List<double>();
             double priceOfTrip = 0.0;
             int passangers = (int)ScenarioContext.Current["passangers"];
-            for (int i = passangers; i <= tripForPassanger.Count - 1; i++)
+            for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
                 double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
-                double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
+                double.TryParse(ticketPriceForPassanger[i].Text.Substring(1), out priceForPassanger);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
                 priceOfTrip += ticketPrice;
@@ -105,7 +107,7 @@ namespace Expedia.com.Pages
         private double ConvertTotalPrice()
         {
             double convertedTotalPrice;
-            double.TryParse(tripTotal.GetAttribute("textContent").Substring(1), out convertedTotalPrice);
+            double.TryParse(tripTotalPrice.GetAttribute("textContent").Substring(1), out convertedTotalPrice);
             return convertedTotalPrice;
         }
 
@@ -160,7 +162,6 @@ namespace Expedia.com.Pages
         {
             Assert.AreEqual(tripInfo[4], flightDuration.Text);
         }
-
 
     }
 }

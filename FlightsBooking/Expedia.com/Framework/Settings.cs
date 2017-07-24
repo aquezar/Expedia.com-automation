@@ -55,7 +55,7 @@ namespace Expedia.com.Framework
             if(ScenarioContext.Current.TestError != null)
             {
                 var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string dir = System.IO.Path.GetDirectoryName(location) + "\\failed_tests\\" + ScenarioContext.Current.ScenarioInfo.Title + "\\"; 
+                string dir = Path.GetDirectoryName(location) + "\\failed_tests\\" + ScenarioContext.Current.ScenarioInfo.Title + "\\"; 
                 Console.WriteLine("An error occured -> " + ScenarioContext.Current.TestError.Message);
                 Console.WriteLine("Screenshot created ->" + dir + screenshotName);
                 TakeScreenShot(driver, dir);
