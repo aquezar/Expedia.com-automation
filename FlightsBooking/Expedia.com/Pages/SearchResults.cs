@@ -69,6 +69,10 @@ namespace Expedia.com.Pages
             Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
         }
 
+        private void CheckSortingBy(string sortingBy)
+        {
+            Assert.IsTrue(SearchSort.SelectedOption.Text == sortingBy);
+        }
         private void CollectCheepestFlightInfo()
         {
             selectedFlight.Add(selectedFlightRoute.Text);
@@ -79,8 +83,9 @@ namespace Expedia.com.Pages
             ScenarioContext.Current["flight"] = selectedFlight;
         }
 
-        public void ClickFlightSelect()
+        public void ClickFlightSelectForCheepestFlight()
         {
+            CheckSortingBy("Price (Lowest)");
             CollectCheepestFlightInfo();
             SelectButton.Click();
         }

@@ -34,7 +34,7 @@ namespace Expedia.com
         }
 
         [Given(@"I enter Flying from (.*)")]
-        public void GivenIEnterFlyingFrom(string p0)
+        public void GivenIEnterFlying(string p0)
         {
             search.EnterFlyingFromValue(p0);
         }

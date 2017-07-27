@@ -36,7 +36,7 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='departure-airport-automation-label-0']")]
         private IWebElement flightFromAirportCode { get; set; }
 
-        //id = arrival-airportcode-automation-label-0
+        //id = .arrival-airportcode-automation-label-0
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
         private IWebElement flightToAirportCode { get; set; }
 
@@ -83,7 +83,7 @@ namespace Expedia.com.Pages
             }                         
         }
 
-        public void CompareTicketsPricesInTripSummary(List<string> tripInfo)
+        public void CompareTicketsPricesInTripSummary(List<string> flightInfo)
         {
             List<double> ticketsPricesList = new List<double>();
             double priceOfTrip = 0.0;
@@ -91,7 +91,7 @@ namespace Expedia.com.Pages
             for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
-                double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
+                double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
                 double.TryParse(ticketPriceForPassanger[i].Text.Substring(1), out priceForPassanger);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
@@ -114,18 +114,11 @@ namespace Expedia.com.Pages
         public void SwitchToTripDetailsTab()
         {
             pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
-
-            /*if (pageDriver.Title != "Trip Details | Expedia")
-            {
-                pageDriver.Close();
-                pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
-            }*/
-
         }
 
-        public void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
+        public void CompareDepartureAndDestination(List<string> flightInfo, string from, string to)
         {
-            Assert.AreEqual(tripInfo[0], (from + " - " + to));
+            Assert.AreEqual(flightInfo[0], (from + " - " + to));
         }
 
         private string convertDepartureDate(string departure)
@@ -148,19 +141,19 @@ namespace Expedia.com.Pages
             Assert.AreEqual(convertDepartureDate(date), flightDate.Text);
         }
 
-        public void CompareDepartureTime(List<string> tripInfo)
+        public void CompareDepartureTime(List<string> flightInfo)
         {
-            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
         }
 
-        public void CompareArrivalTime(List<string> tripInfo)
+        public void CompareArrivalTime(List<string> flightInfo)
         {
-            Assert.AreEqual(tripInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
         }
 
-        public void CompareFlightDuration(List<string> tripInfo)
+        public void CompareFlightDuration(List<string> flightInfo)
         {
-            Assert.AreEqual(tripInfo[4], flightDuration.Text);
+            Assert.AreEqual(flightInfo[4], flightDuration.Text);
         }
 
     }

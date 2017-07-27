@@ -39,6 +39,5 @@ Scenario Outline: One Way Search
 
 Examples: 
 | from                               | to                                          | date       | passangers | searchTab          | fromAirport | toAirport |
-| Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 1          | KBP to BUD Flights | KBP         | BUD       |
 | London, England, UK (LHR-Heathrow) | Berlin, Germany (TXL-Tegel)                 | 10/25/2017 | 3          | LHR to TXL Flights | LHR         | TXL       |
 

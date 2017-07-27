@@ -44,7 +44,7 @@ namespace Expedia.com.Framework
             ScenarioContext.Current["driver"] = driver;
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             return driver;
         }
 

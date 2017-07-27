@@ -38,7 +38,7 @@ namespace Expedia.com
         [Given(@"I select cheepest ticket")]
         public void GivenISelectFlights()
         {
-            results.ClickFlightSelect();
+            results.ClickFlightSelectForCheepestFlight();
         }
 
         [Given(@"I change departure date to (.*)")]
