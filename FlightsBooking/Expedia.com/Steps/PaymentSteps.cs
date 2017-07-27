@@ -8,7 +8,6 @@ namespace Expedia.com
     [Binding]
     class PaymentSteps
     {
-
         private IWebDriver driver;
         private List<double> ticketPrice;
         private List<string> flight = new List<string>();

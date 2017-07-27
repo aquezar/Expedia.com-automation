@@ -10,6 +10,8 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        private string departureDateValidationMessage = "Enter your departure date in this format: mm/dd/yyyy.";
+
         [FindsBy(How = How.Id, Using = "tab-flight-tab-hp")]
         private IWebElement flightsTab { get; set; }
 
@@ -111,7 +113,7 @@ namespace Expedia.com.Pages
 
         public void DepartureDateEmptyValidation(string testName)
         {
-            Assert.AreEqual(departureDateValidator.Text, "Enter your departure date in this format: mm/dd/yyyy.");
+            Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
         }
     }
 }

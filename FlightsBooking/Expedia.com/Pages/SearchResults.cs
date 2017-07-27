@@ -16,6 +16,8 @@ namespace Expedia.com.Pages
         public List<string> selectedFlight = new List<string>();
 
         private string departureDate;
+        private string pageTitleSufix = " | Expedia";
+        private string sortOptionPriceLowest = "Price (Lowest)";
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='sortBar']/div/fieldset/label/select")]
         private IWebElement dropdownSort;
@@ -66,7 +68,7 @@ namespace Expedia.com.Pages
        
        public void AfterSearchPageOpened(string searchTabTitle) 
         {
-            Assert.AreEqual(searchTabTitle + " | Expedia", pageDriver.Title);
+            Assert.AreEqual(searchTabTitle + pageTitleSufix, pageDriver.Title);
         }
 
         private void CheckSortingBy(string sortingBy)
@@ -85,7 +87,7 @@ namespace Expedia.com.Pages
 
         public void ClickFlightSelectForCheepestFlight()
         {
-            CheckSortingBy("Price (Lowest)");
+            CheckSortingBy(sortOptionPriceLowest);
             CollectCheepestFlightInfo();
             SelectButton.Click();
         }

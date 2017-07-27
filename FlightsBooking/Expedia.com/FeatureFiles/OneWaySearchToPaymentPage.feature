@@ -17,7 +17,7 @@ Scenario Outline: One Way Search
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
 	And I check departure date for search results
 	And I select cheepest ticket
-	And I check the <fromAirport> and <toAirport>
+	And I check the departing and arrival airports
 	And I check flight <date>
 	And I check departure time
 	And I check arrival time
@@ -38,6 +38,7 @@ Scenario Outline: One Way Search
 
 
 Examples: 
-| from                               | to                                          | date       | passangers | searchTab          | fromAirport | toAirport |
-| London, England, UK (LHR-Heathrow) | Berlin, Germany (TXL-Tegel)                 | 10/25/2017 | 3          | LHR to TXL Flights | LHR         | TXL       |
-
+| from                                       | to                                                | date       | passangers | searchTab          | fromAirport | toAirport |
+| London, England, UK (LHR-Heathrow)         | Berlin, Germany (TXL-Tegel)                       | 10/25/2017 | 3          | LHR to TXL Flights | LHR         | TXL       |
+| Krakow, Poland (KRK-John Paul II - Balice) | Manchester Airport (MAN), England, United Kingdom | 11/22/2017 | 1          | KRK to MAN Flights | KRK         | MAN       |
+| New York, NY (JFK-John F. Kennedy Intl.)   | Vancouver, BC, Canada (YVR-Vancouver Intl.)       | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |

@@ -32,11 +32,11 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='details']//button[@class='btn-secondary btn-action']")]
         private IWebElement bookButton { get; set; }
 
-        //css = #departure-airport-automation-label-0
-        [FindsBy(How = How.XPath, Using = ".//*[@id='departure-airport-automation-label-0']")]
+        //XPath = .//*[@id='departure-airport-automation-label-0']
+        [FindsBy(How = How.CssSelector, Using = "#departure-airport-automation-label-0")]
         private IWebElement flightFromAirportCode { get; set; }
 
-        //id = .arrival-airportcode-automation-label-0
+        //id = arrival-airportcode-automation-label-0
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
         private IWebElement flightToAirportCode { get; set; }
 
@@ -116,9 +116,9 @@ namespace Expedia.com.Pages
             pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
         }
 
-        public void CompareDepartureAndDestination(List<string> flightInfo, string from, string to)
+        public void CompareDepartureAndDestination(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[0], (from + " - " + to));
+            Assert.AreEqual(flightInfo[0], (flightFromAirportCode.Text + " - " + flightToAirportCode.Text));
         }
 
         private string convertDepartureDate(string departure)

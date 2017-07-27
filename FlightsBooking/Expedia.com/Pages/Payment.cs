@@ -11,6 +11,10 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        private string pageTitle = "Expedia: Payment";
+        private string departureTitleFlightDetailsLocator = ".departure-title";
+        private string flightNonstop = "Nonstop";
+
         [FindsBy(How = How.XPath, Using = ".//span[contains(@id, 'totalPriceForPassenger')]")]
         private IList<IWebElement> tripSummary { get; set; }
 
@@ -51,8 +55,8 @@ namespace Expedia.com.Pages
         {
             IJavaScriptExecutor js = pageDriver as IJavaScriptExecutor;
             string title = (string)js.ExecuteScript("return document.title");
-            Assert.IsTrue(title.Equals("Expedia: Payment"));
-            //Assert.IsTrue(pageDriver.Title.Equals("Expedia: Payment"));
+            Assert.IsTrue(title.Equals(pageTitle));
+            //Assert.IsTrue(pageDriver.Title.Equals(pageTitle));
         }
 
         public void TripSummaryCheck(List<double> ticketPrice)
@@ -69,7 +73,7 @@ namespace Expedia.com.Pages
         {
             flightDetails.Click();
             WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".departure-title")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(departureTitleFlightDetailsLocator)));
         }
 
         private string ConvertTripDate(string date)
@@ -115,7 +119,7 @@ namespace Expedia.com.Pages
         public void CheckFlightDuration(List<string> flightInfo)
         {
             string flightDurationAndStops;
-            if(flightStops.Text == "Nonstop")
+            if(flightStops.Text == flightNonstop)
             {
                 flightDurationAndStops = flightDuration.Text + " " + flightStops.Text;
             }

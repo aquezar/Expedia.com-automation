@@ -68,6 +68,8 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.DescriptionAttribute("One Way Search")]
         [NUnit.Framework.CategoryAttribute("searchFlow")]
         [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/25/2017", "3", "LHR to TXL Flights", "LHR", "TXL", null)]
+        [NUnit.Framework.TestCaseAttribute("Krakow, Poland (KRK-John Paul II - Balice)", "Manchester Airport (MAN), England, United Kingdom", "11/22/2017", "1", "KRK to MAN Flights", "KRK", "MAN", null)]
+        [NUnit.Framework.TestCaseAttribute("New York, NY (JFK-John F. Kennedy Intl.)", "Vancouver, BC, Canada (YVR-Vancouver Intl.)", "12/03/2017", "1", "JFK to YVR Flights", "JFK", "YVR", null)]
         public virtual void OneWaySearch(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -104,7 +106,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 19
  testRunner.And("I select cheepest ticket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
- testRunner.And(string.Format("I check the {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I check the departing and arrival airports", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
  testRunner.And(string.Format("I check flight {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22

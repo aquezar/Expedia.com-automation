@@ -18,13 +18,13 @@ namespace Expedia.com
             driver = (IWebDriver)ScenarioContext.Current["driver"];         
         }
 
-        [Given(@"I check the (.*) and (.*)")]
-        public void GivenICheckFromAndTo(string p0, string p1)
+        [Given(@"I check the departing and arrival airports")]
+        public void GivenICheckFromAndTo()
         {
             details = new TripDetails(driver);
             details.SwitchToTripDetailsTab();
             flight = (List<string>)ScenarioContext.Current["flight"];
-            details.CompareDepartureAndDestination(flight, p0, p1);
+            details.CompareDepartureAndDestination(flight);
         }
 
         [Given(@"I check flight (.*)")]
