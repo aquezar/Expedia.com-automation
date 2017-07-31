@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -12,29 +12,33 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]")]
-        private IWebElement TDFrom { get; set; }
+        //xpath absolute path .//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]
+        [FindsBy(How = How.ClassName, Using = "fdp-location")]
+        private IWebElement fromAirport { get; set; }
+        
+        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/div[2]/span[@class='fdp-location']")] 
+        private IWebElement toAirport { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='flightModule-0']/article/div[2]/div[2]/div[2]/span[2]")]
-        private IWebElement TDTo { get; set; }
+        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]  
+        private IWebElement tripTotalPrice { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]
-        private IWebElement tripTotal { get; set; }
-
+        //css = span[id*='totalPriceForPassenger']
         [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
-        private IList<IWebElement> tripForPassanger { get; set; }
+        private IList<IWebElement> ticketPriceForPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
-        private IWebElement ContinueBooking { get; set; }
+        private IWebElement continueBookingButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='details']//button[@class='btn-secondary btn-action']")]
-        private IWebElement BookButton { get; set; }
+        private IWebElement bookButton { get; set; }
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='departure-airport-automation-label-0']")]
-        private IWebElement TripFrom { get; set; }
+        //XPath = .//*[@id='departure-airport-automation-label-0']
+        [FindsBy(How = How.CssSelector, Using = "#departure-airport-automation-label-0")]
+        private IWebElement flightFromAirportCode { get; set; }
 
+        //id = arrival-airportcode-automation-label-0
         [FindsBy(How = How.XPath, Using = ".//*[@id='arrival-airportcode-automation-label-0']")]
-        private IWebElement TripTo { get; set; }
+        private IWebElement flightToAirportCode { get; set; }
 
         [FindsBy(How = How.Id, Using = "departure-time-automation-label-0")]
         private IWebElement flightDepartureTime { get; set; }
@@ -45,25 +49,20 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.Id, Using = "duration-automation-label-0")]
         private IWebElement flightDuration { get; set; }
 
+        [FindsBy(How = How.Id, Using = "departure-date-0")]
+        private IWebElement flightDate { get; set; }
+
         public TripDetails(IWebDriver driver)
         {
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
         }
 
-        public void TripDetailPageOpens(string TripDetailTabTitle)
-        {
-            //unable to assert page title in a different way
-            WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.TitleIs(TripDetailTabTitle + " | Expedia"));
-            Assert.AreEqual(TripDetailTabTitle + " | Expedia", pageDriver.Title);
-        }
-
-        private bool IsElementPresent(By by)
+        private bool IsElementPresent(IWebElement element)
         {
             try
             {
-                pageDriver.FindElement(by);
+                Assert.IsTrue(element.Displayed);
                 return true;
             }
             catch (NoSuchElementException)
@@ -72,61 +71,89 @@ namespace Expedia.com.Pages
             }
         }
 
-        public void Continue()
+        public void ClickContinueBookingButton()
         {
-            if (IsElementPresent(By.XPath(".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")))
+            if (IsElementPresent(continueBookingButton))
             {
-                ContinueBooking.Click();
+                continueBookingButton.Click();
             }
             else
             {
-                BookButton.Click();
+                bookButton.Click();
             }                         
         }
 
-        private void CompareTicketsPricesInTripSummary(List<string> tripInfo)
+        public void CompareTicketsPricesInTripSummary(List<string> flightInfo)
         {
             List<double> ticketsPricesList = new List<double>();
+            double priceOfTrip = 0.0;
             int passangers = (int)ScenarioContext.Current["passangers"];
-            for (int i = passangers; i <= tripForPassanger.Count - 1; i++)
+            for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
-                double.TryParse(tripInfo[1].Substring(1), out ticketPrice);
+                double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
-                double.TryParse(tripForPassanger[i].Text.Substring(1), out priceForPassanger);
+                double.TryParse(ticketPriceForPassanger[i].Text.Substring(1), out priceForPassanger);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
+                priceOfTrip += ticketPrice;
             }
+            ConvertTotalPrice();
+            Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
+
             ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
         }
 
-        private void CompareDepartureAndDestination(List<string> tripInfo, string from, string to)
+        private double ConvertTotalPrice()
         {
-            Assert.AreEqual(tripInfo[0], (from + " - " + to));
+            double convertedTotalPrice;
+            double.TryParse(tripTotalPrice.GetAttribute("textContent").Substring(1), out convertedTotalPrice);
+            return convertedTotalPrice;
         }
 
-        private void CompareDepartureTime(List<string> tripInfo)
+        public void SwitchToTripDetailsTab()
         {
-            Assert.AreEqual(tripInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+            pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
         }
 
-        private void CompareArrivalTime(List<string> tripInfo)
+        public void CompareDepartureAndDestination(List<string> flightInfo)
         {
-            Assert.AreEqual(tripInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[0], (flightFromAirportCode.Text + " - " + flightToAirportCode.Text));
         }
 
-        private void CompareFlightDuration(List<string> tripInfo)
+        private string convertDepartureDate(string departure)
         {
-            Assert.AreEqual(tripInfo[4], flightDuration.Text);
+            string departureDate;
+            var t = departure.Split('/');
+            int day;
+            int month;
+            int year;
+            int.TryParse(t[2], out year);
+            int.TryParse(t[0], out month);
+            int.TryParse(t[1], out day);
+            DateTime convertedDate = new DateTime(year, month, day);
+            departureDate = convertedDate.ToString("ddd, MMM d");
+            return departureDate;
         }
 
-        public void CompareFlightsInfo(List<string> tripInfo, string from, string to)
+        public void CompareDates(string date)
         {
-            CompareDepartureAndDestination(tripInfo, from, to);
-            CompareDepartureTime(tripInfo);
-            CompareArrivalTime(tripInfo);
-            CompareFlightDuration(tripInfo);
-            CompareTicketsPricesInTripSummary(tripInfo);
+            Assert.AreEqual(convertDepartureDate(date), flightDate.Text);
+        }
+
+        public void CompareDepartureTime(List<string> flightInfo)
+        {
+            Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
+        }
+
+        public void CompareArrivalTime(List<string> flightInfo)
+        {
+            Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
+        }
+
+        public void CompareFlightDuration(List<string> flightInfo)
+        {
+            Assert.AreEqual(flightInfo[4], flightDuration.Text);
         }
 
     }

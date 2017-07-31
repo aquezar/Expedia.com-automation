@@ -9,33 +9,58 @@ namespace Expedia.com
     public class TripDetailSteps
     {
 
-        readonly IWebDriver driver;
+        private IWebDriver driver;
         private List<string>flight = new List<string>();
+        TripDetails details;
 
         public TripDetailSteps()
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
-            
+            driver = (IWebDriver)ScenarioContext.Current["driver"];         
         }
 
-        [Given(@"I check that (.*) opens")]
-        public void GivenICheckThatTripDetailPageOpens(string p0)
+        [Given(@"I check the departing and arrival airports")]
+        public void GivenICheckFromAndTo()
         {
-            new TripDetails(driver).TripDetailPageOpens(p0);         
-        }
-
-        [Given(@"I compare the (.*) and (.*) values and departure, arrival, duration for selected and displayed flight")]
-        public void GivenICompareSelectedAndDisplayedFlight(string p0, string p1)
-        {
+            details = new TripDetails(driver);
+            details.SwitchToTripDetailsTab();
             flight = (List<string>)ScenarioContext.Current["flight"];
-            new TripDetails(driver).CompareFlightsInfo(flight, p0, p1);
+            details.CompareDepartureAndDestination(flight);
         }
 
+        [Given(@"I check flight (.*)")]
+        public void GivenICheckDepartureDate(string p0)
+        {
+            details.CompareDates(p0);
+        }
 
-        [Given(@"I confirm flight")]
+        [Given(@"I check departure time")]
+        public void GivenICheckDepartureTime()
+        {
+            details.CompareDepartureTime(flight);
+        }
+
+        [Given(@"I check arrival time")]
+        public void GivenICheckArrivalTime()
+        {
+            details.CompareArrivalTime(flight);
+        }
+
+        [Given(@"I check duration of flight")]
+        public void GivenICheckFlightDuration()
+        {
+            details.CompareFlightDuration(flight);
+        }
+
+        [Given(@"I check tecket price")]
+        public void GivenICheckTecketPrice()
+        {
+            details.CompareTicketsPricesInTripSummary(flight);
+        }
+
+        [When(@"I confirm flight")]
         public void GivenIConfirmFlight()
         {
-            new TripDetails(driver).Continue();
+            details.ClickContinueBookingButton();
         }
 
     }

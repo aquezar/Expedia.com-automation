@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
@@ -9,47 +10,48 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        private string departureDateValidationMessage = "Enter your departure date in this format: mm/dd/yyyy.";
+
         [FindsBy(How = How.Id, Using = "tab-flight-tab-hp")]
-        private IWebElement FlightsTab { get; set; }
+        private IWebElement flightsTab { get; set; }
 
         [FindsBy(How = How.Id, Using = "flight-type-one-way-label-hp-flight")]
-        private IWebElement OneWayTab { get; set; }
+        private IWebElement oneWayTab { get; set; }
 
         [FindsBy(How = How.Id, Using = "flight-origin-hp-flight")]
-        private IWebElement FlyingFrom { get; set; }
+        private IWebElement flyingFromField { get; set; }
 
         [FindsBy(How = How.Id, Using = "flight-destination-hp-flight")]
-        private IWebElement FlyingTo { get; set; }
+        private IWebElement flyingToField { get; set; }
 
         [FindsBy(How = How.Id, Using = "flight-departing-single-hp-flight")]
-        private IWebElement DepartingDate { get; set; }
+        private IWebElement departingDatePicker { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//select[@id='flight-adults-hp-flight']")]
         private IWebElement dropdownPassangers;
-        private SelectElement Passangers
+        private SelectElement adultsDropdown
         {
             get { return new SelectElement(dropdownPassangers); }
         }
 
         [FindsBy(How = How.Id, Using = "flight-children-hp-flight")]
         private IWebElement dropdownChildrens;
-        private SelectElement Childrens
+        private SelectElement childrenDropdown
         {
             get { return new SelectElement(dropdownChildrens); }
         }
-
-        [FindsBy(How = How.XPath, Using = ".//select[contains(@id, 'flight-age-select-')]")]
-        private IWebElement dropdownChildrensAge;
-        private SelectElement ChildrensAge
-        {
-            get { return new SelectElement(dropdownChildrensAge); }
-        }
     
         [FindsBy(How = How.XPath, Using = ".//*[@id='flight-departing-wrapper-single-hp-flight']/div/div/div[1]/button")]
-        private IWebElement CloseDatePicker { get; set; }
+        private IWebElement closeDatePicker { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = ".btn-primary.btn-action.gcw-submit")]
-        private IWebElement SearchButton { get; set; }
+        private IWebElement searchButton { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "error-link")]
+        private IWebElement departureDateValidator { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='gcw-flights-form-hp-flight']/div[2]")]
+        private IWebElement alertMessage { get; set; }
 
         public OneWaySearch(IWebDriver driver)
         {
@@ -57,49 +59,61 @@ namespace Expedia.com.Pages
             PageFactory.InitElements(pageDriver, this);
         }
 
-        public void GoToFlights()
+        public void GoToFlightsTab()
         {
-            FlightsTab.Click();
+            flightsTab.Click();
         }
 
-        public void GoToOneWay()
+        public void GoToOneWayTab()
         {
-            OneWayTab.Click();
+            oneWayTab.Click();
         }
 
-        public void EnterFlyingFrom(string from)
+        public void EnterFlyingFromValue(string from)
         {
-            FlyingFrom.SendKeys(from);    
+            flyingFromField.Clear();
+            flyingFromField.SendKeys(from);    
         }
 
-        public void EnterFlyingTo(string to)
+        public void EnterFlyingToValue(string to)
         {
-            FlyingTo.SendKeys(to);
+            flyingToField.Clear();
+            flyingToField.SendKeys(to);
         }
 
-        public void EnterDepartingDate(string date)
+        public void EnterDepartingDateValue(string date)
         {
-            DepartingDate.SendKeys(date);
-            CloseDatePicker.Click();
+            departingDatePicker.Clear();
+            departingDatePicker.SendKeys(date);
+            closeDatePicker.Click();
         }
 
         public void SelectNumberOfAdults(string passangers)
         {
-            Passangers.SelectByText(passangers);
-            PassNumberOfPassangers();
+            adultsDropdown.SelectByText(passangers);
+            GetNumberOfPassangers();
         }
 
-        private void PassNumberOfPassangers()
+        private void GetNumberOfPassangers()
         {
             int passangersCount;
-            int.TryParse(Passangers.SelectedOption.Text, out passangersCount);
+            int.TryParse(adultsDropdown.SelectedOption.Text, out passangersCount);
             ScenarioContext.Current["passangers"] = passangersCount;
         }
 
-        public void Search()
+        public void ClickSearchButton()
         {
-            SearchButton.Click();
+            searchButton.Click();
         }
 
+        public void ValidationMessage()
+        {
+            Assert.IsTrue(alertMessage.Displayed);
+        }
+
+        public void DepartureDateEmptyValidation(string testName)
+        {
+            Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
+        }
     }
 }
