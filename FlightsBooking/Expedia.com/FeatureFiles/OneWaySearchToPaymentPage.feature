@@ -39,6 +39,6 @@ Scenario Outline: One Way Search
 
 Examples: 
 | from                                       | to                                                | date       | passangers | searchTab          | fromAirport | toAirport |
-| London, England, UK (LHR-Heathrow)         | Berlin, Germany (TXL-Tegel)                       | 10/25/2017 | 3          | LHR to TXL Flights | LHR         | TXL       |
+| London, England, UK (LHR-Heathrow)         | Fiumicino Airport (FCO), Italy                    | 11/10/2017 | 3          | LHR to FCO Flights | LHR         | FCO       |
 | Krakow, Poland (KRK-John Paul II - Balice) | Manchester Airport (MAN), England, United Kingdom | 11/22/2017 | 1          | KRK to MAN Flights | KRK         | MAN       |
 | New York, NY (JFK-John F. Kennedy Intl.)   | Vancouver, BC, Canada (YVR-Vancouver Intl.)       | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |
