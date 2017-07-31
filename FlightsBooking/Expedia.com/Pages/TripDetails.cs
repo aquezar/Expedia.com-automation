@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Expedia.com.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
@@ -121,34 +122,19 @@ namespace Expedia.com.Pages
             Assert.AreEqual(flightInfo[0], (flightFromAirportCode.Text + " - " + flightToAirportCode.Text));
         }
 
-        private string convertDepartureDate(string departure)
-        {
-            string departureDate;
-            var t = departure.Split('/');
-            int day;
-            int month;
-            int year;
-            int.TryParse(t[2], out year);
-            int.TryParse(t[0], out month);
-            int.TryParse(t[1], out day);
-            DateTime convertedDate = new DateTime(year, month, day);
-            departureDate = convertedDate.ToString("ddd, MMM d");
-            return departureDate;
-        }
-
         public void CompareDates(string date)
         {
-            Assert.AreEqual(convertDepartureDate(date), flightDate.Text);
+            Assert.AreEqual(Helper.ConvertDate(date, '/', "ddd, MMM d"), flightDate.Text);
         }
 
         public void CompareDepartureTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
+            Assert.AreEqual(flightInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
         }
 
         public void CompareArrivalTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
+            Assert.AreEqual(flightInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length -1)));
         }
 
         public void CompareFlightDuration(List<string> flightInfo)

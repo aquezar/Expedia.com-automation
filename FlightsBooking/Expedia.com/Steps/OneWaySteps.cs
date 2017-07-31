@@ -52,7 +52,7 @@ namespace Expedia.com
         }
 
         [Given(@"I choose number of (.*)")]
-        public void GivenIChooseAdultsNumber(string p0)
+        public void GivenIChooseAdultsNumber(int p0)
         {
             search.SelectNumberOfAdults(p0);
         }

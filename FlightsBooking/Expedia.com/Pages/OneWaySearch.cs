@@ -88,9 +88,9 @@ namespace Expedia.com.Pages
             closeDatePicker.Click();
         }
 
-        public void SelectNumberOfAdults(string passangers)
+        public void SelectNumberOfAdults(int passangers)
         {
-            adultsDropdown.SelectByText(passangers);
+            adultsDropdown.SelectByIndex(passangers + 1);
             GetNumberOfPassangers();
         }
 

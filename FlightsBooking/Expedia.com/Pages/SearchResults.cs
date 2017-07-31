@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Expedia.com.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
@@ -15,7 +16,6 @@ namespace Expedia.com.Pages
 
         public List<string> selectedFlight = new List<string>();
 
-        private string departureDate;
         private string pageTitleSufix = " | Expedia";
         private string sortOptionPriceLowest = "Price (Lowest)";
 
@@ -59,6 +59,15 @@ namespace Expedia.com.Pages
 
         [FindsBy(How = How.Id, Using = "flight-wizard-search-button")]
         private IWebElement searchButton { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "fieldset#stops label")]
+        private IList<IWebElement> filterStops { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "fieldset#airlines label")]
+        private IList<IWebElement> filterAirlines { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = "fieldset#departure-times label")]
+        private IList<IWebElement> filterDepartureTime { get; set; }
 
         public SearchResults(IWebDriver driver)
         {
@@ -105,24 +114,10 @@ namespace Expedia.com.Pages
             departureDatePicker.Clear();
             departureDatePicker.SendKeys(date);
         }
-
-        private void ConvertDepartureDate()
-        {
-            var t = departureDatePicker.GetAttribute("value").Split('/');
-            int day;
-            int month;
-            int year;
-            int.TryParse(t[2], out year);
-            int.TryParse(t[0], out month);
-            int.TryParse(t[1], out day);
-            DateTime convertedDate = new DateTime(year, month, day);
-            departureDate = convertedDate.ToString("ddd, MMM d");
-        }
-        
+       
         public void CompareDates()
         {
-            ConvertDepartureDate();
-            Assert.AreEqual(departureDate, flightDate.Text);
+            Assert.AreEqual(Helper.ConvertDate(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
         }
 
         public void ClickSearchButton()
