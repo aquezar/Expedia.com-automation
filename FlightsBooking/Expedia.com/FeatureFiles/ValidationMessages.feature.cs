@@ -18,21 +18,21 @@ namespace Expedia.com.FeatureFiles
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Change departure date in Search results")]
-    public partial class ChangeDepartureDateInSearchResultsFeature
+    [NUnit.Framework.DescriptionAttribute("Validation messages")]
+    public partial class ValidationMessagesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "ChangeDepartureDate.feature"
+#line 1 "ValidationMessages.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Change departure date in Search results", "\tIn order to change departure date\r\n\tAs a user\r\n\tI want to have the ability to cn" +
-                    "hange departure date after performing search", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Validation messages", "\tIn order to fix mistakes when searching flights\r\n\tAs a user\r\n\tI want to see erro" +
+                    "r messages when i make mistakes", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,19 +65,18 @@ namespace Expedia.com.FeatureFiles
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Change Departure date")]
-        [NUnit.Framework.CategoryAttribute("changeDate")]
-        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "KBP", "BUD", "11/15/2017", null)]
-        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/25/2017", "3", "LHR to TXL Flights", "LHR", "TXL", "12/03/2017", null)]
-        public virtual void ChangeDepartureDate(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("One Way search without departure date")]
+        [NUnit.Framework.CategoryAttribute("departureDate")]
+        [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "1", "KBP to BUD Flights", "KBP", "BUD", null)]
+        public virtual void OneWaySearchWithoutDepartureDate(string from, string to, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "changeDate"};
+                    "departureDate"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change Departure date", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("One Way search without departure date", @__tags);
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
@@ -91,21 +90,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.And(string.Format("I enter Flying to {0}", to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And(string.Format("I enter Departing {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
  testRunner.And(string.Format("I choose number of {0}", passangers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 14
  testRunner.And("I click Search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+ testRunner.When("Validation message appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
- testRunner.And(string.Format("After {0} opens", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
- testRunner.And(string.Format("I check correctness of search results by checking {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.And(string.Format("I change departure date to {0}", newDepartureDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
- testRunner.When("I click Search button on Search Results page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 20
- testRunner.Then("Flights for new date are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Message text saying that Date is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
