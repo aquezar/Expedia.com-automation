@@ -10,6 +10,8 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
 
+        private readonly ScenarioContext scenarioContext;
+
         private string departureDateValidationMessage = "Enter your departure date in this format: mm/dd/yyyy.";
 
         [FindsBy(How = How.Id, Using = "tab-flight-tab-hp")]
@@ -53,10 +55,11 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='gcw-flights-form-hp-flight']/div[2]")]
         private IWebElement alertMessage { get; set; }
 
-        public OneWaySearch(IWebDriver driver)
+        public OneWaySearch(IWebDriver driver, ScenarioContext scenarioContext)
         {
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
+            this.scenarioContext = scenarioContext;
         }
 
         public void GoToFlightsTab()
@@ -98,7 +101,7 @@ namespace Expedia.com.Pages
         {
             int passangersCount;
             int.TryParse(adultsDropdown.SelectedOption.Text, out passangersCount);
-            ScenarioContext.Current["passangers"] = passangersCount;
+            scenarioContext["passangers"] = passangersCount;
         }
 
         public void ClickSearchButton()

@@ -5,12 +5,14 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
 {
     class Payment
     {
         private IWebDriver pageDriver;
+        private readonly ScenarioContext scenarioContext;
 
         private string pageTitle = "Expedia: Payment";
         private string departureTitleFlightDetailsLocator = ".departure-title";
@@ -46,10 +48,11 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.Id, Using = "totalPriceForTrip")]
         private IWebElement totalPrice { get; set; }
 
-        public Payment (IWebDriver driver)
+        public Payment (IWebDriver driver, ScenarioContext scenarioContext)
         {
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
+            this.scenarioContext = scenarioContext;
         }
 
         public void PaymentPageOpens()
@@ -89,7 +92,8 @@ namespace Expedia.com.Pages
 
         public void CheckDepartureTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
+            //Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[2], departureTime.Text);
         }
 
         public void CheckArrivalAirport(string to)
@@ -99,7 +103,8 @@ namespace Expedia.com.Pages
 
         public void CheckArrivalTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[3], (arrivalTime.Text.Remove(arrivalTime.Text.Length - 1)));
+            //Assert.AreEqual(flightInfo[3], (arrivalTime.Text.Remove(arrivalTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[3], arrivalTime.Text);
         }
 
         public void CheckFlightDuration(List<string> flightInfo)

@@ -10,16 +10,18 @@ namespace Expedia.com
 
         private IWebDriver driver;
         SearchResults results;
+        private readonly ScenarioContext scenarioContext;
 
-        public SearchresultsSteps()
+        public SearchresultsSteps(ScenarioContext scenarioContext)
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
+            this.scenarioContext = scenarioContext;
+            driver = (IWebDriver)scenarioContext["driver"];
         }
 
         [Given(@"After (.*) opens")]
         public void GivenAfterSearchResultsOpens(string p0)
         {
-            results = new SearchResults(driver);
+            results = new SearchResults(driver, scenarioContext);
             results.AfterSearchPageOpened(p0);            
         }
 

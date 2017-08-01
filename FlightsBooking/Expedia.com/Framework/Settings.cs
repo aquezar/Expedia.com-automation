@@ -16,6 +16,12 @@ namespace Expedia.com.Framework
         private IWebDriver driver;
         private static string processname;
         private string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+        private readonly ScenarioContext scenarioContext;
+
+        public Settings(ScenarioContext scenarioContext)
+        {
+            this.scenarioContext = scenarioContext;
+        }
 
         [BeforeScenario]
         public IWebDriver Init()
@@ -41,10 +47,12 @@ namespace Expedia.com.Framework
                 default:
                     break;
             }
-            ScenarioContext.Current["driver"] = driver;
+            //scenarioContext["driver"] = driver;
+            scenarioContext.Add("driver", driver);
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            var context = (IWebDriver)scenarioContext["driver"];
             return driver;
         }
 

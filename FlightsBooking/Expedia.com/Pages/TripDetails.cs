@@ -12,6 +12,7 @@ namespace Expedia.com.Pages
     public class TripDetails
     {
         private IWebDriver pageDriver;
+        private readonly ScenarioContext scenarioContext;
 
         //xpath absolute path .//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]
         [FindsBy(How = How.ClassName, Using = "fdp-location")]
@@ -53,10 +54,11 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.Id, Using = "departure-date-0")]
         private IWebElement flightDate { get; set; }
 
-        public TripDetails(IWebDriver driver)
+        public TripDetails(IWebDriver driver, ScenarioContext scenarioContext)
         {
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
+            this.scenarioContext = scenarioContext;
         }
 
         private bool IsElementPresent(IWebElement element)
@@ -88,7 +90,7 @@ namespace Expedia.com.Pages
         {
             List<double> ticketsPricesList = new List<double>();
             double priceOfTrip = 0.0;
-            int passangers = (int)ScenarioContext.Current["passangers"];
+            int passangers = (int)scenarioContext["passangers"];
             for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
@@ -102,7 +104,7 @@ namespace Expedia.com.Pages
             ConvertTotalPrice();
             Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
 
-            ScenarioContext.Current["ticketPrice"] = ticketsPricesList;
+            scenarioContext["ticketPrice"] = ticketsPricesList;
         }
 
         private double ConvertTotalPrice()
@@ -129,12 +131,14 @@ namespace Expedia.com.Pages
 
         public void CompareDepartureTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+            //Assert.AreEqual(flightInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
+            Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
         }
 
         public void CompareArrivalTime(List<string> flightInfo)
         {
-            Assert.AreEqual(flightInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length -1)));
+            //Assert.AreEqual(flightInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length -1)));
+            Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
         }
 
         public void CompareFlightDuration(List<string> flightInfo)
