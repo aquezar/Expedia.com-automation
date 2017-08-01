@@ -12,16 +12,17 @@ namespace Expedia.com
         private List<double> ticketPrice;
         private List<string> flight = new List<string>();
         Payment payment;
-
-        public PaymentSteps()
+        private readonly ScenarioContext scenarioContext;
+        public PaymentSteps(ScenarioContext scenarioContext)
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];          
+            this.scenarioContext = scenarioContext;
+            driver = (IWebDriver)scenarioContext["driver"];          
         }
 
         [Then(@"Payment page opens")]
         public void ThenPaymentPageOpens()
         {
-            payment = new Payment(driver);
+            payment = new Payment(driver, scenarioContext);
             payment.PaymentPageOpens();       
         }
 
@@ -46,7 +47,7 @@ namespace Expedia.com
         [Then(@"I check departure time")]
         public void ThenICheckDepartureTime()
         {
-            flight = (List<string>)ScenarioContext.Current["flight"];
+            flight = (List<string>)scenarioContext["flight"];
             payment.CheckDepartureTime(flight);
         }
 
@@ -71,7 +72,7 @@ namespace Expedia.com
         [Then(@"I check ticket price for each passanger")]
         public void ThenICheckTicketPriceForEachPassanger()
         {
-            ticketPrice = (List<double>)ScenarioContext.Current["ticketPrice"];
+            ticketPrice = (List<double>)scenarioContext["ticketPrice"];
             payment.TripSummaryCheck(ticketPrice);
         }
 

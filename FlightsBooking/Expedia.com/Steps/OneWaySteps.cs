@@ -9,9 +9,11 @@ namespace Expedia.com
     {
         private IWebDriver driver;
         OneWaySearch search;
-        public OneWaySteps()
+        private readonly ScenarioContext scenarioContext;
+        public OneWaySteps(ScenarioContext scenarioContext)
         {
-            driver = (IWebDriver)ScenarioContext.Current["driver"];
+            this.scenarioContext = scenarioContext;
+            driver = (IWebDriver)scenarioContext["driver"];
         }
 
         [Given(@"I open expedia\.com")]
@@ -23,7 +25,7 @@ namespace Expedia.com
         [Given(@"I navigate to Flights")]
         public void GivenINavigateToFlights()
         {
-            search = new OneWaySearch(driver);
+            search = new OneWaySearch(driver, scenarioContext);
             search.GoToFlightsTab();
         }
 

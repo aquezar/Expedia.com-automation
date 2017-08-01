@@ -15,6 +15,7 @@ namespace Expedia.com.Pages
         private IWebDriver pageDriver;
 
         public List<string> selectedFlight = new List<string>();
+        private readonly ScenarioContext scenarioContext;
 
         private string pageTitleSufix = " | Expedia";
         private string sortOptionPriceLowest = "Price (Lowest)";
@@ -69,10 +70,11 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.CssSelector, Using = "fieldset#departure-times label")]
         private IList<IWebElement> filterDepartureTime { get; set; }
 
-        public SearchResults(IWebDriver driver)
+        public SearchResults(IWebDriver driver, ScenarioContext scenarioContext)
         {
+            this.scenarioContext = scenarioContext;
             pageDriver = driver;
-            PageFactory.InitElements(pageDriver, this);
+            PageFactory.InitElements(pageDriver, this);           
         }
        
        public void AfterSearchPageOpened(string searchTabTitle) 
@@ -91,7 +93,7 @@ namespace Expedia.com.Pages
             selectedFlight.Add(flightDepartureTime.Text);
             selectedFlight.Add(flightArrivalTime.Text);
             selectedFlight.Add((flightDuration.Text + ", " + flightStops.Text));
-            ScenarioContext.Current["flight"] = selectedFlight;
+            scenarioContext.Add("flight", selectedFlight);
         }
 
         public void ClickFlightSelectForCheepestFlight()
