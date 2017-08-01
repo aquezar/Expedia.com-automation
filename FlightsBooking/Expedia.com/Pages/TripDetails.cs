@@ -25,8 +25,11 @@ namespace Expedia.com.Pages
         private IWebElement tripTotalPrice { get; set; }
 
         //css = span[id^='totalPriceForPassenger']  
-        [FindsBy(How = How.XPath, Using = "//div[@class = 'toggle-inner']//span[contains(@id, 'totalPriceForPassenger')]")] 
+        [FindsBy(How = How.XPath, Using = "//div[@class='toggle-inner']//span[contains(@id, 'totalPriceForPassenger')]")] 
         private IList<IWebElement> ticketPriceForPassanger { get; set; }
+
+        [FindsBy(How = How.XPath, Using = ".//div[@class='toggle-inner']//*[@id='flight_traveler_model_list']/li")]
+        private IList<IWebElement> numberOfTickets { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
         private IWebElement continueBookingButton { get; set; }
@@ -96,24 +99,13 @@ namespace Expedia.com.Pages
                 double ticketPrice;
                 double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
                 double priceForPassanger;
-                double.TryParse(item.Text.Substring(1), out priceForPassanger);
+                double.TryParse(item.GetAttribute("textContent").Substring(1), out priceForPassanger);
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
                 priceOfTrip += ticketPrice;
             }
-            /*for (int i = 0; i < passangers; i++) // for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
-            {
-                double ticketPrice;
-                double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
-                double priceForPassanger;
-                double.TryParse(ticketPriceForPassanger[i].Text.Substring(1), out priceForPassanger);
-                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
-                ticketsPricesList.Add(priceForPassanger);
-                priceOfTrip += ticketPrice;
-            }*/
             ConvertTotalPrice();
             Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
-
             scenarioContext["ticketPrice"] = ticketsPricesList;
         }
 
