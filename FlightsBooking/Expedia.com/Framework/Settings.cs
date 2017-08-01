@@ -15,7 +15,7 @@ namespace Expedia.com.Framework
     {
         private IWebDriver driver;
         private static string processname;
-        private string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+        private static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
         private readonly ScenarioContext scenarioContext;
 
         public Settings(ScenarioContext scenarioContext)
@@ -70,7 +70,7 @@ namespace Expedia.com.Framework
             driver.Quit();
         }
 
-        private void TakeScreenShot(IWebDriver driver, string savePath)
+        public static void TakeScreenShot(IWebDriver driver, string savePath)
         {
             var fileName = savePath + screenshotName;
             ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;

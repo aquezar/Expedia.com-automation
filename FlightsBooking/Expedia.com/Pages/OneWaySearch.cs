@@ -1,7 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Expedia.com.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Configuration;
+using System.IO;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -118,6 +122,19 @@ namespace Expedia.com.Pages
         public void DepartureDateEmptyValidation(string testName)
         {
             Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
+            HighlightElement(alertMessage);
+        }
+
+        private void HighlightElement(IWebElement element)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)pageDriver;
+            /*Highlight the element*/
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 3px solid greenyellow;");
+            var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string dir = Path.GetDirectoryName(location) + "\\success_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
+            string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+            Settings.TakeScreenShot(pageDriver, dir);
+            Console.WriteLine("Screenshot created ->" + dir + screenshotName);
         }
     }
 }
