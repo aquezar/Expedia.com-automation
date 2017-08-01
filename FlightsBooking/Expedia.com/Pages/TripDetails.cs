@@ -24,8 +24,8 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.XPath, Using = ".//div[@class='trip-totals']//span[@class='visuallyhidden']")]  
         private IWebElement tripTotalPrice { get; set; }
 
-        //css = span[id*='totalPriceForPassenger']
-        [FindsBy(How = How.XPath, Using = "//span[contains(@id, 'totalPriceForPassenger')]")] 
+        //css = span[id^='totalPriceForPassenger']  
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'toggle-inner']//span[contains(@id, 'totalPriceForPassenger')]")] 
         private IList<IWebElement> ticketPriceForPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='FlightUDPBookNowButton1']//button[@class='btn-primary btn-action']")]
@@ -90,8 +90,18 @@ namespace Expedia.com.Pages
         {
             List<double> ticketsPricesList = new List<double>();
             double priceOfTrip = 0.0;
-            int passangers = (int)scenarioContext["passangers"];
-            for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
+            //int passangers = (int)scenarioContext["passangers"];
+            foreach (var item in ticketPriceForPassanger)
+            {
+                double ticketPrice;
+                double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
+                double priceForPassanger;
+                double.TryParse(item.Text.Substring(1), out priceForPassanger);
+                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
+                ticketsPricesList.Add(priceForPassanger);
+                priceOfTrip += ticketPrice;
+            }
+            /*for (int i = 0; i < passangers; i++) // for (int i = passangers; i <= ticketPriceForPassanger.Count - 1; i++)
             {
                 double ticketPrice;
                 double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
@@ -100,7 +110,7 @@ namespace Expedia.com.Pages
                 Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
                 ticketsPricesList.Add(priceForPassanger);
                 priceOfTrip += ticketPrice;
-            }
+            }*/
             ConvertTotalPrice();
             Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
 

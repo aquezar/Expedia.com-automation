@@ -72,9 +72,9 @@ namespace Expedia.com.Pages
 
         public SearchResults(IWebDriver driver, ScenarioContext scenarioContext)
         {
-            pageDriver = driver;
-            PageFactory.InitElements(pageDriver, this);
             this.scenarioContext = scenarioContext;
+            pageDriver = driver;
+            PageFactory.InitElements(pageDriver, this);           
         }
        
        public void AfterSearchPageOpened(string searchTabTitle) 
@@ -93,7 +93,7 @@ namespace Expedia.com.Pages
             selectedFlight.Add(flightDepartureTime.Text);
             selectedFlight.Add(flightArrivalTime.Text);
             selectedFlight.Add((flightDuration.Text + ", " + flightStops.Text));
-            scenarioContext["flight"] = selectedFlight;
+            scenarioContext.Add("flight", selectedFlight);
         }
 
         public void ClickFlightSelectForCheepestFlight()

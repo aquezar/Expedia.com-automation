@@ -57,9 +57,9 @@ namespace Expedia.com.Pages
 
         public OneWaySearch(IWebDriver driver, ScenarioContext scenarioContext)
         {
+            this.scenarioContext = scenarioContext;
             pageDriver = driver;
             PageFactory.InitElements(pageDriver, this);
-            this.scenarioContext = scenarioContext;
         }
 
         public void GoToFlightsTab()
@@ -94,15 +94,16 @@ namespace Expedia.com.Pages
         public void SelectNumberOfAdults(int passangers)
         {
             adultsDropdown.SelectByIndex(passangers + 1);
-            GetNumberOfPassangers();
+            //GetNumberOfPassangers();
+            scenarioContext.Add("passangers", passangers);
         }
 
-        private void GetNumberOfPassangers()
+        /*private void GetNumberOfPassangers()
         {
             int passangersCount;
             int.TryParse(adultsDropdown.SelectedOption.Text, out passangersCount);
-            scenarioContext["passangers"] = passangersCount;
-        }
+            scenarioContext.Add("passangers", passangersCount);
+        }*/
 
         public void ClickSearchButton()
         {

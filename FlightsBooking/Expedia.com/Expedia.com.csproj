@@ -75,7 +75,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationMessages.feature</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Globals.cs" />
     <Compile Include="Framework\Helper.cs" />
     <Compile Include="Framework\Settings.cs" />
     <Compile Include="Pages\Payment.cs" />
