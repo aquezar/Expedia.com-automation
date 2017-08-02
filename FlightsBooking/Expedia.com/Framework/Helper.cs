@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 
 namespace Expedia.com.Framework
 {
@@ -17,6 +18,12 @@ namespace Expedia.com.Framework
             DateTime convertedDate = new DateTime(year, month, day);
             departureDate = convertedDate.ToString(format);
             return departureDate;
+        }
+
+        public static void HighlightElement(IWebElement element, IWebDriver driver)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 3px solid greenyellow;");
         }
     }
 }
