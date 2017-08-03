@@ -1,4 +1,6 @@
-﻿Feature: One Way search
+﻿@One Way search
+@integration
+Feature: One Way search
 	In order to book my flight for one way
 	As a user
 	I want to perform search and proceed to payment after selecting flight

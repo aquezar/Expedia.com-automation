@@ -1,4 +1,6 @@
-﻿Feature: Change departure date in Search results
+﻿@Change departure date
+@smoke
+Feature: Change departure date in Search results
 	In order to change departure date
 	As a user
 	I want to have the ability to cnhange departure date after performing search

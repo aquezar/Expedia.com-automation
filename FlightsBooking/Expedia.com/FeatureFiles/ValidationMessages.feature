@@ -1,4 +1,5 @@
-﻿Feature: Validation messages
+﻿@unit
+Feature: Validation messages
 	In order to fix mistakes when searching flights
 	As a user
 	I want to see error messages when i make mistakes
