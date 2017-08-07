@@ -1,2 +1,5 @@
 [xml]$doc = Get-Content TestResult.xml
-$failed = "TestToRun=" + $doc.'test-results'.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-case'.name > res.txt
+$failed = $doc.'test-results'.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-case'.name
+$pos = $failed.Indexof("(")
+$result = $failed.Substring(0, $pos)
+echo TestToRun=$result > result.parameters
