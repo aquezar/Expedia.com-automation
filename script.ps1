@@ -2,4 +2,4 @@
 $failed = $doc.'test-results'.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-suite'.results.'test-case'.name
 $pos = $failed.Indexof("(")
 $result = $failed.Substring(0, $pos)
-echo "TestToRun = $result" > result.parameters
+echo "TestToRun = $result" | result.parameters
