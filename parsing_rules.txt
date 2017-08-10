@@ -1,0 +1,29 @@
+ok /not really/
+ok /-> done:/
+ 
+# match line starting with 'error ', case-insensitive
+error /error/
+error /Error :/
+error /Errors, Failures and Warnings/
+error /FAILURE/
+ 
+# list of warnings here...
+warning /[Ww]arning/
+warning /WARNING/
+warning /Screenshot created ->/
+ 
+# create a quick access link to lines in the report containing 'INFO'
+info /INFO/
+info /Run Settings/
+info /Test Run Summary/
+info /Given I/
+info /And I/
+info /And /
+info /-> skipped because of previous errors/
+info /When/
+info /Then/
+info /Runing test in/
+ 
+# each line containing 'BUILD' represents the start of a section for grouping errors and warnings found after the line.
+# also creates a quick access link.
+start /=> Expedia.com.FeatureFiles./
