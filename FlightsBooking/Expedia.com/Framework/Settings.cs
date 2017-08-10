@@ -50,7 +50,7 @@ namespace Expedia.com.Framework
             scenarioContext.Add("driver", driver);
             driver.Manage().Window.Maximize();
             driver.Manage().Cookies.DeleteAllCookies();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
             return driver;
         }
 
@@ -63,7 +63,7 @@ namespace Expedia.com.Framework
                 var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string dir = Path.GetDirectoryName(location) + "\\failed_tests\\" + scenarioContext.ScenarioInfo.Title + "\\"; 
                 Console.WriteLine("An error occured -> " + scenarioContext.TestError.Message);
-                Console.WriteLine("Screenshot created ->" + dir + screenshotName);
+                Console.WriteLine("Screenshot created -> " + dir + screenshotName);
                 TakeScreenShot(driver, dir);
             }
 

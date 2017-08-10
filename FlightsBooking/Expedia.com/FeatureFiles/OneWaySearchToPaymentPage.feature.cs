@@ -75,7 +75,7 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("One Way Search")]
         [NUnit.Framework.CategoryAttribute("searchFlow")]
-        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "11/10/2017", "3", "LHR to FCO Flights", "LHR", "FCO", null)]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "11/10/2017", "3", "LHR to FCO Flights", "LH-", "FCO", null)]
         [NUnit.Framework.TestCaseAttribute("Krakow, Poland (KRK-John Paul II - Balice)", "Manchester Airport (MAN), England, United Kingdom", "11/22/2017", "1", "KRK to MAN Flights", "KRK", "MAN", null)]
         [NUnit.Framework.TestCaseAttribute("New York, NY (JFK-John F. Kennedy Intl.)", "Vancouver, BC, Canada (YVR-Vancouver Intl.)", "12/03/2017", "1", "JFK to YVR Flights", "JFK", "YVR", null)]
         public virtual void OneWaySearch(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
