@@ -113,6 +113,7 @@ namespace Expedia.com.Pages
 
         public void DepartureDateEmptyValidation(string testName)
         {
+
             Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
 
             Helper.HighlightElement(alertMessage, pageDriver);
