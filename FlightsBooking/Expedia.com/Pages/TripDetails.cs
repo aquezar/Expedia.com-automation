@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -64,22 +63,9 @@ namespace Expedia.com.Pages
             this.scenarioContext = scenarioContext;
         }
 
-        private bool IsElementPresent(IWebElement element)
-        {
-            try
-            {
-                Assert.IsTrue(element.Displayed);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
         public void ClickContinueBookingButton()
         {
-            if (IsElementPresent(continueBookingButton))
+            if (Helper.IsElementPresent(continueBookingButton))
             {
                 continueBookingButton.Click();
             }
