@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 
 namespace Expedia.com.Framework
@@ -24,6 +25,25 @@ namespace Expedia.com.Framework
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 3px solid greenyellow;");
+        }
+
+        public static void UnhighlightElement(IWebElement element, IWebDriver driver)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 0px;");
+        }
+
+        public static bool IsElementPresent(IWebElement element)
+        {
+            try
+            {
+                Assert.IsTrue(element.Displayed);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }

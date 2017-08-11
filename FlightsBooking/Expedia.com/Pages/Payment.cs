@@ -85,9 +85,9 @@ namespace Expedia.com.Pages
             Assert.AreEqual(Helper.ConvertDate(date, '/', "ddd, MMM d"), flightDate.Text);
         }
 
-        public void CheckDepartureAirport(string from)
+        public void CheckDepartureAirport(string fromAirportCode)
         {
-            Assert.AreEqual(from, departureAirportCode.Text);
+            Assert.AreEqual(fromAirportCode, departureAirportCode.Text);
         }
 
         public void CheckDepartureTime(List<string> flightInfo)
@@ -96,9 +96,9 @@ namespace Expedia.com.Pages
             Assert.AreEqual(flightInfo[2], departureTime.Text);
         }
 
-        public void CheckArrivalAirport(string to)
+        public void CheckArrivalAirport(string toAirportCode)
         {
-            Assert.AreEqual(to, arrivalAirportCode.Text);
+            Assert.AreEqual(toAirportCode, arrivalAirportCode.Text);
         }
 
         public void CheckArrivalTime(List<string> flightInfo)

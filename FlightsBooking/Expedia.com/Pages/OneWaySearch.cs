@@ -76,16 +76,16 @@ namespace Expedia.com.Pages
             oneWayTab.Click();
         }
 
-        public void EnterFlyingFromValue(string from)
+        public void EnterFlyingFromValue(string fromAirport)
         {
             flyingFromField.Clear();
-            flyingFromField.SendKeys(from);    
+            flyingFromField.SendKeys(fromAirport);    
         }
 
-        public void EnterFlyingToValue(string to)
+        public void EnterFlyingToValue(string toAirport)
         {
             flyingToField.Clear();
-            flyingToField.SendKeys(to);
+            flyingToField.SendKeys(toAirport);
         }
 
         public void EnterDepartingDateValue(string date)
