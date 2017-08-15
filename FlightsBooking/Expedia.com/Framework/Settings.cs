@@ -58,15 +58,23 @@ namespace Expedia.com.Framework
         [AfterScenario]
         private void Quit()
         {
-            if(scenarioContext.TestError != null)
+            string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
+            switch (extendedLogging)
             {
-                var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string dir = Path.GetDirectoryName(location) + "\\failed_tests\\" + scenarioContext.ScenarioInfo.Title + "\\"; 
-                Console.WriteLine("An error occured -> " + scenarioContext.TestError.Message);
-                Console.WriteLine("Screenshot created -> " + dir + screenshotName);
-                TakeScreenShot(driver, dir);
+                case "True":
+                    if (scenarioContext.TestError != null)
+                    {
+                        var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                        string dir = Path.GetDirectoryName(location) + "\\failed_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
+                        Console.WriteLine("An error occured -> " + scenarioContext.TestError.Message);
+                        Console.WriteLine("Screenshot created -> " + dir + screenshotName);
+                        TakeScreenShot(driver, dir);
+                    }
+                    break;
+                case "False":
+                    break;
             }
-
+            
             driver.Quit();
         }
 

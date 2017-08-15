@@ -83,7 +83,9 @@ namespace Expedia.com.Pages
 
         private void CheckSortingBy(string sortingBy)
         {
+            Helper.HighlightElement(dropdownSort, pageDriver);
             Assert.IsTrue(SearchSort.SelectedOption.Text == sortingBy);
+            Helper.UnhighlightElement(dropdownSort, pageDriver);
         }
         private void CollectCheepestFlightInfo()
         {
@@ -120,7 +122,9 @@ namespace Expedia.com.Pages
        
         public void CompareDates()
         {
+            Helper.HighlightElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertDate(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
+            Helper.UnhighlightElement(flightDate, pageDriver);
         }
 
         public void ClickSearchButton()

@@ -108,20 +108,23 @@ namespace Expedia.com.Pages
 
         public void ValidationMessage()
         {
+            Helper.HighlightElement(alertMessage, pageDriver);
             Assert.IsTrue(alertMessage.Displayed);
+            Helper.UnhighlightElement(alertMessage, pageDriver);
         }
 
         public void DepartureDateEmptyValidation(string testName)
         {
-
+            Helper.HighlightElement(departureDateValidator, pageDriver);
             Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
+            Helper.UnhighlightElement(departureDateValidator, pageDriver);
 
-            Helper.HighlightElement(alertMessage, pageDriver);
-            var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string dir = Path.GetDirectoryName(location) + "\\success_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
-            string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
-            Settings.TakeScreenShot(pageDriver, dir);
-            Console.WriteLine("Screenshot created ->" + dir + screenshotName);
+            //Helper.HighlightElement(alertMessage, pageDriver);
+            //var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string dir = Path.GetDirectoryName(location) + "\\success_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
+            //string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+            //Settings.TakeScreenShot(pageDriver, dir);
+            //Console.WriteLine("Screenshot created ->" + dir + screenshotName);
         }
 
     }

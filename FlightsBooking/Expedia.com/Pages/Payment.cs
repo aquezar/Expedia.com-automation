@@ -69,7 +69,9 @@ namespace Expedia.com.Pages
             {
                 double priceForPassanger;
                 double.TryParse(tripSummary[i].Text.Substring(1), out priceForPassanger);
+                Helper.HighlightElement(tripSummary[i], pageDriver);
                 Assert.AreEqual(ticketPrice[i], priceForPassanger);
+                Helper.UnhighlightElement(tripSummary[i], pageDriver);
             }
         }
 
@@ -82,29 +84,39 @@ namespace Expedia.com.Pages
 
         public void CheckTripDate(string date)
         {
+            Helper.HighlightElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertDate(date, '/', "ddd, MMM d"), flightDate.Text);
+            Helper.UnhighlightElement(flightDate, pageDriver);
         }
 
         public void CheckDepartureAirport(string fromAirportCode)
         {
+            Helper.HighlightElement(departureAirportCode, pageDriver);
             Assert.AreEqual(fromAirportCode, departureAirportCode.Text);
+            Helper.UnhighlightElement(departureAirportCode, pageDriver);
         }
 
         public void CheckDepartureTime(List<string> flightInfo)
         {
+            Helper.HighlightElement(departureTime, pageDriver);
             //Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
             Assert.AreEqual(flightInfo[2], departureTime.Text);
+            Helper.UnhighlightElement(departureTime, pageDriver);
         }
 
         public void CheckArrivalAirport(string toAirportCode)
         {
+            Helper.HighlightElement(arrivalAirportCode, pageDriver);
             Assert.AreEqual(toAirportCode, arrivalAirportCode.Text);
+            Helper.UnhighlightElement(arrivalAirportCode, pageDriver);
         }
 
         public void CheckArrivalTime(List<string> flightInfo)
         {
+            Helper.HighlightElement(arrivalTime, pageDriver);
             //Assert.AreEqual(flightInfo[3], (arrivalTime.Text.Remove(arrivalTime.Text.Length - 1)));
             Assert.AreEqual(flightInfo[3], arrivalTime.Text);
+            Helper.UnhighlightElement(arrivalTime, pageDriver);
         }
 
         public void CheckFlightDuration(List<string> flightInfo)
@@ -118,8 +130,9 @@ namespace Expedia.com.Pages
             {
                 flightDurationAndStops = flightDuration.Text + " " + (flightStops.Text.Remove(flightStops.Text.Length - 1));
             }
-            
+            Helper.HighlightElement(flightStops, pageDriver);
             Assert.AreEqual(flightInfo[4], flightDurationAndStops);
+            Helper.UnhighlightElement(flightStops, pageDriver);
         }
 
         private double ConvertTotalPrice()
