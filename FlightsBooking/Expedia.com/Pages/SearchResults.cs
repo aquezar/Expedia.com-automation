@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -18,6 +19,7 @@ namespace Expedia.com.Pages
 
         private string pageTitleSufix = " | Expedia";
         private string sortOptionPriceLowest = "Price (Lowest)";
+        private string nonstopFlights = "Nonstop";
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='sortBar']/div/fieldset/label/select")]
         private IWebElement dropdownSort;
@@ -68,6 +70,9 @@ namespace Expedia.com.Pages
 
         [FindsBy(How = How.CssSelector, Using = "fieldset#departure-times label")]
         private IList<IWebElement> filterDepartureTime { get; set; }
+
+        [FindsBy(How = How.CssSelector, Using = ".primary.stops-emphasis")]
+        private IList<IWebElement> resultsListStops { get; set; }
 
         public SearchResults(IWebDriver driver, ScenarioContext scenarioContext)
         {
@@ -130,6 +135,29 @@ namespace Expedia.com.Pages
         public void ClickSearchButton()
         {
             searchButton.Click();
+        }
+
+        public void SelectNonstopFilter()
+        {
+            if (filterStops[0].Text.Contains("Nonstop"))
+            {
+                filterStops[0].Click();
+            }
+            Helper.CloseCommercial(pageDriver);               
+        }
+
+        public void OnlyNonstopFlightsDisplayed()
+        {
+            if (filterStops[0].Text.Contains("Nonstop"))
+            {
+                foreach (IWebElement flight in resultsListStops)
+                {
+                    Helper.HighlightElement(flight, pageDriver);
+                    Assert.AreEqual(flight.Text, nonstopFlights);
+                    Helper.UnhighlightElement(flight, pageDriver);
+                }
+            }              
+            
         }
     }
 }

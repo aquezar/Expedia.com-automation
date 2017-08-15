@@ -2,11 +2,13 @@
 using OpenQA.Selenium;
 using System;
 using System.Configuration;
+using System.Linq;
 
 namespace Expedia.com.Framework
 {
     class Helper
     {
+        private static string tripDetailTitle = "Trip Detail | Expedia";
         public static string ConvertDate(string date, char splitSymbol, string format)
         {
             string departureDate;
@@ -60,6 +62,19 @@ namespace Expedia.com.Framework
             catch (NoSuchElementException)
             {
                 return false;
+            }
+        }
+
+        public static void CloseCommercial(IWebDriver driver) //(string commercialWinTitle, IWebDriver driver)
+        {
+            //Close commercial if opened 
+            string commercialTabHandle = driver.WindowHandles.Last();
+            var commercialWindow = driver.SwitchTo().Window(commercialTabHandle);
+
+            if (commercialWindow.Title != tripDetailTitle)
+            {
+                driver.Close();
+                var originalTab = driver.SwitchTo().Window(driver.WindowHandles.First());
             }
         }
     }

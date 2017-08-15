@@ -73,20 +73,20 @@ namespace Expedia.com.FeatureFiles
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("One Way Search")]
-        [NUnit.Framework.CategoryAttribute("searchFlow")]
+        [NUnit.Framework.DescriptionAttribute("Cheepest flight")]
+        [NUnit.Framework.CategoryAttribute("cheepestTicket")]
         [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "11/10/2017", "3", "LHR to FCO Flights", "LH-", "FCO", null)]
         [NUnit.Framework.TestCaseAttribute("Krakow, Poland (KRK-John Paul II - Balice)", "Manchester Airport (MAN), England, United Kingdom", "11/22/2017", "1", "KRK to MAN Flights", "KRK", "MAN", null)]
         [NUnit.Framework.TestCaseAttribute("New York, NY (JFK-John F. Kennedy Intl.)", "Vancouver, BC, Canada (YVR-Vancouver Intl.)", "12/03/2017", "1", "JFK to YVR Flights", "JFK", "YVR", null)]
-        public virtual void OneWaySearch(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
+        public virtual void CheepestFlight(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "searchFlow"};
+                    "cheepestTicket"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("One Way Search", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cheepest flight", @__tags);
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
@@ -146,6 +146,89 @@ this.ScenarioSetup(scenarioInfo);
 #line 37
  testRunner.And("I check ticket price for each passanger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
+ testRunner.And("I check total price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Nonstop cheepest flight")]
+        [NUnit.Framework.CategoryAttribute("nonstopFlights")]
+        [NUnit.Framework.TestCaseAttribute("Berlin, Germany (TXL-Tegel)", "Riga, Latvia (RIX-Riga Intl.)", "12/22/2017", "1", "TXL to RIX Flights", "TXL", "RIX", null)]
+        [NUnit.Framework.TestCaseAttribute("New York, NY (JFK-John F. Kennedy Intl.)", "Vancouver, BC, Canada (YVR-Vancouver Intl.)", "12/03/2017", "1", "JFK to YVR Flights", "JFK", "YVR", null)]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "11/10/2017", "3", "LHR to FCO Flights", "LHR", "FCO", null)]
+        public virtual void NonstopCheepestFlight(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "nonstopFlights"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Nonstop cheepest flight", @__tags);
+#line 47
+this.ScenarioSetup(scenarioInfo);
+#line 48
+ testRunner.Given("I open expedia.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 49
+ testRunner.And("I navigate to Flights", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+ testRunner.And("I navigate to OneWay", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+ testRunner.And(string.Format("I enter Flying from {0}", from), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 52
+ testRunner.And(string.Format("I enter Flying to {0}", to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.And(string.Format("I enter Departing {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+ testRunner.And(string.Format("I choose number of {0}", passangers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+ testRunner.And("I click Search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+ testRunner.And(string.Format("After {0} opens", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+ testRunner.And("I select Nonstop checkbox in filters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+ testRunner.And("I check that only Nonstop flights are displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+ testRunner.And(string.Format("I check correctness of search results by checking {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
+ testRunner.And("I check departure date for search results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 61
+ testRunner.And("I select cheepest ticket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
+ testRunner.And("I check the departing and arrival airports", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 63
+ testRunner.And(string.Format("I check flight {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+ testRunner.And("I check departure time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 65
+ testRunner.And("I check arrival time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+ testRunner.And("I check duration of flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+ testRunner.And("I check tecket price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 68
+ testRunner.When("I confirm flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 69
+ testRunner.Then("Payment page opens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 70
+ testRunner.And("I open Flight details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 71
+ testRunner.And(string.Format("I check flight {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 72
+ testRunner.And(string.Format("I check departing {0}", fromAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+ testRunner.And("I check departure time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+ testRunner.And(string.Format("I check arrival {0}", toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+ testRunner.And("I check time of arrival", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+ testRunner.And("I check duration of flight", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+ testRunner.And("I check ticket price for each passanger", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
  testRunner.And("I check total price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
