@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System.Configuration;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com
@@ -28,13 +29,30 @@ namespace Expedia.com
         [Given(@"I check correctness of search results by checking (.*) and (.*)")]
         public void GivenICheckCorrectnessOfSearchResults(string p0, string p1)
         {
-            results.CheckSearchResults(p0, p1);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    results.CheckSearchResults(p0, p1);
+                    break;
+                case "True":
+                    break;
+            }
+            
         }
 
         [Given(@"I check departure date for search results")]
         public void GivenICheckDepartureDateForSearchResults()
         {
-            results.CompareDates();
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    results.CompareDates();
+                    break;
+                case "True":
+                    break;
+            }
         }
 
         [Given(@"I select cheepest ticket")]

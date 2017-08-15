@@ -1,6 +1,7 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
 using System.Collections.Generic;
+using System.Configuration;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com
@@ -29,51 +30,115 @@ namespace Expedia.com
         [Then(@"I open Flight details")]
         public void ThenIOpenFlightDetails()
         {
-            payment.ShowFlightDetails();
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.ShowFlightDetails();
+                    break;
+                case "True":
+                    break;
+            }   
         }
 
         [Then(@"I check flight (.*)")]
         public void ThenICheckFlightDate(string p0)
         {
-            payment.CheckTripDate(p0);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.CheckTripDate(p0);
+                    break;
+                case "True":
+                    break;
+            }          
         }
 
         [Then(@"I check departing (.*)")]
         public void ThenICheckDepartingAirport(string p0)
         {
-            payment.CheckDepartureAirport(p0);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.CheckDepartureAirport(p0);
+                    break;
+                case "True":
+                    break;
+            }           
         }
 
         [Then(@"I check departure time")]
         public void ThenICheckDepartureTime()
         {
-            flight = (List<string>)scenarioContext["flight"];
-            payment.CheckDepartureTime(flight);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    flight = (List<string>)scenarioContext["flight"];
+                    payment.CheckDepartureTime(flight);
+                    break;
+                case "True":
+                    break;
+            }     
         }
 
         [Then(@"I check arrival (.*)")]
         public void ThenICheckArrivalAirport(string p0)
         {
-            payment.CheckArrivalAirport(p0);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.CheckArrivalAirport(p0);
+                    break;
+                case "True":
+                    break;
+            }           
         }
 
         [Then(@"I check time of arrival")]
         public void ThenICheckTimeOfArrival()
         {
-            payment.CheckArrivalTime(flight);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.CheckArrivalTime(flight);
+                    break;
+                case "True":
+                    break;
+            }         
         }
 
         [Then(@"I check duration of flight")]
         public void ThenICheckDurationOfFlight()
         {
-            payment.CheckFlightDuration(flight);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    payment.CheckFlightDuration(flight);
+                    break;
+                case "True":
+                    break;
+            }           
         }
 
         [Then(@"I check ticket price for each passanger")]
         public void ThenICheckTicketPriceForEachPassanger()
         {
-            ticketPrice = (List<double>)scenarioContext["ticketPrice"];
-            payment.TripSummaryCheck(ticketPrice);
+            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
+            switch (lightweightMode)
+            {
+                case "False":
+                    ticketPrice = (List<double>)scenarioContext["ticketPrice"];
+                    payment.TripSummaryCheck(ticketPrice);
+                    break;
+                case "True":
+                    break;
+            }          
         }
 
         [Then(@"I check total price")]
