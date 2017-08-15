@@ -143,7 +143,7 @@ namespace Expedia.com.Pages
             {
                 filterStops[0].Click();
             }
-            Helper.CloseCommercial(pageDriver);               
+            //Helper.CloseCommercial(pageDriver);               
         }
 
         public void OnlyNonstopFlightsDisplayed()
