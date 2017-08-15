@@ -90,8 +90,8 @@ namespace Expedia.com.Pages
                 ticketsPricesList.Add(priceForPassanger);
                 priceOfTrip += ticketPrice;
             }
-            ConvertTotalPrice();
-            Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
+            var a = ConvertTotalPrice();
+            Assert.IsTrue(a - priceOfTrip <= 2.0);
             scenarioContext["ticketPrice"] = ticketsPricesList;
         }
 

@@ -154,7 +154,7 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Nonstop cheepest flight")]
         [NUnit.Framework.CategoryAttribute("nonstopFlights")]
-        [NUnit.Framework.TestCaseAttribute("Berlin, Germany (TXL-Tegel)", "Barcelona, Spain (BCN-Barcelona Intl.)", "03/13/2018", "1", "TXL to BCN Flights", "TXL", "BCN", null)]
+        [NUnit.Framework.TestCaseAttribute("Berlin, Germany (TXL-Tegel)", "Riga, Latvia (RIX-Riga Intl.)", "12/22/2017", "1", "TXL to RIX Flights", "TXL", "RIX", null)]
         [NUnit.Framework.TestCaseAttribute("New York, NY (JFK-John F. Kennedy Intl.)", "Vancouver, BC, Canada (YVR-Vancouver Intl.)", "12/03/2017", "1", "JFK to YVR Flights", "JFK", "YVR", null)]
         [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "11/10/2017", "3", "LHR to FCO Flights", "LHR", "FCO", null)]
         public virtual void NonstopCheepestFlight(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)

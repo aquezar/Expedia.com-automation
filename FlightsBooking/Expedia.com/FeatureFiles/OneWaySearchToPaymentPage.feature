@@ -79,6 +79,6 @@ Scenario Outline: Nonstop cheepest flight
 
 Examples: 
 | from                                     | to                                          | date       | passangers | searchTab          | fromAirport | toAirport |
-| Berlin, Germany (TXL-Tegel)              | Barcelona, Spain (BCN-Barcelona Intl.)      | 03/13/2018 | 1          | TXL to BCN Flights | TXL         | BCN       |
+| Berlin, Germany (TXL-Tegel)              | Riga, Latvia (RIX-Riga Intl.)               | 12/22/2017 | 1          | TXL to RIX Flights | TXL         | RIX       |
 | New York, NY (JFK-John F. Kennedy Intl.) | Vancouver, BC, Canada (YVR-Vancouver Intl.) | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |
 | London, England, UK (LHR-Heathrow)       | Fiumicino Airport (FCO), Italy              | 11/10/2017 | 3          | LHR to FCO Flights | LHR         | FCO       |
