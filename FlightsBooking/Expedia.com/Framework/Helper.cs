@@ -32,7 +32,6 @@ namespace Expedia.com.Framework
                     js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 3px solid greenyellow;");
                     break;
                 case "False":
-                    Console.WriteLine("Extended logging disabled.");
                     break;
             }            
         }
@@ -47,7 +46,6 @@ namespace Expedia.com.Framework
                     js.ExecuteScript("arguments[0].setAttribute('style', arguments[1]);", element, " border: 0px;");
                     break;
                 case "False":
-                    Console.WriteLine("Extended logging disabled.");
                     break;
             }
         }
