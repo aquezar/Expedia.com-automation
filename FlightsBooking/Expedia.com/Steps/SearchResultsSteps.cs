@@ -79,9 +79,17 @@ namespace Expedia.com
             results.CompareDates();
         }
 
+        [Given(@"I select Nonstop checkbox in filters")]
+        public void GivenISelectNonstopCheckboxInFilters()
+        {
+            results.SelectNonstopFilter();
+        }
 
-
-
+        [Given(@"I check that only Nonstop flights are displayed")]
+        public void GivenICheckThatOnlyNonstopFlightsAreDisplayed()
+        {
+            results.OnlyNonstopFlightsDisplayed();
+        }
 
     }
 }
