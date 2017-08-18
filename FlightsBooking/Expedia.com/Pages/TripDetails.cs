@@ -149,7 +149,8 @@ namespace Expedia.com.Pages
 
         public void TripDetailsPageOpened()
         {
-            Assert.AreEqual(pageTitle, pageDriver.Title);
+            //Assert.AreEqual(pageTitle, pageDriver.Title);
+            SwitchToTripDetailsTab();
         }
 
     }
