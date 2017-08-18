@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Expedia.com.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Expedia.com.Pages
         [FindsBy(How = How.CssSelector, Using = ".group-superlative-1")]
         private IWebElement flightDate { get; set; }
 
-        [FindsBy(How = How.CssSelector,Using = ".item-link")]
+        [FindsBy(How = How.CssSelector, Using = ".history-item-list")]
         private IWebElement ticketLink { get; set; }
 
         public MyLists(IWebDriver driver, ScenarioContext scenarioContext)

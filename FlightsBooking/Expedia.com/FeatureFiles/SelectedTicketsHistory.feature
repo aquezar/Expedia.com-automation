@@ -20,6 +20,7 @@ Scenario Outline: Login, perform search and check history
 	And I click Search button
 	And After <searchTab> opens
 	And I select cheepest ticket
+	And Trip details page opens
 	When I click My Lists button in menu
 	And I click Recently Viewed button
 	And I click on my last selected ticket

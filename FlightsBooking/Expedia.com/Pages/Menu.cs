@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Expedia.com.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using TechTalk.SpecFlow;
 
@@ -62,6 +63,7 @@ namespace Expedia.com.Pages
         public void ClickMyListsButton()
         {
             myListsButton.Click();
+            //Helper.CloseCommercial(pageDriver);
         }
     }
 }

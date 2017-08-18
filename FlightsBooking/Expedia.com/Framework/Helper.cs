@@ -8,7 +8,6 @@ namespace Expedia.com.Framework
 {
     class Helper
     {
-        private static string tripDetailTitle = "Trip Detail | Expedia";
         public static string ConvertDate(string date, char splitSymbol, string format)
         {
             string departureDate;

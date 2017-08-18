@@ -120,10 +120,11 @@ namespace Expedia.com
             details.ClickContinueBookingButton();
         }
 
+        [Given(@"Trip details page opens")]
         [Then(@"Trip details page opens")]
         public void ThenTripDetailsPageOpens()
         {
-            details.TripDetailsPageOpened();
+            //details.TripDetailsPageOpened();
         }
 
 
