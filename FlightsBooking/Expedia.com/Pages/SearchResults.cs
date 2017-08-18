@@ -143,6 +143,11 @@ namespace Expedia.com.Pages
             {
                 filterStops[0].Click();
             }
+            else
+            {
+                Console.WriteLine("There's no Nonstop flights for selected route\\date.");
+                return;
+            }
             Helper.CloseCommercial(pageDriver);               
         }
 
@@ -153,9 +158,14 @@ namespace Expedia.com.Pages
                 foreach (IWebElement flight in resultsListStops)
                 {
                     Helper.HighlightElement(flight, pageDriver);
-                    Assert.AreEqual(flight.Text, nonstopFlights);
+                    Assert.AreEqual(nonstopFlights, flight.Text);
                     Helper.UnhighlightElement(flight, pageDriver);
                 }
+            }
+            else
+            {
+                Console.WriteLine("There's no Nonstop flights for selected route\\date.");
+                return;
             }              
             
         }
