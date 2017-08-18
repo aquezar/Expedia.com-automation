@@ -82,3 +82,40 @@ Examples:
 | Berlin, Germany (TXL-Tegel)              | Riga, Latvia (RIX-Riga Intl.)               | 12/22/2017 | 1          | TXL to RIX Flights | TXL         | RIX       |
 | New York, NY (JFK-John F. Kennedy Intl.) | Vancouver, BC, Canada (YVR-Vancouver Intl.) | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |
 | London, England, UK (LHR-Heathrow)       | Fiumicino Airport (FCO), Italy              | 11/10/2017 | 3          | LHR to FCO Flights | LHR         | FCO       |
+
+
+@negative
+Scenario Outline: Search without Flying to field value
+	Given I open expedia.com
+	And I navigate to Flights
+	And I navigate to OneWay
+	And I enter Flying from <from>
+	And I leave Flying to field empty
+	And I enter Departing <date>
+	And I choose number of <passangers>
+	When I click Search button
+	Then Validation message appears
+	And message text saying that Flying to field is empty
+
+Examples: 
+| from                                     | date       | passangers |
+| Berlin, Germany (TXL-Tegel)              | 12/22/2017 | 1          |
+| New York, NY (JFK-John F. Kennedy Intl.) | 12/03/2017 | 1          |
+
+Scenario Outline: Search without Flying from field value
+	Given I open expedia.com
+	And I navigate to Flights
+	And I navigate to OneWay
+	And I leave Flying from field empty
+	And I enter Flying to <to> 
+	And I enter Departing <date>
+	And I choose number of <passangers>
+	When I click Search button
+	Then Validation message appears
+	And message text saying that Flying from field is empty
+
+Examples: 
+| to                                       | date       | passangers |
+| Berlin, Germany (TXL-Tegel)              | 12/22/2017 | 1          |
+| New York, NY (JFK-John F. Kennedy Intl.) | 12/03/2017 | 1          |
+

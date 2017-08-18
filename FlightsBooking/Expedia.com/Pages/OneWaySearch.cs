@@ -16,8 +16,6 @@ namespace Expedia.com.Pages
 
         private readonly ScenarioContext scenarioContext;
 
-        private string departureDateValidationMessage = "Enter your departure date in this format: mm/dd/yyyy.";
-
         [FindsBy(How = How.Id, Using = "tab-flight-tab-hp")]
         private IWebElement flightsTab { get; set; }
 
@@ -113,10 +111,10 @@ namespace Expedia.com.Pages
             Helper.UnhighlightElement(alertMessage, pageDriver);
         }
 
-        public void DepartureDateEmptyValidation(string testName)
+        public void CheckValidationMessage(string validationMessage)
         {
             Helper.HighlightElement(departureDateValidator, pageDriver);
-            Assert.AreEqual(departureDateValidator.Text, departureDateValidationMessage);
+            Assert.AreEqual(departureDateValidator.Text, validationMessage);
             Helper.UnhighlightElement(departureDateValidator, pageDriver);
 
             //Helper.HighlightElement(alertMessage, pageDriver);
@@ -125,6 +123,16 @@ namespace Expedia.com.Pages
             //string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
             //Settings.TakeScreenShot(pageDriver, dir);
             //Console.WriteLine("Screenshot created ->" + dir + screenshotName);
+        }
+
+        public void ClearFlyingToField()
+        {
+            flyingToField.Clear();
+        }
+
+        public void ClearFlyingFromField()
+        {
+            flyingFromField.Clear();
         }
 
     }

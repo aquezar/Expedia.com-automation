@@ -6,7 +6,7 @@ using TechTalk.SpecFlow;
 
 namespace Expedia.com
 {
-    [Binding]
+    [Binding, Scope(Feature = "One Way search")]
     class PaymentSteps
     {
         private IWebDriver driver;

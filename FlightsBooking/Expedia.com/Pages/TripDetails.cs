@@ -12,6 +12,7 @@ namespace Expedia.com.Pages
     {
         private IWebDriver pageDriver;
         private readonly ScenarioContext scenarioContext;
+        private string pageTitle = "Trip Detail | Expedia";
 
         //xpath absolute path .//*[@id='flightModule-0']/article/div[2]/div[2]/div[1]/span[2]
         [FindsBy(How = How.ClassName, Using = "fdp-location")]
@@ -144,6 +145,11 @@ namespace Expedia.com.Pages
             Helper.HighlightElement(flightDuration, pageDriver);
             Assert.AreEqual(flightInfo[4], flightDuration.Text);
             Helper.UnhighlightElement(flightDuration, pageDriver);
+        }
+
+        public void TripDetailsPageOpened()
+        {
+            Assert.AreEqual(pageTitle, pageDriver.Title);
         }
 
     }
