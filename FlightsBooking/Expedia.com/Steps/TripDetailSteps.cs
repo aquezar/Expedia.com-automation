@@ -124,7 +124,11 @@ namespace Expedia.com
         [Then(@"Trip details page opens")]
         public void ThenTripDetailsPageOpens()
         {
-            //details.TripDetailsPageOpened();
+            if(details == null)
+            {
+                details = new TripDetails(driver, scenarioContext);
+            }
+            details.TripDetailsPageOpened();
         }
 
 
