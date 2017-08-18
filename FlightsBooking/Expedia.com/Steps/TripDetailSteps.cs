@@ -21,6 +21,7 @@ namespace Expedia.com
             driver = (IWebDriver)scenarioContext["driver"];         
         }
 
+        [Then(@"I check the departing and arrival airports")]
         [Given(@"I check the departing and arrival airports")]
         public void GivenICheckFromAndTo()
         {
@@ -38,6 +39,7 @@ namespace Expedia.com
             }           
         }
 
+        [Then(@"I check flight (.*)")]
         [Given(@"I check flight (.*)")]
         public void GivenICheckDepartureDate(string p0)
         {
@@ -52,6 +54,7 @@ namespace Expedia.com
             }  
         }
 
+        [Then(@"I check departure time")]
         [Given(@"I check departure time")]
         public void GivenICheckDepartureTime()
         {
@@ -66,6 +69,7 @@ namespace Expedia.com
             }         
         }
 
+        [Then(@"I check arrival time")]
         [Given(@"I check arrival time")]
         public void GivenICheckArrivalTime()
         {
@@ -80,6 +84,7 @@ namespace Expedia.com
             }        
         }
 
+        [Then(@"I check duration of flight")]
         [Given(@"I check duration of flight")]
         public void GivenICheckFlightDuration()
         {
@@ -94,6 +99,7 @@ namespace Expedia.com
             }      
         }
 
+        [Then(@"I check tecket price")]
         [Given(@"I check tecket price")]
         public void GivenICheckTecketPrice()
         {
@@ -113,6 +119,14 @@ namespace Expedia.com
         {
             details.ClickContinueBookingButton();
         }
+
+        [Given(@"Trip details page opens")]
+        [Then(@"Trip details page opens")]
+        public void ThenTripDetailsPageOpens()
+        {
+            //details.TripDetailsPageOpened();
+        }
+
 
     }
 }

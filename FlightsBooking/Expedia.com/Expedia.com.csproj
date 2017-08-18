@@ -70,6 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChangeDepartureDate.feature</DependentUpon>
     </Compile>
+    <Compile Include="FeatureFiles\SelectedTicketsHistory.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectedTicketsHistory.feature</DependentUpon>
+    </Compile>
     <Compile Include="FeatureFiles\ValidationMessages.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,8 +82,14 @@
     </Compile>
     <Compile Include="Framework\Helper.cs" />
     <Compile Include="Framework\Settings.cs" />
+    <Compile Include="Pages\MyLists.cs" />
+    <Compile Include="Pages\Menu.cs" />
     <Compile Include="Pages\Payment.cs" />
+    <Compile Include="Pages\SignIn.cs" />
+    <Compile Include="Steps\MenuSteps.cs" />
+    <Compile Include="Steps\MyListsSteps.cs" />
     <Compile Include="Steps\PaymentSteps.cs" />
+    <Compile Include="Steps\SignInSteps.cs" />
     <Compile Include="Steps\TripDetailSteps.cs" />
     <Compile Include="Steps\SearchResultsSteps.cs" />
     <Compile Include="Steps\OneWaySteps.cs" />
@@ -93,10 +104,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="FeatureFiles\ChangeDepartureDate.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChangeDepartureDate.feature.cs</LastGenOutput>
+    </None>
+    <None Include="FeatureFiles\SelectedTicketsHistory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SelectedTicketsHistory.feature.cs</LastGenOutput>
     </None>
     <None Include="FeatureFiles\ValidationMessages.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
