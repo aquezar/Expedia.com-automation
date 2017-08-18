@@ -71,10 +71,14 @@ namespace Expedia.com.Framework
             string commercialTabHandle = driver.WindowHandles.Last();
             var commercialWindow = driver.SwitchTo().Window(commercialTabHandle);
 
-            if (commercialWindow.Title != tripDetailTitle)
+            if (!commercialWindow.Title.Contains("| Expedia")) //(commercialWindow.Title != tripDetailTitle)
             {
                 driver.Close();
                 var originalTab = driver.SwitchTo().Window(driver.WindowHandles.First());
+            }
+            else
+            {
+                return;
             }
         }
     }
