@@ -23,7 +23,7 @@ namespace Expedia.com.Framework
             return departureDate;
         }
 
-        public static void HighlightElement(IWebElement element, IWebDriver driver)
+        public static void HighlightIWebElement(IWebElement element, IWebDriver driver)
         {
             string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
             switch (extendedLogging)
@@ -37,7 +37,7 @@ namespace Expedia.com.Framework
             }            
         }
 
-        public static void UnhighlightElement(IWebElement element, IWebDriver driver)
+        public static void UnhighlightIWebElement(IWebElement element, IWebDriver driver)
         {
             string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
             switch (extendedLogging)
@@ -64,9 +64,8 @@ namespace Expedia.com.Framework
             }
         }
 
-        public static void CloseCommercial(IWebDriver driver) //(string commercialWinTitle, IWebDriver driver)
+        public static void CloseCommercialWindow(IWebDriver driver) //(string commercialWinTitle, IWebDriver driver)
         {
-            //Close commercial if opened 
             string commercialTabHandle = driver.WindowHandles.Last();
             var commercialWindow = driver.SwitchTo().Window(commercialTabHandle);
 

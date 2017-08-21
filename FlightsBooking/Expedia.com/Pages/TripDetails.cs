@@ -110,41 +110,41 @@ namespace Expedia.com.Pages
 
         public void CompareDepartureAndDestination(List<string> flightInfo)
         {
-            Helper.HighlightElement(flightFromAirportCode,pageDriver);
-            Helper.HighlightElement(flightToAirportCode, pageDriver);
+            Helper.HighlightIWebElement(flightFromAirportCode,pageDriver);
+            Helper.HighlightIWebElement(flightToAirportCode, pageDriver);
             Assert.AreEqual(flightInfo[0], (flightFromAirportCode.Text + " - " + flightToAirportCode.Text));
-            Helper.UnhighlightElement(flightFromAirportCode, pageDriver);
-            Helper.UnhighlightElement(flightToAirportCode, pageDriver);
+            Helper.UnhighlightIWebElement(flightFromAirportCode, pageDriver);
+            Helper.UnhighlightIWebElement(flightToAirportCode, pageDriver);
         }
 
         public void CompareDates(string date)
         {
-            Helper.HighlightElement(flightDate, pageDriver);
+            Helper.HighlightIWebElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertDate(date, '/', "ddd, MMM d"), flightDate.Text);
-            Helper.UnhighlightElement(flightDate, pageDriver);
+            Helper.UnhighlightIWebElement(flightDate, pageDriver);
         }
 
         public void CompareDepartureTime(List<string> flightInfo)
         {
-            Helper.HighlightElement(flightDepartureTime, pageDriver);
+            Helper.HighlightIWebElement(flightDepartureTime, pageDriver);
             //Assert.AreEqual(flightInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
             Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
-            Helper.UnhighlightElement(flightDepartureTime, pageDriver);
+            Helper.UnhighlightIWebElement(flightDepartureTime, pageDriver);
         }
 
         public void CompareArrivalTime(List<string> flightInfo)
         {
-            Helper.HighlightElement(flightArrivalTime, pageDriver);
+            Helper.HighlightIWebElement(flightArrivalTime, pageDriver);
             //Assert.AreEqual(flightInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length -1)));
             Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
-            Helper.UnhighlightElement(flightArrivalTime, pageDriver);
+            Helper.UnhighlightIWebElement(flightArrivalTime, pageDriver);
         }
 
         public void CompareFlightDuration(List<string> flightInfo)
         {
-            Helper.HighlightElement(flightDuration, pageDriver);
+            Helper.HighlightIWebElement(flightDuration, pageDriver);
             Assert.AreEqual(flightInfo[4], flightDuration.Text);
-            Helper.UnhighlightElement(flightDuration, pageDriver);
+            Helper.UnhighlightIWebElement(flightDuration, pageDriver);
         }
 
         public void TripDetailsPageOpened()

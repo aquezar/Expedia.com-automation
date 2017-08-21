@@ -106,16 +106,16 @@ namespace Expedia.com.Pages
 
         public void ValidationMessage()
         {
-            Helper.HighlightElement(alertMessage, pageDriver);
+            Helper.HighlightIWebElement(alertMessage, pageDriver);
             Assert.IsTrue(alertMessage.Displayed);
-            Helper.UnhighlightElement(alertMessage, pageDriver);
+            Helper.UnhighlightIWebElement(alertMessage, pageDriver);
         }
 
         public void CheckValidationMessage(string validationMessage)
         {
-            Helper.HighlightElement(departureDateValidator, pageDriver);
+            Helper.HighlightIWebElement(departureDateValidator, pageDriver);
             Assert.AreEqual(departureDateValidator.Text, validationMessage);
-            Helper.UnhighlightElement(departureDateValidator, pageDriver);
+            Helper.UnhighlightIWebElement(departureDateValidator, pageDriver);
 
             //Helper.HighlightElement(alertMessage, pageDriver);
             //var location = System.Reflection.Assembly.GetExecutingAssembly().Location;

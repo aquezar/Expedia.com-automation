@@ -88,9 +88,9 @@ namespace Expedia.com.Pages
 
         private void CheckSortingBy(string sortingBy)
         {
-            Helper.HighlightElement(dropdownSort, pageDriver);
+            Helper.HighlightIWebElement(dropdownSort, pageDriver);
             Assert.IsTrue(SearchSort.SelectedOption.Text == sortingBy);
-            Helper.UnhighlightElement(dropdownSort, pageDriver);
+            Helper.UnhighlightIWebElement(dropdownSort, pageDriver);
         }
         private void CollectCheepestFlightInfo()
         {
@@ -113,9 +113,9 @@ namespace Expedia.com.Pages
         {
             for(int i = 0; i <= flightsListRoute.Count-1; i++)
             {
-                Helper.HighlightElement(flightsListRoute.ElementAt(i), pageDriver);
+                Helper.HighlightIWebElement(flightsListRoute.ElementAt(i), pageDriver);
                 Assert.AreEqual(flightsListRoute.ElementAt(i).Text, (fromAirportCode + " - " + toAirportCode));
-                Helper.UnhighlightElement(flightsListRoute.ElementAt(i), pageDriver);
+                Helper.UnhighlightIWebElement(flightsListRoute.ElementAt(i), pageDriver);
             }
         }
 
@@ -127,9 +127,9 @@ namespace Expedia.com.Pages
        
         public void CompareDates()
         {
-            Helper.HighlightElement(flightDate, pageDriver);
+            Helper.HighlightIWebElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertDate(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
-            Helper.UnhighlightElement(flightDate, pageDriver);
+            Helper.UnhighlightIWebElement(flightDate, pageDriver);
         }
 
         public void ClickSearchButton()
@@ -148,7 +148,7 @@ namespace Expedia.com.Pages
                 Console.WriteLine("There's no Nonstop flights for selected route\\date.");
                 return;
             }
-            Helper.CloseCommercial(pageDriver);               
+            Helper.CloseCommercialWindow(pageDriver);               
         }
 
         public void OnlyNonstopFlightsDisplayed()
@@ -157,9 +157,9 @@ namespace Expedia.com.Pages
             {
                 foreach (IWebElement flight in resultsListStops)
                 {
-                    Helper.HighlightElement(flight, pageDriver);
+                    Helper.HighlightIWebElement(flight, pageDriver);
                     Assert.AreEqual(nonstopFlights, flight.Text);
-                    Helper.UnhighlightElement(flight, pageDriver);
+                    Helper.UnhighlightIWebElement(flight, pageDriver);
                 }
             }
             else

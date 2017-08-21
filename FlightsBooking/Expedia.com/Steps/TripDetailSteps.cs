@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using TechTalk.SpecFlow;
@@ -14,6 +15,7 @@ namespace Expedia.com
         private List<string>flight = new List<string>();
         TripDetails details;
         private readonly ScenarioContext scenarioContext;
+        private string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
 
         public TripDetailSteps(ScenarioContext scenarioContext)
         {
@@ -21,97 +23,56 @@ namespace Expedia.com
             driver = (IWebDriver)scenarioContext["driver"];         
         }
 
-        [Then(@"I check the departing and arrival airports")]
-        [Given(@"I check the departing and arrival airports")]
-        public void GivenICheckFromAndTo()
+        [Then(@"I check '(.*)'")]
+        [Given(@"I check '(.*)'")]
+        public void GivenICheck(string checkParameter)
         {
             details = new TripDetails(driver, scenarioContext);
             details.SwitchToTripDetailsTab();
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
             switch (lightweightMode)
             {
-                case "False":      
+                case "False":
                     flight = (List<string>)scenarioContext["flight"];
-                    details.CompareDepartureAndDestination(flight);
+                    switch (checkParameter)
+                    {
+                        case "the departing and arrival airports":
+                            details.CompareDepartureAndDestination(flight);
+                            break;
+                        case "departure time":
+                            details.CompareDepartureTime(flight);
+                            break;
+                        case "arrival time":
+                            details.CompareArrivalTime(flight);
+                            break;
+                        case "duration of flight":
+                            details.CompareFlightDuration(flight);
+                            break;
+                        case "tecket price":
+                            details.CompareTicketsPricesInTripSummary(flight);
+                            break;
+                        default:
+                            Console.WriteLine("Checking parameter for ticket is incorrect");
+                            break;
+                    }
                     break;
                 case "True":
                     break;
-            }           
+            }
+            
         }
 
         [Then(@"I check flight (.*)")]
         [Given(@"I check flight (.*)")]
-        public void GivenICheckDepartureDate(string p0)
+        public void GivenICheckDepartureDate(string date)
         {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
             switch (lightweightMode)
             {
                 case "False":
-                    details.CompareDates(p0);
+                    details.CompareDates(date);
                     break;
                 case "True":
                     break;
             }  
-        }
-
-        [Then(@"I check departure time")]
-        [Given(@"I check departure time")]
-        public void GivenICheckDepartureTime()
-        {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
-            switch (lightweightMode)
-            {
-                case "False":
-                    details.CompareDepartureTime(flight);
-                    break;
-                case "True":
-                    break;
-            }         
-        }
-
-        [Then(@"I check arrival time")]
-        [Given(@"I check arrival time")]
-        public void GivenICheckArrivalTime()
-        {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
-            switch (lightweightMode)
-            {
-                case "False":
-                    details.CompareArrivalTime(flight);
-                    break;
-                case "True":
-                    break;
-            }        
-        }
-
-        [Then(@"I check duration of flight")]
-        [Given(@"I check duration of flight")]
-        public void GivenICheckFlightDuration()
-        {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
-            switch (lightweightMode)
-            {
-                case "False":
-                    details.CompareFlightDuration(flight);
-                    break;
-                case "True":
-                    break;
-            }      
-        }
-
-        [Then(@"I check tecket price")]
-        [Given(@"I check tecket price")]
-        public void GivenICheckTecketPrice()
-        {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
-            switch (lightweightMode)
-            {
-                case "False":
-                    details.CompareTicketsPricesInTripSummary(flight);
-                    break;
-                case "True":
-                    break;
-            }           
         }
 
         [When(@"I confirm flight")]
