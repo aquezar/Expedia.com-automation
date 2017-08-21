@@ -6,6 +6,7 @@ Feature: One Way search
 	I want to perform search and proceed to payment after selecting flight
 
 @cheepestTicket
+@smoke
 Scenario Outline: Cheepest flight
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab
@@ -85,6 +86,7 @@ Examples:
 
 
 @negative
+@smoke
 Scenario Outline: Search without Flying to field value
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab
@@ -102,6 +104,8 @@ Examples:
 | Berlin, Germany (TXL-Tegel)              | 12/22/2017 | 1          |
 | New York, NY (JFK-John F. Kennedy Intl.) | 12/03/2017 | 1          |
 
+@negative
+@smoke
 Scenario Outline: Search without Flying from field value
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab

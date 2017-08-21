@@ -5,6 +5,7 @@ Feature: Validation messages
 	I want to see error messages when i make mistakes
 
 @departureDate
+@smoke
 Scenario Outline: One Way search without departure date
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab
