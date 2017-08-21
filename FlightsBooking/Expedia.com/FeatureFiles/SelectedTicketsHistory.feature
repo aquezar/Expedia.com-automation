@@ -8,9 +8,9 @@ Scenario Outline: Login, perform search and check history
 	Given I open 'http://expedia.com'
 	And I click 'Account' button in menu
 	And I click 'Sign in' button in menu
-	And I enter my Email <address>
-	And I enter my Password <password>
-	And I click Sign in
+	And I enter 'vklovak.test@gmail.com' in 'Email' input field
+	And I enter 'password123' in 'Password' input field
+	And I click Sign in button
 	And I navigate to 'Flights' tab
 	And I navigate to 'OneWay' tab
 	And I enter <departureAirport> in 'Flying from' field
@@ -33,5 +33,5 @@ Scenario Outline: Login, perform search and check history
 	And I check 'tecket price'
  
  Examples: 
- | address                | password    | departureAirport            | arrivalAirport                | date       | passangers | searchResults      |
- | vklovak.test@gmail.com | password123 | Berlin, Germany (TXL-Tegel) | Riga, Latvia (RIX-Riga Intl.) | 12/22/2017 | 1          | TXL to RIX Flights |
+| departureAirport            | arrivalAirport                | date       | passangers | searchResults      |
+| Berlin, Germany (TXL-Tegel) | Riga, Latvia (RIX-Riga Intl.) | 12/22/2017 | 1          | TXL to RIX Flights |

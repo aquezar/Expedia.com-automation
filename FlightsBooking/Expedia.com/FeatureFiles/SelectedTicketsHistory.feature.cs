@@ -68,8 +68,8 @@ namespace Expedia.com.FeatureFiles
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Login, perform search and check history")]
-        [NUnit.Framework.TestCaseAttribute("vklovak.test@gmail.com", "password123", "Berlin, Germany (TXL-Tegel)", "Riga, Latvia (RIX-Riga Intl.)", "12/22/2017", "1", "TXL to RIX Flights", null)]
-        public virtual void LoginPerformSearchAndCheckHistory(string address, string password, string departureAirport, string arrivalAirport, string date, string passangers, string searchResults, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Berlin, Germany (TXL-Tegel)", "Riga, Latvia (RIX-Riga Intl.)", "12/22/2017", "1", "TXL to RIX Flights", null)]
+        public virtual void LoginPerformSearchAndCheckHistory(string departureAirport, string arrivalAirport, string date, string passangers, string searchResults, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login, perform search and check history", exampleTags);
 #line 7
@@ -81,11 +81,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 10
  testRunner.And("I click \'Sign in\' button in menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.And(string.Format("I enter my Email {0}", address), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I enter \'vklovak.test@gmail.com\' in \'Email\' input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And(string.Format("I enter my Password {0}", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I enter \'password123\' in \'Password\' input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And("I click Sign in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click Sign in button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
  testRunner.And("I navigate to \'Flights\' tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
