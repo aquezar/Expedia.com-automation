@@ -40,24 +40,9 @@ namespace Expedia.com.Pages
             accountButton.Click();
         }
 
-        public void ClickSignIn()
-        {
-            signInButton.Click();
-        }
-
-        public void EnterEmail(string email)
-        {
-            signInEmailField.SendKeys(email);
-        }
-
-        public void EnterPassword(string password)
-        {
-            signInPasswordField.SendKeys(password);
-        }
-
         public void ClickSignInButton()
         {
-            signInSignInButton.Click();
+            signInButton.Click();
         }
 
         public void ClickMyListsButton()

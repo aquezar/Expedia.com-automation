@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Steps
@@ -17,20 +18,25 @@ namespace Expedia.com.Steps
             driver = (IWebDriver)scenarioContext["driver"];
         }
 
-        [Given(@"I enter my Email (.*)")]
-        public void GivenIEnterMyEmail(string p0)
+        [Given(@"I enter '(.*)' in '(.*)' input field")]
+        public void GivenIEnterInInputField(string value, string fieldName)
         {
             signIn = new SignIn(driver, scenarioContext);
-            signIn.EnterEmail(p0);
+            switch (fieldName)
+            {
+                case "Email":
+                    signIn.EnterEmail(value);
+                    break;
+                case "Password":
+                    signIn.EnterPassword(value);
+                    break;
+                default:
+                    Console.WriteLine("Ther's now such field on Sign In page");
+                    break;
+            }
         }
 
-        [Given(@"I enter my Password (.*)")]
-        public void GivenIEnterMyPassword(string p0)
-        {
-            signIn.EnterPassword(p0);
-        }
-
-        [Given(@"I click Sign in")]
+        [Given(@"I click Sign in button")]
         public void GivenIClickSignIn()
         {
             signIn.ClickSignInButton();

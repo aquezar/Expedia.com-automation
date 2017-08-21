@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Steps
@@ -17,27 +18,27 @@ namespace Expedia.com.Steps
             driver = (IWebDriver)scenarioContext["driver"];
         }
 
-        [Given(@"I click Account button in menu")]
-        public void GivenIClickAccountButtonInMenu()
+        [When(@"I click '(.*)' button in menu")]
+        [Given(@"I click '(.*)' button in menu")]
+        public void GivenIClickButtonInMenu(string buttonName)
         {
             menu = new Menu(driver, scenarioContext);
-            menu.ClickAccountButton();
+            switch (buttonName)
+            {
+                case "Account":
+                    menu.ClickAccountButton();
+                    break;
+                case "Sign in":
+                    menu.ClickSignInButton();
+                    break;
+                case "My Lists":
+                    menu.ClickMyListsButton();
+                    break;
+                default:
+                    Console.WriteLine("Ther's no such button in Main Menu");
+                    break;
+            }
         }
-
-        [Given(@"I click Sign in button in menu")]
-        public void GivenIClickSignInButtonInMenu()
-        {
-            menu.ClickSignIn();
-        }
-
-        [When(@"I click My Lists button in menu")]
-        public void WhenIClickMyListsButtonInMenu()
-        {
-            menu.ClickMyListsButton();
-        }
-
-
-
 
     }
 }

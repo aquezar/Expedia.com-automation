@@ -14,8 +14,8 @@ namespace Expedia.com.Framework
     public class Settings
     {
         private IWebDriver driver;
-        private static string processname;
-        private static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+        private static string WebDriverProcessName;
+        
         private readonly ScenarioContext scenarioContext;
 
         public Settings(ScenarioContext scenarioContext)
@@ -31,17 +31,17 @@ namespace Expedia.com.Framework
             {
                 case "Firefox":
                     driver = new FirefoxDriver();
-                    processname = "firefox";
+                    WebDriverProcessName = "firefox";
                     Console.WriteLine("Runing test in Firefox");
                     break;
                 case "IE":
                     driver = new InternetExplorerDriver();
-                    processname = "IEDriverServer";
+                    WebDriverProcessName = "IEDriverServer";
                     Console.WriteLine("Runing test in IE");
                     break;
                 case "Chrome":
                     driver = new ChromeDriver();
-                    processname = "chromedriver";
+                    WebDriverProcessName = "chromedriver";
                     Console.WriteLine("Runing test in Chrome");
                     break;
                 default:
@@ -67,8 +67,8 @@ namespace Expedia.com.Framework
                         var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
                         string dir = Path.GetDirectoryName(location) + "\\failed_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
                         Console.WriteLine("An error occured -> " + scenarioContext.TestError.Message);
-                        Console.WriteLine("Screenshot created -> " + dir + screenshotName);
-                        TakeScreenShot(driver, dir);
+                        Console.WriteLine("Screenshot created -> " + dir + Helper.screenshotName);
+                        Helper.TakeScreenShot(driver, dir);
                     }
                     break;
                 case "False":
@@ -78,24 +78,12 @@ namespace Expedia.com.Framework
             driver.Quit();
         }
 
-        public static void TakeScreenShot(IWebDriver driver, string savePath)
-        {
-            var fileName = savePath + screenshotName;
-            ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
-            Screenshot screenshot = screenshotHandler.GetScreenshot();
-            if (!Directory.Exists(savePath))
-            {
-                Directory.CreateDirectory(savePath);
-            }
-            screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
-        }
-
         [AfterTestRun]
-        private static void KillDriverProcess()
+        private static void KillWebDriverProcess()
         {
             try
             {
-                foreach (Process process in Process.GetProcessesByName(processname))
+                foreach (Process process in Process.GetProcessesByName(WebDriverProcessName))
                 { 
                     process.Kill();
                 }

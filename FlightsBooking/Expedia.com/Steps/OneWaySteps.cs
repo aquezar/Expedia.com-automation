@@ -1,5 +1,6 @@
 ﻿using Expedia.com.Pages;
 using OpenQA.Selenium;
+using System;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com
@@ -16,44 +17,51 @@ namespace Expedia.com
             driver = (IWebDriver)scenarioContext["driver"];
         }
 
-        [Given(@"I open expedia\.com")]
-        public void GivenIOpenExpedia_Com()
+        [Given(@"I open '(.*)'")]
+        public void GivenIOpen(string homePageUrl)
         {
-            driver.Navigate().GoToUrl("http://expedia.com");
+            driver.Navigate().GoToUrl(homePageUrl);
         }
-        
-        [Given(@"I navigate to Flights")]
-        public void GivenINavigateToFlights()
+
+        [Given(@"I navigate to '(.*)' tab")]
+        public void GivenINavigateToTab(string tabName)
         {
             search = new OneWaySearch(driver, scenarioContext);
-            search.GoToFlightsTab();
+            switch (tabName)
+            {
+                case "Flights":
+                    search.GoToFlightsTab();
+                    break;
+                case "OneWay":
+                    search.GoToOneWayTab();
+                    break;
+                default:
+                    Console.WriteLine("Tab name is incorrect");
+                    break;
+            }
         }
 
-        [Given(@"I navigate to OneWay")]
-        public void GivenINavigateToOneWay()
+        [Given(@"I enter (.*) in '(.*)' field")]
+        public void GivenIEnterValueInField(string fieldValue, string fieldName)
         {
-            search.GoToOneWayTab();
+            switch (fieldName)
+            {
+                case "Flying from":
+                    search.EnterFlyingFromValue(fieldValue);
+                    break;
+                case "Flying to":
+                    search.EnterFlyingToValue(fieldValue);
+                    break;
+                case "Departing":
+                    search.EnterDepartingDateValue(fieldValue);
+                    break;
+                default:
+                    Console.WriteLine("Field name is incorrect");
+                    break;
+            }
         }
 
-        [Given(@"I enter Flying from (.*)")]
-        public void GivenIEnterFlying(string p0)
-        {
-            search.EnterFlyingFromValue(p0);
-        }
-
-        [Given(@"I enter Flying to (.*)")]
-        public void GivenIEnterFlyingTom(string p0)
-        {
-            search.EnterFlyingToValue(p0);
-        }
-
-        [Given(@"I enter Departing (.*)")]
-        public void GivenIEnterDepartingDate(string p0)
-        {
-            search.EnterDepartingDateValue(p0);
-        }
-
-        [Given(@"I choose number of (.*)")]
+        [Given(@"I choose number of (.*) in Adults dropdown")]
         public void GivenIChooseAdultsNumber(int p0)
         {
             search.SelectNumberOfAdults(p0);
@@ -70,14 +78,14 @@ namespace Expedia.com
         [When(@"Validation message appears")]
         public void ThenValidationMessageAppears()
         {
-            search.ValidationMessage();
+            search.IsValidationMessageDisplayed();
         }
 
-        [Then(@"Message text saying that Date is empty")]
+        /*[Then(@"Message text saying that Date is empty")]
         public void ThenMessageTextSayingThatDateIsEmpty()
         {
             search.CheckValidationMessage("Enter your departure date in this format: mm/dd/yyyy.");
-        }
+        }*/
 
         [Given(@"I leave Flying to field empty")]
         public void GivenILeaveFlyingToFieldEmpty()
@@ -85,11 +93,11 @@ namespace Expedia.com
             search.ClearFlyingToField();
         }
 
-        [Then(@"message text saying that Flying to field is empty")]
+        /*[Then(@"message text saying that Flying to field is empty")]
         public void ThenMessageTextSayingThatFlyingToFieldIsEmpty()
         {
             search.CheckValidationMessage("Tell us where you're flying to.");
-        }
+        }*/
 
         [Given(@"I leave Flying from field empty")]
         public void GivenILeaveFlyingFromFieldEmpty()
@@ -97,10 +105,31 @@ namespace Expedia.com
             search.ClearFlyingFromField();
         }
 
-        [Then(@"message text saying that Flying from field is empty")]
+        /*[Then(@"message text saying that Flying from field is empty")]
         public void ThenMessageTextSayingThatFlyingFromFieldIsEmpty()
         {
             search.CheckValidationMessage("Tell us where you're flying from.");
+        }*/
+
+
+        [Then(@"message text saying that '(.*)'")]
+        public void ThenMessageTextSayingThat(string validationMessageTrigger)
+        {
+            switch (validationMessageTrigger)
+            {
+                case "Flying from field is empty":
+                    search.CheckValidationMessage("Tell us where you're flying from.");
+                    break;
+                case "Flying to field is empty":
+                    search.CheckValidationMessage("Tell us where you're flying to.");
+                    break;
+                case "Date is empty":
+                    search.CheckValidationMessage("Enter your departure date in this format: mm/dd/yyyy.");
+                    break;
+                default:
+                    Console.WriteLine("Validation message trigger is incorrect");
+                    break;
+            }
         }
 
 

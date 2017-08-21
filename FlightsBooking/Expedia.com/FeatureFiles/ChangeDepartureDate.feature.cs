@@ -77,7 +77,7 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.CategoryAttribute("changeDate")]
         [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "09/05/2017", "1", "KBP to BUD Flights", "KBP", "BUD", "11/15/2017", null)]
         [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Berlin, Germany (TXL-Tegel)", "10/25/2017", "3", "LHR to TXL Flights", "LHR", "TXL", "12/03/2017", null)]
-        public virtual void ChangeDepartureDate(string from, string to, string date, string passangers, string searchTab, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
+        public virtual void ChangeDepartureDate(string departureAirport, string arrivalAirport, string date, string passangers, string searchResults, string fromAirport, string toAirport, string newDepartureDate, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "changeDate"};
@@ -89,23 +89,23 @@ namespace Expedia.com.FeatureFiles
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
- testRunner.Given("I open expedia.com", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I open \'http://expedia.com\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 11
- testRunner.And("I navigate to Flights", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I navigate to \'Flights\' tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And("I navigate to OneWay", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I navigate to \'OneWay\' tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And(string.Format("I enter Flying from {0}", from), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter {0} in \'Flying from\' field", departureAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
- testRunner.And(string.Format("I enter Flying to {0}", to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter {0} in \'Flying to\' field", arrivalAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
- testRunner.And(string.Format("I enter Departing {0}", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter {0} in \'Departing\' field", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.And(string.Format("I choose number of {0}", passangers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I choose number of {0} in Adults dropdown", passangers), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
  testRunner.And("I click Search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.And(string.Format("After {0} opens", searchTab), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("After {0} page opens", searchResults), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
  testRunner.And(string.Format("I check correctness of search results by checking {0} and {1}", fromAirport, toAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20

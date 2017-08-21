@@ -7,15 +7,15 @@ Feature: Change departure date in Search results
 
 @changeDate
 Scenario Outline: Change Departure date
-	Given I open expedia.com
-	And I navigate to Flights
-	And I navigate to OneWay
-	And I enter Flying from <from>
-	And I enter Flying to <to>
-	And I enter Departing <date>
-	And I choose number of <passangers>
+	Given I open 'http://expedia.com'
+	And I navigate to 'Flights' tab
+	And I navigate to 'OneWay' tab
+	And I enter <departureAirport> in 'Flying from' field
+	And I enter <arrivalAirport> in 'Flying to' field
+	And I enter <date> in 'Departing' field 
+	And I choose number of <passangers> in Adults dropdown
 	And I click Search button
-	And After <searchTab> opens
+	And After <searchResults> page opens
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
 	And I change departure date to <newDepartureDate>
 	When I click Search button on Search Results page
@@ -23,6 +23,6 @@ Scenario Outline: Change Departure date
  
 
 Examples: 
-| from                               | to                                          | date       | passangers | searchTab          | fromAirport | toAirport | newDepartureDate |
+| departureAirport                   | arrivalAirport                              | date       | passangers | searchResults      | fromAirport | toAirport | newDepartureDate |
 | Kiev, Ukraine (KBP-Borispol Intl.) | Budapest, Hungary(BUD - Ferenc Liszt Intl.) | 09/05/2017 | 1          | KBP to BUD Flights | KBP         | BUD       | 11/15/2017       |
 | London, England, UK (LHR-Heathrow) | Berlin, Germany (TXL-Tegel)                 | 10/25/2017 | 3          | LHR to TXL Flights | LHR         | TXL       | 12/03/2017       |

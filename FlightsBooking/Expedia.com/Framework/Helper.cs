@@ -2,13 +2,16 @@
 using OpenQA.Selenium;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 
 namespace Expedia.com.Framework
 {
     class Helper
     {
-        public static string ConvertDate(string date, char splitSymbol, string format)
+        private static string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
+        public static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+        public static string ConvertStringToDateFormat(string date, char splitSymbol, string format)
         {
             string departureDate;
             var t = date.Split(splitSymbol);
@@ -23,9 +26,8 @@ namespace Expedia.com.Framework
             return departureDate;
         }
 
-        public static void HighlightElement(IWebElement element, IWebDriver driver)
+        public static void HighlightIWebElement(IWebElement element, IWebDriver driver)
         {
-            string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
             switch (extendedLogging)
             {
                 case "True":
@@ -37,9 +39,8 @@ namespace Expedia.com.Framework
             }            
         }
 
-        public static void UnhighlightElement(IWebElement element, IWebDriver driver)
+        public static void UnhighlightIWebElement(IWebElement element, IWebDriver driver)
         {
-            string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
             switch (extendedLogging)
             {
                 case "True":
@@ -64,13 +65,12 @@ namespace Expedia.com.Framework
             }
         }
 
-        public static void CloseCommercial(IWebDriver driver) //(string commercialWinTitle, IWebDriver driver)
+        public static void CloseCommercialWindow(IWebDriver driver)
         {
-            //Close commercial if opened 
             string commercialTabHandle = driver.WindowHandles.Last();
             var commercialWindow = driver.SwitchTo().Window(commercialTabHandle);
 
-            if (!commercialWindow.Title.Contains("| Expedia")) //(commercialWindow.Title != tripDetailTitle)
+            if (!commercialWindow.Title.Contains("| Expedia"))
             {
                 driver.Close();
                 var originalTab = driver.SwitchTo().Window(driver.WindowHandles.First());
@@ -80,5 +80,18 @@ namespace Expedia.com.Framework
                 return;
             }
         }
+
+        public static void TakeScreenShot(IWebDriver driver, string savePath)
+        {
+            var fileName = savePath + screenshotName;
+            ITakesScreenshot screenshotHandler = driver as ITakesScreenshot;
+            Screenshot screenshot = screenshotHandler.GetScreenshot();
+            if (!Directory.Exists(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+            }
+            screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
+        }
+
     }
 }
