@@ -24,10 +24,10 @@ namespace Expedia.com.Steps
             signIn = new SignIn(driver, scenarioContext);
             switch (fieldName)
             {
-                case "email":
+                case "Email":
                     signIn.EnterEmail(value);
                     break;
-                case "password":
+                case "Password":
                     signIn.EnterPassword(value);
                     break;
                 default:

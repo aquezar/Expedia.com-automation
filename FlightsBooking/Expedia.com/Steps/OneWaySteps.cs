@@ -78,7 +78,7 @@ namespace Expedia.com
         [When(@"Validation message appears")]
         public void ThenValidationMessageAppears()
         {
-            search.ValidationMessage();
+            search.IsValidationMessageDisplayed();
         }
 
         /*[Then(@"Message text saying that Date is empty")]

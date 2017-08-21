@@ -104,7 +104,7 @@ namespace Expedia.com.Pages
             searchButton.Click();
         }
 
-        public void ValidationMessage()
+        public void IsValidationMessageDisplayed()
         {
             Helper.HighlightIWebElement(alertMessage, pageDriver);
             Assert.IsTrue(alertMessage.Displayed);

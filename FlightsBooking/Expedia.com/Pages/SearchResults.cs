@@ -86,7 +86,7 @@ namespace Expedia.com.Pages
             Assert.AreEqual(searchTabTitle + pageTitleSufix, pageDriver.Title);
         }
 
-        private void CheckSortingBy(string sortingBy)
+        private void CheckSortingByDropdownValue(string sortingBy)
         {
             Helper.HighlightIWebElement(dropdownSort, pageDriver);
             Assert.IsTrue(SearchSort.SelectedOption.Text == sortingBy);
@@ -104,7 +104,7 @@ namespace Expedia.com.Pages
 
         public void ClickFlightSelectForCheepestFlight()
         {
-            CheckSortingBy(sortOptionPriceLowest);
+            CheckSortingByDropdownValue(sortOptionPriceLowest);
             CollectCheepestFlightInfo();
             SelectButton.Click();
         }
@@ -128,7 +128,7 @@ namespace Expedia.com.Pages
         public void CompareDates()
         {
             Helper.HighlightIWebElement(flightDate, pageDriver);
-            Assert.AreEqual(Helper.ConvertDate(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
+            Assert.AreEqual(Helper.ConvertStringToDateFormat(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
             Helper.UnhighlightIWebElement(flightDate, pageDriver);
         }
 

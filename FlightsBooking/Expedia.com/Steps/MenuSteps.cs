@@ -29,7 +29,7 @@ namespace Expedia.com.Steps
                     menu.ClickAccountButton();
                     break;
                 case "Sign in":
-                    menu.ClickSignIn();
+                    menu.ClickSignInButton();
                     break;
                 case "My Lists":
                     menu.ClickMyListsButton();

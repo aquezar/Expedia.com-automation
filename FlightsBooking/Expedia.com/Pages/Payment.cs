@@ -85,7 +85,7 @@ namespace Expedia.com.Pages
         public void CheckTripDate(string date)
         {
             Helper.HighlightIWebElement(flightDate, pageDriver);
-            Assert.AreEqual(Helper.ConvertDate(date, '/', "ddd, MMM d"), flightDate.Text);
+            Assert.AreEqual(Helper.ConvertStringToDateFormat(date, '/', "ddd, MMM d"), flightDate.Text);
             Helper.UnhighlightIWebElement(flightDate, pageDriver);
         }
 
@@ -135,7 +135,7 @@ namespace Expedia.com.Pages
             Helper.UnhighlightIWebElement(flightStops, pageDriver);
         }
 
-        private double ConvertTotalPrice()
+        private double ConvertTotalPriceToDouble()
         {
             double convertedTotalPrice;
             double.TryParse(totalPrice.Text.Substring(1), out convertedTotalPrice);
@@ -151,7 +151,7 @@ namespace Expedia.com.Pages
                 double.TryParse(tripSummary[i].Text.Substring(1), out priceOfTicket);
                 priceOfTrip += priceOfTicket;                
             }
-            Assert.IsTrue(ConvertTotalPrice() - priceOfTrip <= 0.01);
+            Assert.IsTrue(ConvertTotalPriceToDouble() - priceOfTrip <= 0.01);
         }
     }
 }

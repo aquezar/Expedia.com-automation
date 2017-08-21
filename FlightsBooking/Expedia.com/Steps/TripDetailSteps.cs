@@ -36,19 +36,19 @@ namespace Expedia.com
                     switch (checkParameter)
                     {
                         case "the departing and arrival airports":
-                            details.CompareDepartureAndDestination(flight);
+                            details.CheckTicketParameter("Departure and arrival airports", flight);
                             break;
                         case "departure time":
-                            details.CompareDepartureTime(flight);
+                            details.CheckTicketParameter("Departure time", flight);
                             break;
                         case "arrival time":
-                            details.CompareArrivalTime(flight);
+                            details.CheckTicketParameter("Arrival time", flight);
                             break;
                         case "duration of flight":
-                            details.CompareFlightDuration(flight);
+                            details.CheckTicketParameter("Flight duration", flight);
                             break;
                         case "tecket price":
-                            details.CompareTicketsPricesInTripSummary(flight);
+                            details.CheckTicketParameter("Ticket price", flight);
                             break;
                         default:
                             Console.WriteLine("Checking parameter for ticket is incorrect");
@@ -89,7 +89,7 @@ namespace Expedia.com
             {
                 details = new TripDetails(driver, scenarioContext);
             }
-            details.TripDetailsPageOpened();
+            details.WhenTripDetailsPageOpened();
         }
 
 
