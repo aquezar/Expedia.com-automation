@@ -1,5 +1,4 @@
-﻿@One Way search
-@integration
+﻿@integration
 Feature: One Way search
 	In order to book my flight for one way
 	As a user
@@ -25,7 +24,7 @@ Scenario Outline: Cheepest flight
 	And I check 'departure time'
 	And I check 'arrival time'
 	And I check 'duration of flight'
-	And I check 'tecket price'
+	And I check 'ticket price'
 	When I confirm flight
 	Then Payment page opens 
 	And I open Flight details
@@ -65,7 +64,7 @@ Scenario Outline: Nonstop cheepest flight
 	And I check 'departure time'
 	And I check 'arrival time'
 	And I check 'duration of flight'
-	And I check 'tecket price'
+	And I check 'ticket price'
 	When I confirm flight
 	Then Payment page opens 
 	And I open Flight details

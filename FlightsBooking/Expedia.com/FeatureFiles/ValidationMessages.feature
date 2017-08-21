@@ -1,4 +1,5 @@
 ﻿@unit
+@smoke
 Feature: Validation messages
 	In order to fix mistakes when searching flights
 	As a user

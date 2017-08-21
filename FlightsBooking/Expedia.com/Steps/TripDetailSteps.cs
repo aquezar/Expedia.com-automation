@@ -47,7 +47,7 @@ namespace Expedia.com
                         case "duration of flight":
                             details.CheckTicketParameter("Flight duration", flight);
                             break;
-                        case "tecket price":
+                        case "ticket price":
                             details.CheckTicketParameter("Ticket price", flight);
                             break;
                         default:

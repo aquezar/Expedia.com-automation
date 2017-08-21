@@ -1,5 +1,4 @@
-﻿@Change departure date
-@smoke
+﻿@smoke
 Feature: Change departure date in Search results
 	In order to change departure date
 	As a user

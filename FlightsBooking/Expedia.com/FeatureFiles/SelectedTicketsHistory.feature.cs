@@ -125,7 +125,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 32
  testRunner.And("I check \'duration of flight\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
- testRunner.And("I check \'tecket price\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I check \'ticket price\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

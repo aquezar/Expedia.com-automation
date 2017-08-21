@@ -30,7 +30,7 @@ Scenario Outline: Login, perform search and check history
 	And I check 'departure time'
 	And I check 'arrival time'
 	And I check 'duration of flight'
-	And I check 'tecket price'
+	And I check 'ticket price'
  
  Examples: 
 | departureAirport            | arrivalAirport                | date       | passangers | searchResults      |
