@@ -104,16 +104,34 @@ namespace Expedia.com
             results.CompareDates();
         }
 
-        [Given(@"I select Nonstop checkbox in filters")]
-        public void GivenISelectNonstopCheckboxInFilters()
+        [Given(@"I select '(.*)' checkbox in filters")]
+        public void GivenISelectNonstopCheckboxInFilters(string stopsFilter)
         {
-            results.SelectNonstopFilter();
+            switch (stopsFilter)
+            {
+                case "Nonstop":
+                    results.SelectNonstopFilter();
+                    break;
+                default:
+                    Console.WriteLine("Ther's no such option in Stops filter");
+                    break;
+            }
+            
         }
 
-        [Given(@"I check that only Nonstop flights are displayed")]
-        public void GivenICheckThatOnlyNonstopFlightsAreDisplayed()
+        [Given(@"I check that only '(.*)' flights are displayed")]
+        public void GivenICheckThatOnlyNonstopFlightsAreDisplayed(string flightStops)
         {
-            results.OnlyNonstopFlightsDisplayed();
+            switch (flightStops)
+            {
+                case "Nonstop":
+                    results.OnlyNonstopFlightsDisplayed();
+                    break;
+                default:
+                    Console.WriteLine("There's no such value for flight stops");
+                    break;
+            }
+            
         }
 
     }

@@ -54,8 +54,8 @@ Scenario Outline: Nonstop cheepest flight
 	And I choose number of <passangers> in Adults dropdown
 	And I click Search button
 	And After <searchResults> page opens
-	And I select Nonstop checkbox in filters
-	And I check that only Nonstop flights are displayed
+	And I select 'Nonstop' checkbox in filters
+	And I check that only 'Nonstop' flights are displayed
 	And I check correctness of search results by checking <fromAirport> and <toAirport>
 	And I check departure date for search results
 	And I select 'cheepest' ticket
