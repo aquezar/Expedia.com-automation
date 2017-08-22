@@ -36,7 +36,7 @@ namespace Expedia.com
             switch (lightweightMode)
             {
                 case "False":
-                    payment.ClickFlightDetails();
+                    payment.OpenFlightDetails();
                     break;
                 case "True":
                     break;

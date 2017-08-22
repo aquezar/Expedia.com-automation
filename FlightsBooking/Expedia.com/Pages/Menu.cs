@@ -48,7 +48,6 @@ namespace Expedia.com.Pages
         public void ClickMyListsButton()
         {
             myListsButton.Click();
-            //Helper.CloseCommercial(pageDriver);
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Expedia.com.Pages
         }
 
         //Opening Flight Details section to ckheck flight information
-        public void ClickFlightDetails()
+        public void OpenFlightDetails()
         {
             flightDetailsLink.Click();
             WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(5));

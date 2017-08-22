@@ -20,6 +20,7 @@ namespace Expedia.com.Pages
         private string pageTitleSufix = " | Expedia";
         private string sortOptionPriceLowest = "Price (Lowest)";
         private string nonstopFlights = "Nonstop";
+        private bool nonstopPresent;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='sortBar']/div/fieldset/label/select")]
         private IWebElement dropdownSort;
@@ -143,17 +144,7 @@ namespace Expedia.com.Pages
         //Selecting Nonstop option in Stops filter if present
         public void SelectNonstopFilter()
         {
-            /*if (filterStops[0].Text.Contains("Nonstop"))
-            {
-                filterStops[0].Click();
-            }
-            else
-            {
-                Console.WriteLine("There's no Nonstop flights for selected route\\date.");
-                return;
-            }*/
-            bool nonstopPresent;
-            if (filterStops[0].Text.Contains("Nonstop"))
+            if (filterStops[0].Text.Contains(nonstopFlights))
             {
                 nonstopPresent = true;
             }
@@ -177,30 +168,6 @@ namespace Expedia.com.Pages
         //Checking that displayed tickets are for flights without stops
         public void OnlyNonstopFlightsDisplayed()
         {
-            /*if (filterStops[0].Text.Contains("Nonstop"))
-            {
-                foreach (IWebElement flight in resultsListStops)
-                {
-                    Helper.HighlightIWebElement(flight, pageDriver);
-                    Assert.AreEqual(nonstopFlights, flight.Text);
-                    Helper.UnhighlightIWebElement(flight, pageDriver);
-                }
-            }
-            else
-            {
-                Console.WriteLine("There's no Nonstop flights for selected route\\date.");
-                return;
-            }  */
-            bool nonstopPresent;
-            if (filterStops[0].Text.Contains("Nonstop"))
-            {
-                nonstopPresent = true;
-            }
-            else
-            {
-                nonstopPresent = false;
-            }
-
             switch (nonstopPresent)
             {
                 case true:

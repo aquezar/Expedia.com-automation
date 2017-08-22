@@ -67,7 +67,7 @@ namespace Expedia.com.Pages
         //Click Continue Booking button or Book button(depends on flight)
         public void ClickContinueBookingButton()
         {
-            if (Helper.IsElementPresent(continueBookingButton))
+            if (Helper.IsIWebElementPresent(continueBookingButton))
             {
                 continueBookingButton.Click();
             }
@@ -138,12 +138,10 @@ namespace Expedia.com.Pages
                         ticketsPricesList.Add(priceForPassanger);
                         priceOfTrip += ticketPrice;
                     }
-                    var a = ConvertTotalPriceToDouble();
-                    Assert.IsTrue(a - priceOfTrip <= 2.0);
+                    var totalPriceDouble = ConvertTotalPriceToDouble();
+                    Assert.IsTrue(totalPriceDouble - priceOfTrip <= 2.0);
                     scenarioContext["ticketPrice"] = ticketsPricesList;
                     break;
-
-
             }
         }
 

@@ -11,6 +11,9 @@ namespace Expedia.com.Framework
     {
         private static string extendedLogging = ConfigurationManager.AppSettings["ExtendedLogging"];
         public static string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
+
+        //Converting date from string to DateTime
+        //and returning it as string in specified format 
         public static string ConvertStringToDateFormat(string date, char splitSymbol, string format)
         {
             string departureDate;
@@ -52,7 +55,8 @@ namespace Expedia.com.Framework
             }
         }
 
-        public static bool IsElementPresent(IWebElement element)
+        //Checks that IWebElement present on page
+        public static bool IsIWebElementPresent(IWebElement element)
         {
             try
             {
@@ -65,6 +69,8 @@ namespace Expedia.com.Framework
             }
         }
 
+        //Closing commercial window.
+        //Used to close commercial in come cases when clicking and switching to other tabs
         public static void CloseCommercialWindow(IWebDriver driver)
         {
             string commercialTabHandle = driver.WindowHandles.Last();
