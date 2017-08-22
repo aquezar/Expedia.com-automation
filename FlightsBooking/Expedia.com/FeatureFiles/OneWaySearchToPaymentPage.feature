@@ -39,7 +39,7 @@ Scenario Outline: Cheepest flight
 
 Examples: 
 | departureAirport                           | arrivalAirport                                    | date       | passangers | searchResults      | fromAirport | toAirport |
-| London, England, UK (LHR-Heathrow)         | Fiumicino Airport (FCO), Italy                    | 11/10/2017 | 3          | LHR to FCO Flights | LH-         | FCO       |
+| London, England, UK (LHR-Heathrow)         | Fiumicino Airport (FCO), Italy                    | 11/10/2017 | 3          | LHR to FCO Flights | LHR         | FCO       |
 | Krakow, Poland (KRK-John Paul II - Balice) | Manchester Airport (MAN), England, United Kingdom | 11/22/2017 | 1          | KRK to MAN Flights | KRK         | MAN       |
 | New York, NY (JFK-John F. Kennedy Intl.)   | Vancouver, BC, Canada (YVR-Vancouver Intl.)       | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |
 	

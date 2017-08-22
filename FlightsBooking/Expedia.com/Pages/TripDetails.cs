@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -141,6 +142,9 @@ namespace Expedia.com.Pages
                     var totalPriceDouble = ConvertTotalPriceToDouble();
                     Assert.IsTrue(totalPriceDouble - priceOfTrip <= 2.0);
                     scenarioContext["ticketPrice"] = ticketsPricesList;
+                    break;
+                default:
+                    Console.WriteLine("Checking parameter " + parameter.ToUpper() + " for ticket is incorrect");
                     break;
             }
         }

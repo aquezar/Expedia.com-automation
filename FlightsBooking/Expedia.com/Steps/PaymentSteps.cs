@@ -52,13 +52,13 @@ namespace Expedia.com
                     switch (checkingParameter)
                     {
                         case "flight":
-                            payment.CheckTripDate(value);
+                            payment.CheckTicketParameter("Flight date", value);
                             break;
                         case "departing":
-                            payment.CheckDepartureAirport(value);
+                            payment.CheckTicketParameter("Departure airport", value);
                             break;
                         case "arrival":
-                            payment.CheckArrivalAirport(value);
+                            payment.CheckTicketParameter("Arrival airport", value);
                             break;
                         default:
                             Console.WriteLine("Checking parameter " + checkingParameter.ToUpper() + " for ticket is incorrect");
@@ -71,22 +71,22 @@ namespace Expedia.com
         }
 
         [Then(@"I check '(.*)' on Payment page")]
-        public void ThenICheckOnPaymentPage(string chekingParameter)
+        public void ThenICheckOnPaymentPage(string checkingParameter)
         {
             switch (lightweightMode)
             {
                 case "False":
                     flight = (List<string>)scenarioContext["flight"];
-                    switch (chekingParameter)
+                    switch (checkingParameter)
                     {
                         case "departure time":
-                            payment.CheckDepartureTime(flight);
+                            payment.CheckTicketParameter("Departure time", flight);
                             break;
                         case "time of arrival":
-                            payment.CheckArrivalTime(flight);
+                            payment.CheckTicketParameter("Arrival time", flight);
                             break;
                         case "duration of flight":
-                            payment.CheckFlightDuration(flight);
+                            payment.CheckTicketParameter("Flight duration", flight);
                             break;
                         case "ticket price for each passanger":
                             ticketPrice = (List<double>)scenarioContext["ticketPrice"];
@@ -96,7 +96,7 @@ namespace Expedia.com
                             payment.CheckTotalPrice();
                             break;
                         default:
-                            Console.WriteLine("Checking parameter " + chekingParameter.ToUpper() + " for ticket is incorrect");
+                            Console.WriteLine("Checking parameter " + checkingParameter.ToUpper() + " for ticket is incorrect");
                             break;
                     }
                     break;

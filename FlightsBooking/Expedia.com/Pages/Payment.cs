@@ -86,7 +86,68 @@ namespace Expedia.com.Pages
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(departureTitleFlightDetailsLocator)));
         }
 
-        public void CheckTripDate(string date)
+        public void CheckTicketParameter(string parameterToCheck, string value)
+        {
+            switch (parameterToCheck)
+            {
+                case "Flight date":
+                    Helper.HighlightIWebElement(flightDate, pageDriver);
+                    Assert.AreEqual(Helper.ConvertStringToDateFormat(value, '/', "ddd, MMM d"), flightDate.Text);
+                    Helper.UnhighlightIWebElement(flightDate, pageDriver);
+                    break;
+                case "Departure airport":
+                    Helper.HighlightIWebElement(departureAirportCode, pageDriver);
+                    Assert.AreEqual(value, departureAirportCode.Text);
+                    Helper.UnhighlightIWebElement(departureAirportCode, pageDriver);
+                    break;
+                case "Arrival airport":
+                    Helper.HighlightIWebElement(arrivalAirportCode, pageDriver);
+                    Assert.AreEqual(value, arrivalAirportCode.Text);
+                    Helper.UnhighlightIWebElement(arrivalAirportCode, pageDriver);
+                    break;
+                default:
+                    Console.WriteLine("Checking parameter " + parameterToCheck.ToUpper() + " for ticket is incorrect");
+                    break;
+            }
+        }
+
+        public void CheckTicketParameter(string parameterToCheck, List<string> flightInfo)
+        {
+            switch (parameterToCheck)
+            {
+                case "Departure time":
+                    Helper.HighlightIWebElement(departureTime, pageDriver);
+                    //Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
+                    Assert.AreEqual(flightInfo[2], departureTime.Text);
+                    Helper.UnhighlightIWebElement(departureTime, pageDriver);
+                    break;
+                case "Arrival time":
+                    Helper.HighlightIWebElement(arrivalTime, pageDriver);
+                    //Assert.AreEqual(flightInfo[3], (arrivalTime.Text.Remove(arrivalTime.Text.Length - 1)));
+                    Assert.AreEqual(flightInfo[3], arrivalTime.Text);
+                    Helper.UnhighlightIWebElement(arrivalTime, pageDriver);
+                    break;
+                case "Flight duration":
+                    string flightDurationAndStops;
+                    if (flightStops.Text == flightNonstop)
+                    {
+                        flightDurationAndStops = flightDuration.Text + " " + flightStops.Text;
+                    }
+                    else
+                    {
+                        flightDurationAndStops = flightDuration.Text + " " + (flightStops.Text.Remove(flightStops.Text.Length - 1));
+                    }
+                    Helper.HighlightIWebElement(flightStops, pageDriver);
+                    Assert.AreEqual(flightInfo[4], flightDurationAndStops);
+                    Helper.UnhighlightIWebElement(flightStops, pageDriver);
+                    break;
+                default:
+                    Console.WriteLine("Checking parameter " + parameterToCheck.ToUpper() + " for ticket is incorrect");
+                    break;
+            }
+        }
+
+        /*public void CheckFlightDate(string date)
         {
             Helper.HighlightIWebElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertStringToDateFormat(date, '/', "ddd, MMM d"), flightDate.Text);
@@ -98,17 +159,17 @@ namespace Expedia.com.Pages
             Helper.HighlightIWebElement(departureAirportCode, pageDriver);
             Assert.AreEqual(fromAirportCode, departureAirportCode.Text);
             Helper.UnhighlightIWebElement(departureAirportCode, pageDriver);
-        }
+        }*/
 
-        public void CheckDepartureTime(List<string> flightInfo)
+        /*public void CheckDepartureTime(List<string> flightInfo)
         {
             Helper.HighlightIWebElement(departureTime, pageDriver);
             //Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
             Assert.AreEqual(flightInfo[2], departureTime.Text);
             Helper.UnhighlightIWebElement(departureTime, pageDriver);
-        }
+        }*/
 
-        public void CheckArrivalAirport(string toAirportCode)
+        /*public void CheckArrivalAirport(string toAirportCode)
         {
             Helper.HighlightIWebElement(arrivalAirportCode, pageDriver);
             Assert.AreEqual(toAirportCode, arrivalAirportCode.Text);
@@ -137,7 +198,7 @@ namespace Expedia.com.Pages
             Helper.HighlightIWebElement(flightStops, pageDriver);
             Assert.AreEqual(flightInfo[4], flightDurationAndStops);
             Helper.UnhighlightIWebElement(flightStops, pageDriver);
-        }
+        }*/
 
         //Converting Total price from string to double for checking total price against sum of prices for each ticket
         private double ConvertTotalPriceToDouble()
