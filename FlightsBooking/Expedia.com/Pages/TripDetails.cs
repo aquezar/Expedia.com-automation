@@ -64,6 +64,7 @@ namespace Expedia.com.Pages
             this.scenarioContext = scenarioContext;
         }
 
+        //Click Continue Booking button or Book button(depends on flight)
         public void ClickContinueBookingButton()
         {
             if (Helper.IsElementPresent(continueBookingButton))
@@ -76,26 +77,7 @@ namespace Expedia.com.Pages
             }                         
         }
 
-        /*public void CompareTicketsPricesInTripSummary(List<string> flightInfo)
-        {
-            List<double> ticketsPricesList = new List<double>();
-            double priceOfTrip = 0.0;
-            //int passangers = (int)scenarioContext["passangers"];
-            foreach (var item in ticketPriceForPassanger)
-            {
-                double ticketPrice;
-                double.TryParse(flightInfo[1].Substring(1), out ticketPrice);
-                double priceForPassanger;
-                double.TryParse(item.GetAttribute("textContent").Substring(1), out priceForPassanger);
-                Assert.IsTrue((priceForPassanger - ticketPrice) <= 1.0);
-                ticketsPricesList.Add(priceForPassanger);
-                priceOfTrip += ticketPrice;
-            }
-            var a = ConvertTotalPriceToDouble();
-            Assert.IsTrue(a - priceOfTrip <= 2.0);
-            scenarioContext["ticketPrice"] = ticketsPricesList;
-        }*/
-
+        //Converting string to double to check total prica against sum of prices for separate ticket
         private double ConvertTotalPriceToDouble()
         {
             double convertedTotalPrice;
@@ -108,22 +90,14 @@ namespace Expedia.com.Pages
             pageDriver.SwitchTo().Window(pageDriver.WindowHandles.Last());
         }
 
-        /*public void CompareDepartureAndDestinationAirports(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(flightFromAirportCode,pageDriver);
-            Helper.HighlightIWebElement(flightToAirportCode, pageDriver);
-            Assert.AreEqual(flightInfo[0], (flightFromAirportCode.Text + " - " + flightToAirportCode.Text));
-            Helper.UnhighlightIWebElement(flightFromAirportCode, pageDriver);
-            Helper.UnhighlightIWebElement(flightToAirportCode, pageDriver);
-        }*/
-
-        public void CompareDates(string date)
+        public void CheckDepartureDate(string date)
         {
             Helper.HighlightIWebElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertStringToDateFormat(date, '/', "ddd, MMM d"), flightDate.Text);
             Helper.UnhighlightIWebElement(flightDate, pageDriver);
         }
 
+        //Checking ticket fields
         public void CheckTicketParameter(string parameter, List<string> flightInfo)
         {
             switch (parameter)
@@ -172,33 +146,12 @@ namespace Expedia.com.Pages
 
             }
         }
-        /*public void CompareDepartureTime(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(flightDepartureTime, pageDriver);
-            //Assert.AreEqual(flightInfo[2], (flightDepartureTime.Text.Remove(flightDepartureTime.Text.Length - 1)));
-            Assert.AreEqual(flightInfo[2], flightDepartureTime.Text);
-            Helper.UnhighlightIWebElement(flightDepartureTime, pageDriver);
-        }
 
-        public void CompareArrivalTime(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(flightArrivalTime, pageDriver);
-            //Assert.AreEqual(flightInfo[3], (flightArrivalTime.Text.Remove(flightArrivalTime.Text.Length -1)));
-            Assert.AreEqual(flightInfo[3], flightArrivalTime.Text);
-            Helper.UnhighlightIWebElement(flightArrivalTime, pageDriver);
-        }
-
-        public void CompareFlightDuration(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(flightDuration, pageDriver);
-            Assert.AreEqual(flightInfo[4], flightDuration.Text);
-            Helper.UnhighlightIWebElement(flightDuration, pageDriver);
-        }*/
-
-        public void WhenTripDetailsPageOpened()
+        public bool IsTripDetailsPageOpened()
         {
             SwitchToTripDetailsTab();
             Assert.AreEqual(pageTitle, pageDriver.Title);
+            return true;
         }
 
     }

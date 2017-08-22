@@ -27,7 +27,7 @@ namespace Expedia.com
         public void ThenPaymentPageOpens()
         {
             payment = new Payment(driver, scenarioContext);
-            payment.PaymentPageOpens();       
+            payment.IsPaymentPageOpened();       
         }
 
         [Then(@"I open Flight details")]
@@ -115,7 +115,7 @@ namespace Expedia.com
                             break;
                         case "ticket price for each passanger":
                             ticketPrice = (List<double>)scenarioContext["ticketPrice"];
-                            payment.TripSummaryCheck(ticketPrice);
+                            payment.CheckTripSummary(ticketPrice);
                             break;
                         case "total price":
                             payment.CheckTotalPrice();

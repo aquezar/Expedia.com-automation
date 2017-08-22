@@ -69,6 +69,7 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Login, perform search and check history")]
         [NUnit.Framework.TestCaseAttribute("Berlin, Germany (TXL-Tegel)", "Riga, Latvia (RIX-Riga Intl.)", "12/22/2017", "1", "TXL to RIX Flights", null)]
+        [NUnit.Framework.TestCaseAttribute("Amsterdam, Netherlands (AMRiga, Latvia (RIX-Riga Intl.)S-Schiphol)", "Barcelona, Spain (BCN-Barcelona Intl.)", "12/26/2017", "1", "AMS to BCN Flights", null)]
         public virtual void LoginPerformSearchAndCheckHistory(string departureAirport, string arrivalAirport, string date, string passangers, string searchResults, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login, perform search and check history", exampleTags);

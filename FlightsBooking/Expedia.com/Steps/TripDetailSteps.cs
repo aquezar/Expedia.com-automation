@@ -68,7 +68,7 @@ namespace Expedia.com
             switch (lightweightMode)
             {
                 case "False":
-                    details.CompareDates(date);
+                    details.CheckDepartureDate(date);
                     break;
                 case "True":
                     break;
@@ -89,7 +89,7 @@ namespace Expedia.com
             {
                 details = new TripDetails(driver, scenarioContext);
             }
-            details.WhenTripDetailsPageOpened();
+            details.IsTripDetailsPageOpened();
         }
 
 

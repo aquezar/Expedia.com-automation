@@ -116,13 +116,6 @@ namespace Expedia.com.Pages
             Helper.HighlightIWebElement(departureDateValidator, pageDriver);
             Assert.AreEqual(departureDateValidator.Text, validationMessage);
             Helper.UnhighlightIWebElement(departureDateValidator, pageDriver);
-
-            //Helper.HighlightElement(alertMessage, pageDriver);
-            //var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //string dir = Path.GetDirectoryName(location) + "\\success_tests\\" + scenarioContext.ScenarioInfo.Title + "\\";
-            //string screenshotName = DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss-ff") + "_" + ConfigurationManager.AppSettings["Browser"] + ".png";
-            //Settings.TakeScreenShot(pageDriver, dir);
-            //Console.WriteLine("Screenshot created ->" + dir + screenshotName);
         }
 
         public void ClearFlyingToField()

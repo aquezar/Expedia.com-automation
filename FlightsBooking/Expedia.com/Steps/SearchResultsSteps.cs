@@ -35,7 +35,7 @@ namespace Expedia.com
             switch (lightweightMode)
             {
                 case "False":
-                    results.CompareDates();
+                    results.CheckDepartureDate();
                     break;
                 case "True":
                     break;
@@ -49,7 +49,7 @@ namespace Expedia.com
             switch (lightweightMode)
             {
                 case "False":
-                    results.CheckSearchResults(p0, p1);
+                    results.CheckSearchResultsDepartureAndArrival(p0, p1);
                     break;
                 case "True":
                     break;
@@ -101,7 +101,7 @@ namespace Expedia.com
         [Then(@"Flights for new date are shown")]
         public void ThenFlightsForNewDateAreShown()
         {
-            results.CompareDates();
+            results.CheckDepartureDate();
         }
 
         [Given(@"I select '(.*)' checkbox in filters")]

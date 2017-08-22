@@ -30,7 +30,7 @@ namespace Expedia.com.Pages
         }
 
         [FindsBy(How = How.XPath, Using = "//button[contains(@class, 'btn-secondary btn-action t-select-btn')]")]
-        private IWebElement SelectButton { get; set; }
+        private IWebElement selectButton { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//li[contains(@id, 'flight-module-')]//div[@data-test-id='airports']")]
         private IList<IWebElement> flightsListRoute { get; set; }
@@ -86,12 +86,15 @@ namespace Expedia.com.Pages
             Assert.AreEqual(searchTabTitle + pageTitleSufix, pageDriver.Title);
         }
 
+        //Checking that sorting option is set to sortingBy value(Price(Lowest), Duration(Shortest), etc.)
         private void CheckSortingByDropdownValue(string sortingBy)
         {
             Helper.HighlightIWebElement(dropdownSort, pageDriver);
             Assert.IsTrue(SearchSort.SelectedOption.Text == sortingBy);
             Helper.UnhighlightIWebElement(dropdownSort, pageDriver);
         }
+
+        //Collecting info about cheepest ticket and pushing it to list, which added to context for further checks on Trip details and Payment pages
         private void CollectCheepestFlightInfo()
         {
             selectedFlight.Add(selectedFlightRoute.Text);
@@ -106,10 +109,10 @@ namespace Expedia.com.Pages
         {
             CheckSortingByDropdownValue(sortOptionPriceLowest);
             CollectCheepestFlightInfo();
-            SelectButton.Click();
+            selectButton.Click();
         }
 
-        public void CheckSearchResults(string fromAirportCode, string toAirportCode)
+        public void CheckSearchResultsDepartureAndArrival(string fromAirportCode, string toAirportCode)
         {
             for(int i = 0; i <= flightsListRoute.Count-1; i++)
             {
@@ -125,7 +128,7 @@ namespace Expedia.com.Pages
             departureDatePicker.SendKeys(date);
         }
        
-        public void CompareDates()
+        public void CheckDepartureDate()
         {
             Helper.HighlightIWebElement(flightDate, pageDriver);
             Assert.AreEqual(Helper.ConvertStringToDateFormat(departureDatePicker.GetAttribute("value"), '/', "ddd, MMM d"), flightDate.Text);
@@ -137,6 +140,7 @@ namespace Expedia.com.Pages
             searchButton.Click();
         }
 
+        //Selecting Nonstop option in Stops filter if present
         public void SelectNonstopFilter()
         {
             if (filterStops[0].Text.Contains("Nonstop"))
@@ -150,7 +154,8 @@ namespace Expedia.com.Pages
             }
             Helper.CloseCommercialWindow(pageDriver);               
         }
-
+        
+        //Checking that displayed tickets are for flights without stops
         public void OnlyNonstopFlightsDisplayed()
         {
             if (filterStops[0].Text.Contains("Nonstop"))

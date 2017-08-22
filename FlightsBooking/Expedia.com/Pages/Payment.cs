@@ -55,15 +55,18 @@ namespace Expedia.com.Pages
             this.scenarioContext = scenarioContext;
         }
 
-        public void PaymentPageOpens()
+        //Checking that Payment page opened
+        public bool IsPaymentPageOpened()
         {
             IJavaScriptExecutor js = pageDriver as IJavaScriptExecutor;
             string title = (string)js.ExecuteScript("return document.title");
             Assert.IsTrue(title.Equals(pageTitle));
             //Assert.IsTrue(pageDriver.Title.Equals(pageTitle));
+            return true;
         }
 
-        public void TripSummaryCheck(List<double> ticketPrice)
+        //Checking every ticket price
+        public void CheckTripSummary(List<double> ticketPrice)
         {
             for (int i = 0; i <= tripSummary.Count - 1; i++)
             {
@@ -75,6 +78,7 @@ namespace Expedia.com.Pages
             }
         }
 
+        //Opening Flight Details section to ckheck flight information
         public void ClickFlightDetails()
         {
             flightDetails.Click();
@@ -135,6 +139,7 @@ namespace Expedia.com.Pages
             Helper.UnhighlightIWebElement(flightStops, pageDriver);
         }
 
+        //Converting Total price from string to double for checking total price against sum of prices for each ticket
         private double ConvertTotalPriceToDouble()
         {
             double convertedTotalPrice;

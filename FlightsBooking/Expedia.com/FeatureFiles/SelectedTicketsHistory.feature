@@ -33,5 +33,6 @@ Scenario Outline: Login, perform search and check history
 	And I check 'ticket price'
  
  Examples: 
-| departureAirport            | arrivalAirport                | date       | passangers | searchResults      |
-| Berlin, Germany (TXL-Tegel) | Riga, Latvia (RIX-Riga Intl.) | 12/22/2017 | 1          | TXL to RIX Flights |
+| departureAirport                                                   | arrivalAirport                         | date       | passangers | searchResults      |
+| Berlin, Germany (TXL-Tegel)                                        | Riga, Latvia (RIX-Riga Intl.)          | 12/22/2017 | 1          | TXL to RIX Flights |
+| Amsterdam, Netherlands (AMRiga, Latvia (RIX-Riga Intl.)S-Schiphol) | Barcelona, Spain (BCN-Barcelona Intl.) | 12/26/2017 | 1          | AMS to BCN Flights |
