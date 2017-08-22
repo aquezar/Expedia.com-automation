@@ -95,7 +95,8 @@ namespace Expedia.com.Pages
 
         public void SelectNumberOfAdults(int passangers)
         {
-            adultsDropdown.SelectByIndex(passangers + 1);
+            adultsDropdown.SelectByText(passangers.ToString());
+            //adultsDropdown.SelectByIndex(passangers + 1);
             scenarioContext.Add("passangers", passangers);
         }
 
