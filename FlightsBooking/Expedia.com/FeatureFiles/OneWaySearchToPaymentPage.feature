@@ -91,7 +91,7 @@ Scenario Outline: Search without Flying to field value
 	And I navigate to 'Flights' tab
 	And I navigate to 'OneWay' tab
 	And I enter <departureAirport> in 'Flying from' field
-	And I leave Flying to field empty
+	And I leave 'Flying to' field empty
 	And I enter <date> in 'Departing' field 
 	And I choose number of <passangers> in Adults dropdown
 	When I click Search button
@@ -109,7 +109,7 @@ Scenario Outline: Search without Flying from field value
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab
 	And I navigate to 'OneWay' tab
-	And I leave Flying from field empty
+	And I leave 'Flying from' field empty
 	And I enter <arrivalAirport> in 'Flying to' field
 	And I enter <date> in 'Departing' field 
 	And I choose number of <passangers> in Adults dropdown

@@ -19,10 +19,10 @@ namespace Expedia.com.Pages
         private string flightNonstop = "Nonstop";
 
         [FindsBy(How = How.XPath, Using = ".//span[contains(@id, 'totalPriceForPassenger')]")]
-        private IList<IWebElement> tripSummary { get; set; }
+        private IList<IWebElement> ticketPricesForEachPassanger { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//a[@data-toggle-text='One Way Flight']")]
-        private IWebElement flightDetails { get; set; }
+        private IWebElement flightDetailsLink { get; set; }
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='trip-summary']//div[@class='date-info']")] 
         private IWebElement flightDate { get; set; }
@@ -68,20 +68,20 @@ namespace Expedia.com.Pages
         //Checking every ticket price
         public void CheckTripSummary(List<double> ticketPrice)
         {
-            for (int i = 0; i <= tripSummary.Count - 1; i++)
+            for (int i = 0; i <= ticketPricesForEachPassanger.Count - 1; i++)
             {
                 double priceForPassanger;
-                double.TryParse(tripSummary[i].Text.Substring(1), out priceForPassanger);
-                Helper.HighlightIWebElement(tripSummary[i], pageDriver);
+                double.TryParse(ticketPricesForEachPassanger[i].Text.Substring(1), out priceForPassanger);
+                Helper.HighlightIWebElement(ticketPricesForEachPassanger[i], pageDriver);
                 Assert.AreEqual(ticketPrice[i], priceForPassanger);
-                Helper.UnhighlightIWebElement(tripSummary[i], pageDriver);
+                Helper.UnhighlightIWebElement(ticketPricesForEachPassanger[i], pageDriver);
             }
         }
 
         //Opening Flight Details section to ckheck flight information
         public void ClickFlightDetails()
         {
-            flightDetails.Click();
+            flightDetailsLink.Click();
             WebDriverWait wait = new WebDriverWait(pageDriver, TimeSpan.FromSeconds(5));
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(departureTitleFlightDetailsLocator)));
         }
@@ -150,10 +150,10 @@ namespace Expedia.com.Pages
         public void CheckTotalPrice()
         {
             double priceOfTrip = 0.0;
-            for (int i = 0; i <= tripSummary.Count - 1; i++)
+            for (int i = 0; i <= ticketPricesForEachPassanger.Count - 1; i++)
             {
                 double priceOfTicket;  
-                double.TryParse(tripSummary[i].Text.Substring(1), out priceOfTicket);
+                double.TryParse(ticketPricesForEachPassanger[i].Text.Substring(1), out priceOfTicket);
                 priceOfTrip += priceOfTicket;                
             }
             Assert.IsTrue(ConvertTotalPriceToDouble() - priceOfTrip <= 0.01);

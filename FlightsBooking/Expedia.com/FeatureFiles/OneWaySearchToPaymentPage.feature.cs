@@ -257,7 +257,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 93
  testRunner.And(string.Format("I enter {0} in \'Flying from\' field", departureAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 94
- testRunner.And("I leave Flying to field empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I leave \'Flying to\' field empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 95
  testRunner.And(string.Format("I enter {0} in \'Departing\' field", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 96
@@ -297,7 +297,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 111
  testRunner.And("I navigate to \'OneWay\' tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 112
- testRunner.And("I leave Flying from field empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I leave \'Flying from\' field empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 113
  testRunner.And(string.Format("I enter {0} in \'Flying to\' field", arrivalAirport), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 114

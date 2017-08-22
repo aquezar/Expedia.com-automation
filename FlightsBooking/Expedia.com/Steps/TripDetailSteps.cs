@@ -51,7 +51,7 @@ namespace Expedia.com
                             details.CheckTicketParameter("Ticket price", flight);
                             break;
                         default:
-                            Console.WriteLine("Checking parameter for ticket is incorrect");
+                            Console.WriteLine("Checking parameter " + checkParameter.ToUpper() + " for ticket is incorrect");
                             break;
                     }
                     break;

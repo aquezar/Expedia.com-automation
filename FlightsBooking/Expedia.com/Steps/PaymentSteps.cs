@@ -61,7 +61,7 @@ namespace Expedia.com
                             payment.CheckArrivalAirport(value);
                             break;
                         default:
-                            Console.WriteLine("Checking parameter for ticket is incorrect");
+                            Console.WriteLine("Checking parameter " + checkingParameter.ToUpper() + " for ticket is incorrect");
                             break;
                     }
                     break;
@@ -69,31 +69,6 @@ namespace Expedia.com
                     break;
             }
         }
-        /*[Then(@"I check flight (.*)")]
-        public void ThenICheckFlightDate(string p0)
-        {
-            switch (lightweightMode)
-            {
-                case "False":
-                    payment.CheckTripDate(p0);
-                    break;
-                case "True":
-                    break;
-            }          
-        }
-
-        [Then(@"I check departing (.*)")]
-        public void ThenICheckDepartingAirport(string p0)
-        {
-            switch (lightweightMode)
-            {
-                case "False":
-                    payment.CheckDepartureAirport(p0);
-                    break;
-                case "True":
-                    break;
-            }           
-        }*/
 
         [Then(@"I check '(.*)' on Payment page")]
         public void ThenICheckOnPaymentPage(string chekingParameter)
@@ -121,7 +96,7 @@ namespace Expedia.com
                             payment.CheckTotalPrice();
                             break;
                         default:
-                            Console.WriteLine("Checking parameter for ticket is incorrect");
+                            Console.WriteLine("Checking parameter " + chekingParameter.ToUpper() + " for ticket is incorrect");
                             break;
                     }
                     break;
@@ -129,83 +104,6 @@ namespace Expedia.com
                     break;
             }
         }
-
-
-
-
-        /*[Then(@"I check departure time")]
-        public void ThenICheckDepartureTime()
-        {
-            switch (lightweightMode)
-            {
-                case "False":
-                    flight = (List<string>)scenarioContext["flight"];
-                    payment.CheckDepartureTime(flight);
-                    break;
-                case "True":
-                    break;
-            }     
-        }*/
-
-        /* [Then(@"I check arrival (.*)")]
-         public void ThenICheckArrivalAirport(string p0)
-         {
-             switch (lightweightMode)
-             {
-                 case "False":
-                     payment.CheckArrivalAirport(p0);
-                     break;
-                 case "True":
-                     break;
-             }           
-         }
-
-         [Then(@"I check time of arrival")]
-         public void ThenICheckTimeOfArrival()
-         {
-             switch (lightweightMode)
-             {
-                 case "False":
-                     payment.CheckArrivalTime(flight);
-                     break;
-                 case "True":
-                     break;
-             }         
-         }
-
-        [Then(@"I check duration of flight")]
-        public void ThenICheckDurationOfFlight()
-        {
-            switch (lightweightMode)
-            {
-                case "False":
-                    payment.CheckFlightDuration(flight);
-                    break;
-                case "True":
-                    break;
-            }
-        }
-
-        [Then(@"I check ticket price for each passanger")]
-        public void ThenICheckTicketPriceForEachPassanger()
-        {
-            switch (lightweightMode)
-            {
-                case "False":
-                    ticketPrice = (List<double>)scenarioContext["ticketPrice"];
-                    payment.TripSummaryCheck(ticketPrice);
-                    break;
-                case "True":
-                    break;
-            }          
-        }
-
-        [Then(@"I check total price")]
-        public void ThenICheckTotalPrice()
-        {
-            payment.CheckTotalPrice();
-        }*/
-
 
     }
 }

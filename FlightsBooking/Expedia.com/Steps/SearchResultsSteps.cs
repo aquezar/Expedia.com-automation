@@ -57,20 +57,6 @@ namespace Expedia.com
             
         }
 
-       /* [Given(@"I check departure date for search results")]
-        public void GivenICheckDepartureDateForSearchResults()
-        {
-            string lightweightMode = ConfigurationManager.AppSettings["LightweightMode"];
-            switch (lightweightMode)
-            {
-                case "False":
-                    results.CompareDates();
-                    break;
-                case "True":
-                    break;
-            }
-        }*/
-
         [Given(@"I select '(.*)' ticket")]
         public void GivenISelectTicket(string ticketType)
         {
@@ -80,7 +66,7 @@ namespace Expedia.com
                     results.ClickFlightSelectForCheepestFlight();
                     break;
                 default:
-                    Console.WriteLine("Ticket type is incorrect");
+                    Console.WriteLine("Ticket type " + ticketType.ToUpper() + " is incorrect");
                     break;
             }
             
@@ -113,7 +99,7 @@ namespace Expedia.com
                     results.SelectNonstopFilter();
                     break;
                 default:
-                    Console.WriteLine("Ther's no such option in Stops filter");
+                    Console.WriteLine("Ther's no such option " + stopsFilter.ToUpper() + " in Stops filter");
                     break;
             }
             
@@ -128,7 +114,7 @@ namespace Expedia.com
                     results.OnlyNonstopFlightsDisplayed();
                     break;
                 default:
-                    Console.WriteLine("There's no such value for flight stops");
+                    Console.WriteLine("There's no such value " + flightStops.ToUpper() + " for flight stops");
                     break;
             }
             

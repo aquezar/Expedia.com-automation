@@ -36,7 +36,7 @@ namespace Expedia.com
                     search.GoToOneWayTab();
                     break;
                 default:
-                    Console.WriteLine("Tab name is incorrect");
+                    Console.WriteLine("Tab name " + tabName.ToUpper() + " is incorrect");
                     break;
             }
         }
@@ -56,7 +56,7 @@ namespace Expedia.com
                     search.EnterDepartingDateValue(fieldValue);
                     break;
                 default:
-                    Console.WriteLine("Field name is incorrect");
+                    Console.WriteLine("Field name " + fieldName.ToUpper() + " is incorrect");
                     break;
             }
         }
@@ -81,36 +81,22 @@ namespace Expedia.com
             search.IsValidationMessageDisplayed();
         }
 
-        /*[Then(@"Message text saying that Date is empty")]
-        public void ThenMessageTextSayingThatDateIsEmpty()
+        [Given(@"I leave '(.*)' field empty")]
+        public void GivenILeaveFieldEmpty(string fieldName)
         {
-            search.CheckValidationMessage("Enter your departure date in this format: mm/dd/yyyy.");
-        }*/
-
-        [Given(@"I leave Flying to field empty")]
-        public void GivenILeaveFlyingToFieldEmpty()
-        {
-            search.ClearFlyingToField();
+            switch (fieldName)
+            {
+                case "Flying to":
+                    search.ClearFlyingToField();
+                    break;
+                case "Flying from":
+                    search.ClearFlyingFromField();
+                    break;
+                default:
+                    Console.WriteLine("Field name " + fieldName.ToUpper() + " is incorrect");
+                    break;
+            }
         }
-
-        /*[Then(@"message text saying that Flying to field is empty")]
-        public void ThenMessageTextSayingThatFlyingToFieldIsEmpty()
-        {
-            search.CheckValidationMessage("Tell us where you're flying to.");
-        }*/
-
-        [Given(@"I leave Flying from field empty")]
-        public void GivenILeaveFlyingFromFieldEmpty()
-        {
-            search.ClearFlyingFromField();
-        }
-
-        /*[Then(@"message text saying that Flying from field is empty")]
-        public void ThenMessageTextSayingThatFlyingFromFieldIsEmpty()
-        {
-            search.CheckValidationMessage("Tell us where you're flying from.");
-        }*/
-
 
         [Then(@"message text saying that '(.*)'")]
         public void ThenMessageTextSayingThat(string validationMessageTrigger)
@@ -127,7 +113,7 @@ namespace Expedia.com
                     search.CheckValidationMessage("Enter your departure date in this format: mm/dd/yyyy.");
                     break;
                 default:
-                    Console.WriteLine("Validation message trigger is incorrect");
+                    Console.WriteLine("Validation message trigger " + validationMessageTrigger.ToUpper() + " is incorrect");
                     break;
             }
         }

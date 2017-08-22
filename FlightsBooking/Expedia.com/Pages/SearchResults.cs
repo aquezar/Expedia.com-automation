@@ -143,7 +143,7 @@ namespace Expedia.com.Pages
         //Selecting Nonstop option in Stops filter if present
         public void SelectNonstopFilter()
         {
-            if (filterStops[0].Text.Contains("Nonstop"))
+            /*if (filterStops[0].Text.Contains("Nonstop"))
             {
                 filterStops[0].Click();
             }
@@ -151,6 +151,25 @@ namespace Expedia.com.Pages
             {
                 Console.WriteLine("There's no Nonstop flights for selected route\\date.");
                 return;
+            }*/
+            bool nonstopPresent;
+            if (filterStops[0].Text.Contains("Nonstop"))
+            {
+                nonstopPresent = true;
+            }
+            else
+            {
+                nonstopPresent = false;
+            }
+
+            switch (nonstopPresent)
+            {
+                case true:
+                    filterStops[0].Click();
+                    break;
+                case false:
+                    Console.WriteLine("There's no Nonstop flights for selected route\\date.");
+                    break;
             }
             Helper.CloseCommercialWindow(pageDriver);               
         }
@@ -158,7 +177,7 @@ namespace Expedia.com.Pages
         //Checking that displayed tickets are for flights without stops
         public void OnlyNonstopFlightsDisplayed()
         {
-            if (filterStops[0].Text.Contains("Nonstop"))
+            /*if (filterStops[0].Text.Contains("Nonstop"))
             {
                 foreach (IWebElement flight in resultsListStops)
                 {
@@ -171,8 +190,32 @@ namespace Expedia.com.Pages
             {
                 Console.WriteLine("There's no Nonstop flights for selected route\\date.");
                 return;
-            }              
-            
+            }  */
+            bool nonstopPresent;
+            if (filterStops[0].Text.Contains("Nonstop"))
+            {
+                nonstopPresent = true;
+            }
+            else
+            {
+                nonstopPresent = false;
+            }
+
+            switch (nonstopPresent)
+            {
+                case true:
+                    foreach (IWebElement flight in resultsListStops)
+                    {
+                        Helper.HighlightIWebElement(flight, pageDriver);
+                        Assert.AreEqual(nonstopFlights, flight.Text);
+                        Helper.UnhighlightIWebElement(flight, pageDriver);
+                    }
+                    break;
+                case false:
+                    Console.WriteLine("There's no Nonstop flights for selected route\\date.");
+                    break;
+            }
+
         }
     }
 }
