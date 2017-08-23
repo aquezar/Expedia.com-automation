@@ -1,4 +1,5 @@
 ﻿@smoke
+@regression
 Feature: Selected tickets history
 	In order to view my recent flights search results
 	As a registered user

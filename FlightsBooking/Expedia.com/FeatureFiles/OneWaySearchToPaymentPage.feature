@@ -1,4 +1,5 @@
 ﻿@integration
+@regression
 Feature: One Way search
 	In order to book my flight for one way
 	As a user
