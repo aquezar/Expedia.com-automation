@@ -147,59 +147,6 @@ namespace Expedia.com.Pages
             }
         }
 
-        /*public void CheckFlightDate(string date)
-        {
-            Helper.HighlightIWebElement(flightDate, pageDriver);
-            Assert.AreEqual(Helper.ConvertStringToDateFormat(date, '/', "ddd, MMM d"), flightDate.Text);
-            Helper.UnhighlightIWebElement(flightDate, pageDriver);
-        }
-
-        public void CheckDepartureAirport(string fromAirportCode)
-        {
-            Helper.HighlightIWebElement(departureAirportCode, pageDriver);
-            Assert.AreEqual(fromAirportCode, departureAirportCode.Text);
-            Helper.UnhighlightIWebElement(departureAirportCode, pageDriver);
-        }*/
-
-        /*public void CheckDepartureTime(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(departureTime, pageDriver);
-            //Assert.AreEqual(flightInfo[2], (departureTime.Text.Remove(departureTime.Text.Length - 1)));
-            Assert.AreEqual(flightInfo[2], departureTime.Text);
-            Helper.UnhighlightIWebElement(departureTime, pageDriver);
-        }*/
-
-        /*public void CheckArrivalAirport(string toAirportCode)
-        {
-            Helper.HighlightIWebElement(arrivalAirportCode, pageDriver);
-            Assert.AreEqual(toAirportCode, arrivalAirportCode.Text);
-            Helper.UnhighlightIWebElement(arrivalAirportCode, pageDriver);
-        }
-
-        public void CheckArrivalTime(List<string> flightInfo)
-        {
-            Helper.HighlightIWebElement(arrivalTime, pageDriver);
-            //Assert.AreEqual(flightInfo[3], (arrivalTime.Text.Remove(arrivalTime.Text.Length - 1)));
-            Assert.AreEqual(flightInfo[3], arrivalTime.Text);
-            Helper.UnhighlightIWebElement(arrivalTime, pageDriver);
-        }
-
-        public void CheckFlightDuration(List<string> flightInfo)
-        {
-            string flightDurationAndStops;
-            if(flightStops.Text == flightNonstop)
-            {
-                flightDurationAndStops = flightDuration.Text + " " + flightStops.Text;
-            }
-            else
-            {
-                flightDurationAndStops = flightDuration.Text + " " + (flightStops.Text.Remove(flightStops.Text.Length - 1));
-            }
-            Helper.HighlightIWebElement(flightStops, pageDriver);
-            Assert.AreEqual(flightInfo[4], flightDurationAndStops);
-            Helper.UnhighlightIWebElement(flightStops, pageDriver);
-        }*/
-
         //Converting Total price from string to double for checking total price against sum of prices for each ticket
         private double ConvertTotalPriceToDouble()
         {

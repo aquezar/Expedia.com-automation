@@ -1,5 +1,4 @@
-﻿using Expedia.com.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using TechTalk.SpecFlow;
 

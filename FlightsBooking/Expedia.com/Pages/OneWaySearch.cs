@@ -3,9 +3,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Configuration;
-using System.IO;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
