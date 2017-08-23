@@ -7,6 +7,7 @@ Feature: One Way search
 
 @cheepestTicket
 @smoke
+@e2e
 Scenario Outline: Cheepest flight
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab
@@ -45,6 +46,7 @@ Examples:
 | New York, NY (JFK-John F. Kennedy Intl.)   | Vancouver, BC, Canada (YVR-Vancouver Intl.)       | 12/03/2017 | 1          | JFK to YVR Flights | JFK         | YVR       |
 	
 @nonstopFlights
+@e2e
 Scenario Outline: Nonstop cheepest flight
 	Given I open 'http://expedia.com'
 	And I navigate to 'Flights' tab

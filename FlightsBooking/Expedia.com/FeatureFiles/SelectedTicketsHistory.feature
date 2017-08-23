@@ -5,6 +5,7 @@ Feature: Selected tickets history
 	As a registered user
 	I want to view my search history
 
+@e2e
 Scenario Outline: Login, perform search and check history
 	Given I open 'http://expedia.com'
 	And I click 'Account' button in menu
