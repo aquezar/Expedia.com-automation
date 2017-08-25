@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace Expedia.com.Pages
@@ -171,11 +172,11 @@ namespace Expedia.com.Pages
             switch (nonstopPresent)
             {
                 case true:
-                    foreach (IWebElement flight in resultsListStops)
+                    for(int i = 0; i < resultsListStops.Count; i++)
                     {
-                        Helper.HighlightIWebElement(flight, pageDriver);
-                        Assert.AreEqual(nonstopFlights, flight.Text);
-                        Helper.UnhighlightIWebElement(flight, pageDriver);
+                        Helper.HighlightIWebElement(resultsListStops.ElementAt(i), pageDriver);
+                        Assert.AreEqual(nonstopFlights, resultsListStops.ElementAt(i).Text);
+                        Helper.UnhighlightIWebElement(resultsListStops.ElementAt(i), pageDriver);
                     }
                     break;
                 case false:

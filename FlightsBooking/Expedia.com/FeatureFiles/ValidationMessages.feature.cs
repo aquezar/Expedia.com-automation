@@ -73,6 +73,7 @@ namespace Expedia.com.FeatureFiles
         [NUnit.Framework.CategoryAttribute("departureDate")]
         [NUnit.Framework.CategoryAttribute("smoke")]
         [NUnit.Framework.TestCaseAttribute("Kiev, Ukraine (KBP-Borispol Intl.)", "Budapest, Hungary(BUD - Ferenc Liszt Intl.)", "1", "KBP to BUD Flights", "KBP", "BUD", null)]
+        [NUnit.Framework.TestCaseAttribute("London, England, UK (LHR-Heathrow)", "Fiumicino Airport (FCO), Italy", "1", "LHR to FCO Flights", "LHR", "FCO", null)]
         public virtual void OneWaySearchWithoutDepartureDate(string from, string to, string passangers, string searchTab, string fromAirport, string toAirport, string[] exampleTags)
         {
             string[] @__tags = new string[] {
