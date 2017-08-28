@@ -72,6 +72,7 @@ namespace Expedia.com.Framework
                     }
                     break;
                 case "False":
+                    Console.WriteLine("Extended logging DISABLED");
                     break;
             }
             

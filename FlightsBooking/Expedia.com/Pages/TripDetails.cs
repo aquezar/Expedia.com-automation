@@ -128,7 +128,6 @@ namespace Expedia.com.Pages
                 case "Ticket price":
                     List<double> ticketsPricesList = new List<double>();
                     double priceOfTrip = 0.0;
-                    //int passangers = (int)scenarioContext["passangers"];
                     foreach (var item in ticketPriceForPassanger)
                     {
                         double ticketPrice;

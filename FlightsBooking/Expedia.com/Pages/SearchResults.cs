@@ -116,7 +116,7 @@ namespace Expedia.com.Pages
 
         public void CheckSearchResultsDepartureAndArrival(string fromAirportCode, string toAirportCode)
         {
-            for(int i = 0; i <= flightsListRoute.Count-1; i++)
+            for (int i = 0; i <= flightsListRoute.Count - 1; i++)
             {
                 Helper.HighlightIWebElement(flightsListRoute.ElementAt(i), pageDriver);
                 Assert.AreEqual(flightsListRoute.ElementAt(i).Text, (fromAirportCode + " - " + toAirportCode));
