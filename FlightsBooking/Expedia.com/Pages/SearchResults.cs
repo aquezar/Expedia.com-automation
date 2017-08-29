@@ -1,6 +1,7 @@
 ﻿using Expedia.com.Framework;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -14,6 +15,7 @@ namespace Expedia.com.Pages
     public class SearchResults
     {
         private IWebDriver pageDriver;
+        private Actions pageActions;
 
         public List<string> selectedFlight = new List<string>();
         private readonly ScenarioContext scenarioContext;
@@ -80,6 +82,7 @@ namespace Expedia.com.Pages
         {
             this.scenarioContext = scenarioContext;
             pageDriver = driver;
+            pageActions = new Actions(pageDriver);
             PageFactory.InitElements(pageDriver, this);           
         }
        
@@ -116,8 +119,12 @@ namespace Expedia.com.Pages
 
         public void CheckSearchResultsDepartureAndArrival(string fromAirportCode, string toAirportCode)
         {
-            for (int i = 0; i <= flightsListRoute.Count - 1; i++)
+            for (int i = 0; i < flightsListRoute.Count; i++)
             {
+                //scrolling to element
+                Thread.Sleep(500);
+                pageActions.MoveToElement(flightsListRoute.ElementAt(i));
+                pageActions.Perform();
                 Helper.HighlightIWebElement(flightsListRoute.ElementAt(i), pageDriver);
                 Assert.AreEqual(flightsListRoute.ElementAt(i).Text, (fromAirportCode + " - " + toAirportCode));
                 Helper.UnhighlightIWebElement(flightsListRoute.ElementAt(i), pageDriver);
@@ -172,8 +179,12 @@ namespace Expedia.com.Pages
             switch (nonstopPresent)
             {
                 case true:
-                    for(int i = 0; i < resultsListStops.Count; i++)
+                    //Actions actions = new Actions(pageDriver);
+                    for (int i = 0; i < resultsListStops.Count; i++)
                     {
+                        Thread.Sleep(500);
+                        pageActions.MoveToElement(resultsListStops.ElementAt(i));
+                        pageActions.Perform();
                         Helper.HighlightIWebElement(resultsListStops.ElementAt(i), pageDriver);
                         Assert.AreEqual(nonstopFlights, resultsListStops.ElementAt(i).Text);
                         Helper.UnhighlightIWebElement(resultsListStops.ElementAt(i), pageDriver);
